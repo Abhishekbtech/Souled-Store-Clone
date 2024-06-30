@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, MenuItem } from '@mui/material';
 import { Search, AccountCircle, ShoppingCart } from '@mui/icons-material';
-// import logo from '../assets/logo.png'; // Add your logo image path here
+import logo from '../Image/Logo.png';
+// import CategoryDropdown from './CategoryDropdown';
 
 function NavBar() {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -36,12 +37,18 @@ function NavBar() {
         <div>
             <nav className="bg-red-600 p-4">
                 <div className="container mx-auto flex items-center justify-between">
-                    {/* <img src={logo} alt="The Souled Store" className="h-10" /> */}
+                    <img src={logo} alt="The Souled Store" className="h-10" />
                     <div className="flex space-x-4">
-                        <Link to="/men" className="text-white text-lg">Men</Link>
-                        <Link to="/women" className="text-white text-lg">Women</Link>
+                        {/* <CategoryDropdown gender="Women" />
+                        <CategoryDropdown gender="Men" /> */}
+                        <Link to="/women" className="text-white text-xl">WOMEN</Link>
+                        <Link to="/" className="text-white text-xl">MEN</Link>
+                        <Link to="/kids" className="text-white text-xl">KIDS</Link>
                     </div>
-                    <div className="flex space-x-4 items-center">
+                    <div className="flex space-x-6 items-center">
+                        <Link to="#" className="text-white">Track Order</Link>
+                        <Link to="#" className="text-white">Contact Us</Link>
+                        <Link to="#" className="text-white">Download App</Link>
                         <div className="relative">
                             <input
                                 type="text"
@@ -50,13 +57,8 @@ function NavBar() {
                             />
                             <Search className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600" />
                         </div>
-                        <div className="relative">
-                            <ShoppingCart className="text-white" />
-                            <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">4</span>
-                        </div>
-                        <div>
-                            <AccountCircle className="text-white cursor-pointer" onClick={handleProfileMenuOpen} />
-                        </div>
+                        <ShoppingCart className="text-white" />
+                        <AccountCircle className="text-white cursor-pointer" onClick={handleProfileMenuOpen} />
                     </div>
                 </div>
             </nav>
