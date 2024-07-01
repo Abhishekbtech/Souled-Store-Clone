@@ -2,7 +2,7 @@ import React from 'react'
 
 function MenPage() {
     return (
-        <div>MenPage</div>
+        <h1>Men's Collection</h1>
     )
 }
 
