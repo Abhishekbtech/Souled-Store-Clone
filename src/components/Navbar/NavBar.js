@@ -9,8 +9,9 @@ const Navbar = () => {
                     <img src="/path/to/logo.png" alt="The Souled Store" className="h-8" />
                 </Link>
                 <div className="hidden md:flex space-x-4">
-                    <Link to="/men" className="text-white">Men</Link>
                     <Link to="/women" className="text-white">Women</Link>
+                    <Link to="/men" className="text-white">Men</Link>
+                    <Link to="/kids" className="text-white">Women</Link>
                 </div>
                 <div className="flex items-center space-x-4">
                     <button className="text-white hidden md:block" onClick={() => alert('Track Order')}>Track Order</button>
