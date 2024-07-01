@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { AppBar, Toolbar, InputBase, IconButton, Button, Menu, MenuItem } from '@mui/material';
+import { InputBase, IconButton, Menu, MenuItem } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const SecondNavbar = () => {
-    const [anchorEl, setAnchorEl] = useState(null);
     const [categories, setCategories] = useState([]);
+    const [anchorEl, setAnchorEl] = useState(null);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -15,7 +16,7 @@ const SecondNavbar = () => {
                 }
             });
             const data = await response.json();
-            setCategories(data);
+            setCategories(data.data);
         };
 
         fetchCategories();
@@ -30,38 +31,42 @@ const SecondNavbar = () => {
     };
 
     return (
-        <AppBar position="static" color="default">
-            <Toolbar>
-                <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleMenuOpen}>
-                    Categories
-                </Button>
-                <Menu
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleMenuClose}
-                >
-                    {categories.map((category) => (
-                        <MenuItem key={category.id} onClick={handleMenuClose}>
-                            {category.name}
-                        </MenuItem>
+        <nav className="bg-gray-100 p-2">
+            <div className="container mx-auto flex items-center justify-between flex-wrap">
+                <div className="flex space-x-4 overflow-x-auto flex-1">
+                    {categories.map((category, index) => (
+                        <button key={index} className="text-gray-700 hover:text-gray-900 whitespace-nowrap">
+                            {category}
+                        </button>
                     ))}
-                </Menu>
-                <div style={{ flexGrow: 1 }} />
-                <InputBase
-                    placeholder="Search…"
-                    inputProps={{ 'aria-label': 'search' }}
-                    style={{ marginRight: '16px' }}
-                />
-                <IconButton type="submit" aria-label="search">
-                    <SearchIcon />
-                </IconButton>
-                <IconButton aria-label="show cart items">
-                    <ShoppingCartIcon />
-                </IconButton>
-            </Toolbar>
-        </AppBar>
+                </div>
+                <div className="flex items-center space-x-4">
+                    <InputBase
+                        placeholder="Search…"
+                        inputProps={{ 'aria-label': 'search' }}
+                        className="border border-gray-300 rounded-md p-2"
+                    />
+                    <IconButton type="submit" aria-label="search">
+                        <SearchIcon />
+                    </IconButton>
+                    <IconButton aria-label="show cart items">
+                        <ShoppingCartIcon />
+                    </IconButton>
+                    <div>
+                        <AccountCircleIcon className="text-gray-700 cursor-pointer" onClick={handleMenuOpen} />
+                        <Menu
+                            anchorEl={anchorEl}
+                            open={Boolean(anchorEl)}
+                            onClose={handleMenuClose}
+                        >
+                            <MenuItem onClick={handleMenuClose}>My Wishlist</MenuItem>
+                            <MenuItem onClick={handleMenuClose}>My Orders</MenuItem>
+                            <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+                        </Menu>
+                    </div>
+                </div>
+            </div>
+        </nav>
     );
 };
 
