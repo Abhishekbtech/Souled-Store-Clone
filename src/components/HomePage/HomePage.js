@@ -20,7 +20,7 @@ const Home = () => {
       <ProductsByCategory category="shirt" />
       <ProductsByCategory category="tshirt" />
       
-      {/* <BestDeals /> */}
+      <BestDeals />
       {/* <Footer /> */}
       ji
     </div>
