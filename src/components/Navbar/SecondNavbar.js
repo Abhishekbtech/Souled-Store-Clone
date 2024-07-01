@@ -8,6 +8,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 const SecondNavbar = () => {
     const [categories, setCategories] = useState([]);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [showSearch, setShowSearch] = useState(false);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -31,26 +32,32 @@ const SecondNavbar = () => {
         setAnchorEl(null);
     };
 
+    const toggleSearch = () => {
+        setShowSearch(!showSearch);
+    };
+
     return (
         <nav className="bg-gray-100 p-2">
             <div className="container mx-auto flex items-center justify-between flex-wrap">
                 <div className="flex space-x-4 overflow-x-auto flex-1">
-                    {categories.map((category) => (
-                        <button key={category.id} className="text-gray-700 hover:text-gray-900 whitespace-nowrap">
+                    {categories.map((category, index) => (
+                        <button key={index} className="text-gray-700 hover:text-gray-900 whitespace-nowrap">
                             {category}
                         </button>
                     ))}
                 </div>
                 <div className="flex items-center space-x-4">
-                    <InputBase
-                        placeholder="Search…"
-                        inputProps={{ 'aria-label': 'search' }}
-                        className="border border-gray-300 rounded-md p-2"
-                    />
-                    <IconButton type="submit" aria-label="search">
+                    {showSearch && (
+                        <InputBase
+                            placeholder="Search…"
+                            inputProps={{ 'aria-label': 'search' }}
+                            className="border border-gray-300 rounded-md p-1"
+                        />
+                    )}
+                    <IconButton type="button" aria-label="search" onClick={toggleSearch}>
                         <SearchIcon />
                     </IconButton>
-                    <IconButton aria-label="show wishlist items">
+                    <IconButton aria-label="show wishlist">
                         <FavoriteIcon />
                     </IconButton>
                     <IconButton aria-label="show cart items">
