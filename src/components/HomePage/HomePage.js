@@ -1,11 +1,25 @@
 import React from 'react';
+import HeroBanner from './HeroBanner';
+import Categories from './Categories';
+import ProductsByCategory from './ProductsByCategory';
+import BestDeals from './BestDeals';
+// import Footer from '../components/Footer';
 
-function HomePage() {
-    return (
-        <div className="p-4">
-            <h1 className="text-3xl">Welcome to The Souled Store</h1>
-        </div>
-    );
-}
+const Home = () => {
+  return (
+    <div>
+      <HeroBanner />
+      <Categories />
+      <ProductsByCategory category="hoodie" />
+      <ProductsByCategory category="jeans" />
+      <ProductsByCategory category="jogger" />
+      <ProductsByCategory category="tshirt" />
+      
+      {/* <BestDeals /> */}
+      {/* <Footer /> */}
+      ji
+    </div>
+  );
+};
 
-export default HomePage;
+export default Home;
