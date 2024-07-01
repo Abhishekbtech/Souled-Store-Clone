@@ -2,7 +2,7 @@ import React from 'react'
 
 function WomenPage() {
     return (
-        <div>WomenPage</div>
+        <h1>Women's Collection</h1>
     )
 }
 
