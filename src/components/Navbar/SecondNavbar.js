@@ -42,7 +42,7 @@ const SecondNavbar = () => {
                 <div className="flex space-x-4 overflow-x-auto flex-1">
                     {categories.map((category, index) => (
                         <button key={index} className="text-gray-700 hover:text-gray-900 whitespace-nowrap">
-                            {category}
+                            {category.toUpperCase()}
                         </button>
                     ))}
                 </div>
