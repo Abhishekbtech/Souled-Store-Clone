@@ -1,57 +1,25 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@mui/material';
 import { Link } from 'react-router-dom';
-import MenuIcon from '@mui/icons-material/Menu';
 
-const NavBar = () => {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-    };
-
+const Navbar = () => {
     return (
-        <AppBar position="static">
-            <Toolbar>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    <Link to="/">The Souled Store</Link>
-                </Typography>
-                <Button color="inherit"><Link to="/men">Men</Link></Button>
-                <Button color="inherit"><Link to="/women">Women</Link></Button>
-                <IconButton
-                    size="large"
-                    edge="end"
-                    color="inherit"
-                    aria-label="menu"
-                    onClick={handleMenuOpen}
-                >
-                    <MenuIcon />
-                </IconButton>
-                <Menu
-                    anchorEl={anchorEl}
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    open={Boolean(anchorEl)}
-                    onClose={handleMenuClose}
-                >
-                    <MenuItem onClick={handleMenuClose}>My Wishlist</MenuItem>
-                    <MenuItem onClick={handleMenuClose}>My Orders</MenuItem>
-                    <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
-                </Menu>
-            </Toolbar>
-        </AppBar>
+        <nav className="bg-red-600 p-4">
+            <div className="container mx-auto flex items-center justify-between">
+                <Link to="/" className="text-white text-xl font-bold flex items-center space-x-2">
+                    <img src="/path/to/logo.png" alt="The Souled Store" className="h-8" />
+                </Link>
+                <div className="hidden md:flex space-x-4">
+                    <Link to="/men" className="text-white">Men</Link>
+                    <Link to="/women" className="text-white">Women</Link>
+                </div>
+                <div className="flex items-center space-x-4">
+                    <button className="text-white hidden md:block" onClick={() => alert('Track Order')}>Track Order</button>
+                    <button className="text-white hidden md:block" onClick={() => alert('Contact Us')}>Contact Us</button>
+                    <button className="text-white hidden md:block" onClick={() => alert('Download App')}>Download App</button>
+                </div>
+            </div>
+        </nav>
     );
 };
 
-export default NavBar;
+export default Navbar;
