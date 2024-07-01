@@ -34,7 +34,7 @@ const ProductsByCategory = ({ category }) => {
     };
 
     const settings = {
-        dots: true,
+        // dots: true,
         infinite: true,
         speed: 500,
         slidesToShow: 4,
@@ -54,8 +54,8 @@ const ProductsByCategory = ({ category }) => {
             <div className="relative container mx-auto">
                 <Slider {...settings}>
                     {products.map((product) => (
-                        <div key={product.id} className="product-card bg-white p-4 rounded-lg shadow-md mx-2 max-w-xs">
-                            <img src={product.displayImage} alt={product.name} className="h-32 w-full object-cover rounded-md mb-2" />
+                        <div key={product.id} className="product-card bg-white p-4 rounded-lg shadow-md mx-2 max-w-xs ml-7">
+                            <img src={product.displayImage} alt={product.name} className="h-35 w-full object-cover rounded-md mb-2" />
                             <h3 className="text-lg font-semibold">{product.name}</h3>
                             <p className="text-gray-700">${product.price}</p>
                             <p className="text-gray-500">Rating: {product.ratings}</p>
