@@ -16,6 +16,8 @@ const Home = () => {
       <ProductsByCategory category="jumpsuit" />
       <ProductsByCategory category="kurta" />
       <ProductsByCategory category="kurti" />
+      <ProductsByCategory category="pyjamas" />
+      <ProductsByCategory category="shirt" />
       <ProductsByCategory category="tshirt" />
       
       {/* <BestDeals /> */}
