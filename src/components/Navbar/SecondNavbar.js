@@ -3,6 +3,7 @@ import { InputBase, IconButton, Menu, MenuItem } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const SecondNavbar = () => {
     const [categories, setCategories] = useState([]);
@@ -34,8 +35,8 @@ const SecondNavbar = () => {
         <nav className="bg-gray-100 p-2">
             <div className="container mx-auto flex items-center justify-between flex-wrap">
                 <div className="flex space-x-4 overflow-x-auto flex-1">
-                    {categories.map((category, index) => (
-                        <button key={index} className="text-gray-700 hover:text-gray-900 whitespace-nowrap">
+                    {categories.map((category) => (
+                        <button key={category.id} className="text-gray-700 hover:text-gray-900 whitespace-nowrap">
                             {category}
                         </button>
                     ))}
@@ -48,6 +49,9 @@ const SecondNavbar = () => {
                     />
                     <IconButton type="submit" aria-label="search">
                         <SearchIcon />
+                    </IconButton>
+                    <IconButton aria-label="show wishlist items">
+                        <FavoriteIcon />
                     </IconButton>
                     <IconButton aria-label="show cart items">
                         <ShoppingCartIcon />
