@@ -11,7 +11,7 @@ const Navbar = () => {
                 <div className="hidden md:flex space-x-4">
                     <Link to="/women" className="text-white">Women</Link>
                     <Link to="/men" className="text-white">Men</Link>
-                    <Link to="/kids" className="text-white">Women</Link>
+                    <Link to="/kids" className="text-white">Kids</Link>
                 </div>
                 <div className="flex items-center space-x-4">
                     <button className="text-white hidden md:block" onClick={() => alert('Track Order')}>Track Order</button>
