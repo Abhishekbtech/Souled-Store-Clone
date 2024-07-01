@@ -13,6 +13,8 @@ const Home = () => {
       <ProductsByCategory category="hoodie" />
       <ProductsByCategory category="jeans" />
       <ProductsByCategory category="jogger" />
+      <ProductsByCategory category="jeans" />
+      <ProductsByCategory category="jumpsuit" />
       <ProductsByCategory category="tshirt" />
       
       {/* <BestDeals /> */}
