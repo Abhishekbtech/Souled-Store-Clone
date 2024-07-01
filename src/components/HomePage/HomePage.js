@@ -26,7 +26,6 @@ const Home = () => {
 
             <BestDeals />
             {/* <Footer /> */}
-            ji
         </div>
     );
 };
