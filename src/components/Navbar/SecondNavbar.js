@@ -4,14 +4,14 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 const SecondNavbar = () => {
     const [categories, setCategories] = useState([]);
     const [anchorEl, setAnchorEl] = useState(null);
     const [showSearch, setShowSearch] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
-    const history = useHistory();
+    const Navigate = useNavigate();
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -42,7 +42,7 @@ const SecondNavbar = () => {
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value)
         console.log(searchTerm)
-        history.push(`/search?query=${searchTerm}`);
+        Navigate("/search", {state :{key :searchTerm}});
     };
 
     return (
