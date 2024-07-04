@@ -9,6 +9,7 @@ const SecondNavbar = () => {
     const [categories, setCategories] = useState([]);
     const [anchorEl, setAnchorEl] = useState(null);
     const [showSearch, setShowSearch] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -36,6 +37,13 @@ const SecondNavbar = () => {
         setShowSearch(!showSearch);
     };
 
+    const handleSearch = (e) => {
+        // Navigate to the search results page or handle search logic here
+        console.log('Searching for:', e.target.value);
+    };
+
+    const handleSearchChange = (e) => setSearchTerm(e.target.value);
+
     return (
         <nav className="bg-gray-100 p-2">
             <div className="container mx-auto flex items-center justify-between flex-wrap">
@@ -48,11 +56,16 @@ const SecondNavbar = () => {
                 </div>
                 <div className="flex items-center space-x-4">
                     {showSearch && (
-                        <InputBase
-                            placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
-                            className="border border-gray-300 rounded-md p-1"
-                        />
+                        <div className="flex items-center border rounded-md overflow-hidden">
+                            <input
+                                type="search"
+                                className="px-4 py-2 w-full"
+                                placeholder="Search..."
+                                value={searchTerm}
+                                onChange={handleSearchChange}
+                                onSearch={handleSearch}
+                            />
+                        </div>
                     )}
                     <IconButton type="button" aria-label="search" onClick={toggleSearch}>
                         <SearchIcon />
