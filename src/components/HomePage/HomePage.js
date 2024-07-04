@@ -5,6 +5,7 @@ import ProductsByCategory from './ProductsByCategory';
 import BestDeals from './BestDeals';
 import BestSeller from './BestSeller';
 import Trending from './Trending';
+import NewArrival from './NewArrival';
 // import Footer from '../components/Footer';
 
 const Home = () => {
@@ -27,6 +28,7 @@ const Home = () => {
             <ProductsByCategory category="tshirt" /> */}
             <BestSeller/>
             <Trending/>
+            <NewArrival/>
             <BestDeals />
             {/* <Footer /> */}
         </div>
