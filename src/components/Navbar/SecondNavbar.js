@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { InputBase, IconButton, Menu, MenuItem } from '@mui/material';
+import { IconButton, Menu, MenuItem } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -37,12 +37,10 @@ const SecondNavbar = () => {
         setShowSearch(!showSearch);
     };
 
-    const handleSearch = (e) => {
-        // Navigate to the search results page or handle search logic here
-        console.log('Searching for:', e.target.value);
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value)
+        console.log(searchTerm)
     };
-
-    const handleSearchChange = (e) => setSearchTerm(e.target.value);
 
     return (
         <nav className="bg-gray-100 p-2">
@@ -63,7 +61,7 @@ const SecondNavbar = () => {
                                 placeholder="Search..."
                                 value={searchTerm}
                                 onChange={handleSearchChange}
-                                onSearch={handleSearch}
+                                // onSearch={handleSearch}
                             />
                         </div>
                     )}
