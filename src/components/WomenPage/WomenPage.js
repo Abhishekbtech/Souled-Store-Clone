@@ -1,8 +1,14 @@
 import React from 'react'
+import ProductsByCategory from '../HomePage/ProductsByCategory'
 
 function WomenPage() {
     return (
-        <h1>Women's Collection</h1>
+        <>
+            <ProductsByCategory category="jeans" />
+            <ProductsByCategory category="jogger" />
+            <ProductsByCategory category="jumpsuit" />
+            <ProductsByCategory category="kurti" />
+        </>
     )
 }
 
