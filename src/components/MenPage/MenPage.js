@@ -6,6 +6,7 @@ function MenPage() {
         <>
             <ProductsByCategory category="hoodie" />
             <ProductsByCategory category="pyjamas" />
+            <ProductsByCategory category="kurta" />
             <ProductsByCategory category="shirt" />
             <ProductsByCategory category="shorts" />
             <ProductsByCategory category="sweater" />
