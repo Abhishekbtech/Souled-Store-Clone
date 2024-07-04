@@ -61,7 +61,6 @@ const SecondNavbar = () => {
                                 placeholder="Search..."
                                 value={searchTerm}
                                 onChange={handleSearchChange}
-                                // onSearch={handleSearch}
                             />
                         </div>
                     )}
