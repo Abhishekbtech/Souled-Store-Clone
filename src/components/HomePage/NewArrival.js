@@ -8,7 +8,7 @@ function NewArrival() {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const response = await axios.get('https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?filter={"sellerTag":"trending"}', {
+            const response = await axios.get('https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?filter={"sellerTag":"new arrival"}', {
                 headers: { projectId: '0e7aaiqkxs51' }
             });
             setProducts(response.data.data);
@@ -49,7 +49,7 @@ function NewArrival() {
 
     return (
         <div className="products-by-category py-8">
-            <h2 className="text-2xl font-bold text-center mb-4 capitalize">Trending</h2>
+            <h2 className="text-2xl font-bold text-center mb-4 capitalize">New Arrival</h2>
             <div className="relative container mx-auto">
                 <Slider {...settings}>
                     {products.map((product) => (
