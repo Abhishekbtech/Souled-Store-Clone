@@ -3,16 +3,17 @@ import HeroBanner from './HeroBanner';
 import Categories from './Categories';
 import ProductsByCategory from './ProductsByCategory';
 import BestDeals from './BestDeals';
+import BestSeller from './BestSeller';
 // import Footer from '../components/Footer';
 
 const Home = () => {
     return (
         <div>
             <HeroBanner />
-            {/* <Categories /> */}
-            <ProductsByCategory category="hoodie" />
-            <ProductsByCategory category="jeans" />
-            <ProductsByCategory category="jogger" />
+            <Categories />
+            {/* <ProductsByCategory category="trending" />
+            <ProductsByCategory category="new arrival" /> */}
+            {/* <ProductsByCategory category="jogger" />
             <ProductsByCategory category="jumpsuit" />
             <ProductsByCategory category="kurta" />
             <ProductsByCategory category="kurti" />
@@ -22,8 +23,8 @@ const Home = () => {
             <ProductsByCategory category="sweater" />
             <ProductsByCategory category="tracksuit" />
             <ProductsByCategory category="trouser" />
-            <ProductsByCategory category="tshirt" />
-
+            <ProductsByCategory category="tshirt" /> */}
+            <BestSeller/>
             <BestDeals />
             {/* <Footer /> */}
         </div>
