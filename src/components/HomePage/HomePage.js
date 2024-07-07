@@ -5,7 +5,7 @@ import BestDeals from './BestDeals';
 import BestSeller from './BestSeller';
 import Trending from './Trending';
 import NewArrival from './NewArrival';
-// import Footer from '../components/Footer';
+import Footer from '../Footer/Footer';
 
 const Home = () => {
     return (
@@ -16,7 +16,7 @@ const Home = () => {
             <Trending/>
             <NewArrival/>
             <BestDeals />
-            {/* <Footer /> */}
+            <Footer />
         </div>
     );
 };
