@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Categories = () => {
     const [categories, setCategories] = useState([]);
@@ -18,12 +19,12 @@ const Categories = () => {
     return (
         <div className="categories py-8">
             <h2 className="text-2xl font-bold text-center mb-4">Available Categories</h2>
-            <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                {categories.map((category) => (
-                    <div key={category.id} className="category-card bg-white p-4 rounded-lg shadow-md">
-                        <img src={category.imageUrl} alt={category.name} className="h-32 w-full object-cover rounded-md mb-2" />
-                        <h3 className="text-lg font-semibold text-center">{category.name}</h3>
-                    </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {categories.map((category, index) => (
+                    <Link key={index} to={`/category/${index}`} className="hover:shadow-lg transition-shadow">
+                        <img src={category.image} className="w-full h-48 object-cover" />
+                        <p className="text-center mt-2">{category}</p>
+                    </Link>
                 ))}
             </div>
         </div>
