@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Slider from 'react-slick';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/outline';
+import { Link } from 'react-router-dom';
 
 const BestDeals = () => {
     const [products, setProducts] = useState([]);
@@ -57,8 +58,9 @@ const BestDeals = () => {
                         <div key={product.id} className="product-card bg-white p-4 rounded-lg shadow-md mx-2 max-w-xs ml-7 transition-transform transform hover:scale-105 hover:shadow-lg">
                             <img src={product.displayImage} alt={product.name} className="h-35 w-full object-cover rounded-md mb-2" />
                             <h3 className="text-lg font-semibold">{product.name}</h3>
-                            <p className="text-gray-700">${product.price}</p>
+                            <p className="text-gray-700">₹ {product.price}</p>
                             <p className="text-gray-500">Rating: {product.ratings}</p>
+                            <Link to={`/product/${product.id}`} className="text-blue-500 hover:underline">View Product</Link>
                         </div>
                     ))}
                 </Slider>
