@@ -8,10 +8,14 @@ function BestSeller() {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const response = await axios.get('https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?filter={"sellerTag":"best seller"}', {
-                headers: { projectId: '0e7aaiqkxs51' }
-            });
-            setProducts(response.data.data);
+            try {
+                const response = await axios.get('https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?filter={"sellerTag":"best seller"}', {
+                    headers: { projectId: '0e7aaiqkxs51' }
+                });
+                setProducts(response.data.data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
         };
 
         fetchProducts();
@@ -55,9 +59,9 @@ function BestSeller() {
                     {products.map((product) => (
                         <div key={product.id} className="product-card bg-white p-4 rounded-lg shadow-md mx-2 max-w-xs ml-7 transition-transform transform hover:scale-105 hover:shadow-lg">
                             <img src={product.displayImage} alt={product.name} className="h-35 w-full object-cover rounded-md mb-2" />
-                            <h3 className="text-lg font-semibold">{product.name}</h3>
+                            <h3 className="text-lg font-semibold overflow-hidden whitespace-nowrap overflow-ellipsis">{product.name}</h3>
                             <p className="text-gray-700">${product.price}</p>
-                            <p className="text-gray-500">Rating: {product.ratings}</p>
+                            <p className="text-gray-500">Rating: {parseFloat(product.ratings).toFixed(1)}</p>
                         </div>
                     ))}
                 </Slider>
@@ -66,4 +70,4 @@ function BestSeller() {
     );
 }
 
-export default BestSeller
+export default BestSeller;
