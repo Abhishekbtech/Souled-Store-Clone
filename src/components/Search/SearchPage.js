@@ -15,15 +15,17 @@ const SearchPage = () => {
     const [totalProducts, setTotalProducts] = useState(0);
 
     const location = useLocation();
-    const query = new URLSearchParams(location.search).get('query');
+    const searchTerm = location.state?.key;
 
     const fetchProducts = async () => {
         try {
             const response = await axios.get(
-                `{{base_domain}}/api/v1/ecommerce/clothes/products?search={"field":"${query}"}&filter=${JSON.stringify(filters)}&sort=${sort}&page=${page}`
+                `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?filter={"subCategory":"${searchTerm}"}`, {
+                headers: { projectId: '0e7aaiqkxs51' }
+            }
             );
-            setProducts(response.data.products);
-            setTotalProducts(response.data.total);
+            setProducts(response.data.data);
+            setTotalProducts(response.data.results);
         } catch (error) {
             console.error('Error fetching products:', error);
         }
@@ -31,21 +33,23 @@ const SearchPage = () => {
 
     useEffect(() => {
         fetchProducts();
-    }, [query, filters, sort, page]);
+    }, [searchTerm, filters, sort, page]);
 
     return (
         <div className="container mx-auto py-4">
-            <h1 className="text-2xl font-bold">Showing results for {query} - {totalProducts} items</h1>
+            <h1 className="text-2xl font-bold">Showing results for {searchTerm} - {totalProducts} items</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
                 {products.map((product) => (
-                    <div key={product._id} className="border rounded-lg p-4">
-                        <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-md" />
+                    <div
+                        key={product._id}
+                        className="border rounded-lg p-4 hover:scale-105 hover:shadow-lg hover:bg-gray-50 transition duration-900 cursor-pointer"
+                    >
+                        <img src={product.displayImage} alt={product.name} className="w-full h-35 object-cover rounded-md" />
                         <div className="mt-2">
                             <h2 className="text-xl font-semibold">{product.name}</h2>
                             <p className="text-gray-600">{product.price}</p>
                             <div className="flex items-center justify-between mt-2">
                                 <HeartIcon className="w-6 h-6 text-gray-600" />
-                                {/* Add other icons or buttons here */}
                             </div>
                         </div>
                     </div>
