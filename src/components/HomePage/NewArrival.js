@@ -59,7 +59,7 @@ const BestDeals = () => {
                             <img src={product.displayImage} alt={product.name} className="h-35 w-full object-cover rounded-md mb-2" />
                             <h3 className="text-lg font-semibold">{product.name}</h3>
                             <p className="text-gray-700">₹ {product.price}</p>
-                            <p className="text-gray-500">Rating: {product.ratings}</p>
+                            <p className="text-gray-500">Rating: {parseFloat(product.ratings).toFixed(1)}</p>
                             <Link to={`/product/${product.id}`} className="text-blue-500 hover:underline">View Product</Link>
                         </div>
                     ))}
