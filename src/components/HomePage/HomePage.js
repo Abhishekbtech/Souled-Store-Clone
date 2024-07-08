@@ -6,13 +6,15 @@ import BestSeller from './BestSeller';
 import Trending from './Trending';
 import NewArrival from './NewArrival';
 import Footer from '../Footer/Footer';
+import Bestsell from './Bestsell';
 
 const Home = () => {
     return (
-        <div>
+        <div className='m-5'>
             <HeroBanner />
             <Categories />
-            <BestSeller/>
+            {/* <BestSeller/> */}
+            <Bestsell/>
             <Trending/>
             <NewArrival/>
             <BestDeals />
