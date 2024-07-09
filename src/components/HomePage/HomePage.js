@@ -7,16 +7,20 @@ import Trending from './Trending';
 import NewArrival from './NewArrival';
 import Footer from '../Footer/Footer';
 import Bestsell from './Bestsell';
+import Banner from './Banner';
+import Img from './Img';
 
 const Home = () => {
     return (
         <div className='m-5'>
-            <HeroBanner />
+            <Banner />
+            {/* <HeroBanner /> */}
             <Categories />
-            {/* <BestSeller/> */}
-            <Bestsell/>
-            <Trending/>
-            <NewArrival/>
+            <Img/>
+            <BestSeller />
+            {/* <Bestsell/> */}
+            <Trending />
+            <NewArrival />
             <BestDeals />
             <Footer />
         </div>
