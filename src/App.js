@@ -6,6 +6,8 @@ import Home from './components/HomePage/HomePage';
 import Men from './components/MenPage/MenPage';
 import Women from './components/WomenPage/WomenPage';
 import SearchPage from './components/Search/SearchPage';
+import Footer from './components/Footer/Footer';
+import ProductsByCategory from './components/CategoryData/ProductsByCategory';
 
 function App() {
   return (
@@ -18,7 +20,9 @@ function App() {
           <Route path="/men" element={<Men />} />
           <Route path="/women" element={<Women />} />
           <Route path='/search' element={<SearchPage/>}/>
+          <Route path='/:gender/:type' element={<ProductsByCategory/>}/>
         </Routes>
+        <Footer/>
       </div>
     </Router>
   );
