@@ -1,19 +1,19 @@
 import React from 'react'
-import ProductsByCategory from '../HomePage/ProductsByCategory'
+import Categorie from './Categorie'
+import Trending from './Trending'
+import TopRated from './TopRated'
+import NewArrival from './NewArrival'
+import BestSeller from './BestSeller'
 
 function MenPage() {
     return (
-        <>
-            <ProductsByCategory category="hoodie" />
-            <ProductsByCategory category="pyjamas" />
-            <ProductsByCategory category="kurta" />
-            <ProductsByCategory category="shirt" />
-            <ProductsByCategory category="shorts" />
-            <ProductsByCategory category="sweater" />
-            <ProductsByCategory category="tracksuit" />
-            <ProductsByCategory category="trouser" />
-            <ProductsByCategory category="tshirt" />
-        </>
+        <div className='m-3'>
+            <Categorie/>
+            <Trending/>
+            <TopRated/>
+            <NewArrival/>
+            <BestSeller/>
+        </div>
     )
 }
 
