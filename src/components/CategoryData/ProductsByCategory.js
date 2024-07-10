@@ -34,20 +34,27 @@ function ProductsByCategory() {
         <div className="container mx-auto px-4 py-8">
             <div className="flex">
                 {/* Sidebar */}
-                <div className="w-1/4 pr-4">
+                <div className="w-1/4 pr-4 pl-5">
                     <h2 className="text-lg font-bold mb-4">SellerTag</h2>
                     <ul className="mb-8">
-                        <li className="mb-2"><input type="checkbox" id="men" name="sellerTag" value="best seller" /> Best Seller</li>
-                        <li className="mb-2"><input type="checkbox" id="women" name="sellerTag" value="trending" /> Trending</li>
-                        <li className="mb-2"><input type="checkbox" id="kids" name="sellerTag" value="new arrival" /> New Arrival</li>
-                        <li className="mb-2"><input type="checkbox" id="kids" name="sellerTag" value="top rated" /> Top Rated</li>
+                        <li className="mb-2"><input type="radio" id="men" name="sellerTag" value="best seller" /> Best Seller</li>
+                        <li className="mb-2"><input type="radio" id="women" name="sellerTag" value="trending" /> Trending</li>
+                        <li className="mb-2"><input type="radio" id="kids" name="sellerTag" value="new arrival" /> New Arrival</li>
+                        <li className="mb-2"><input type="radio" id="kids" name="sellerTag" value="top rated" /> Top Rated</li>
                     </ul>
                     <h2 className="text-lg font-bold mb-4">BRAND</h2>
                     <ul>
-                        <li className="mb-2"><input type="checkbox" id="tshirts" name="products" value="tshirts" /> T-Shirts</li>
-                        <li className="mb-2"><input type="checkbox" id="tshirts" name="products" value="tshirts" /> T-Shirts</li>
-                        <li className="mb-2"><input type="checkbox" id="tshirts" name="products" value="tshirts" /> T-Shirts</li>
-                        <li className="mb-2"><input type="checkbox" id="tshirts" name="products" value="tshirts" /> T-Shirts</li>
+                        <li className="mb-2"><input type="radio" name="brand" value="Bewakoof®" /> Bewakoof®</li>
+                        <li className="mb-2"><input type="radio" name="brand" value="Campus Sutra" /> Campus Sutra</li>
+                        <li className="mb-2"><input type="radio" name="brand" value="7 Shores" /> 7 Shores</li>
+                        <li className="mb-2"><input type="radio" name="brand" value="TISTABENE" /> TISTABENE</li>
+                        <li className="mb-2"><input type="radio" name="brand" value="SAVVAO" /> SAVVAO</li>
+                        <li className="mb-2"><input type="radio" name="brand" value="BEWAKOOF X STREETWEAR" /> BEWAKOOF X STREETWEAR</li>
+                        <li className="mb-2"><input type="radio" name="brand" value="OFFICIAL MARVEL MERCHANDISE" /> OFFICIAL MARVEL MERCHANDISE</li>
+                        <li className="mb-2"><input type="radio" name="brand" value="OFFICIAL DC MERCHANDISE" /> OFFICIAL DC MERCHANDISE</li>
+                        <li className="mb-2"><input type="radio" name="brand" value="OFFICIAL TOM & JERRY MERCHANDISE" /> OFFICIAL TOM & JERRY MERCHANDISE</li>
+                        <li className="mb-2"><input type="radio" name="brand" value="OFFICIAL NARUTO MERCHANDISE" /> OFFICIAL NARUTO MERCHANDISE</li>
+                        
                     </ul>
                 </div>
 
