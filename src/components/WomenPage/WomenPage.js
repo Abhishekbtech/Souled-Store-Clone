@@ -1,14 +1,16 @@
 import React from 'react'
-import ProductsByCategory from '../HomePage/ProductsByCategory'
+import ProductsBySellerTag from '../CategoryData/ProductsBySellerTag'
+import Categorie from './Categorie'
 
 function WomenPage() {
     return (
-        <>
-            <ProductsByCategory category="jeans" />
-            <ProductsByCategory category="jogger" />
-            <ProductsByCategory category="jumpsuit" />
-            <ProductsByCategory category="kurti" />
-        </>
+        <div className='m-3'>
+            <Categorie/>
+            <ProductsBySellerTag gender="Women" sellerTag="trending"/>
+            <ProductsBySellerTag gender="Women" sellerTag="top rated"/>
+            <ProductsBySellerTag gender="Women" sellerTag="new arrival"/>
+            <ProductsBySellerTag gender="Women" sellerTag="best seller"/>
+        </div>
     )
 }
 
