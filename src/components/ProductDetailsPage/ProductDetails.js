@@ -139,7 +139,8 @@ const ProductDetails = () => {
                         </button>
                         {expandedSections.artistDetails && (
                             <div className="px-4 pb-4">
-                                <p>{product.artistDetails}</p>
+                                <p>The Souled Store was born out of a simple idea - love what you do and follow your soul! Thus, our goal is to give everyone something they'll love, something they can use to express themselves, and, simply put, something to put a smile on their face. So, whether it's superheroes like Superman, TV shows like F.R.I.E.N.D.S, pop culture, music, sports, or quirky, funny stuff you're looking for, we have something for everyone.</p>
+                                <p className='mt-3'>TSS Originals or The Souled Store Originals is our exclusive range of funny, funky, trendy and stylish designs. Designed by our kick-ass team of in-house designers, TSS Originals are some cool and quirky designs that help you speak your vibe.</p>
                             </div>
                         )}
                     </div>
