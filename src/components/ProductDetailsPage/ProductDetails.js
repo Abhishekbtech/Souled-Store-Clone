@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faInstagram, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 const ProductDetails = () => {
     const { productId } = useParams();
@@ -93,11 +95,20 @@ const ProductDetails = () => {
                             ADD TO WISHLIST
                         </button>
                     </div>
-                    <div className="flex space-x-2 mb-4">
-                        <span>Share:</span>
-                        <a href="#" className="text-blue-500"><i className="fab fa-facebook"></i></a>
-                        <a href="#" className="text-blue-500"><i className="fab fa-twitter"></i></a>
-                        <a href="#" className="text-blue-500"><i className="fab fa-whatsapp"></i></a>
+                    <div className="flex space-x-2 mb-4 mt-5">
+                        <span className='pr-5'>Share:</span>
+                        <a href="#" className="text-black text-2xl pr-2">
+                            <FontAwesomeIcon icon={faFacebook}/>
+                        </a>
+                        <a href="#" className="text-black text-2xl pr-2">
+                            <FontAwesomeIcon icon={faTwitter}/>
+                        </a>
+                        <a href="#" className="text-black text-2xl pr-2">
+                            <FontAwesomeIcon icon={faWhatsapp}/>
+                        </a>
+                        <a href="#" className="text-black text-2xl pr-2">
+                            <FontAwesomeIcon icon={faInstagram}/>
+                        </a>
                     </div>
                     <div className="mb-4">
                         <h3 className="font-semibold mb-2">Delivery Details</h3>
