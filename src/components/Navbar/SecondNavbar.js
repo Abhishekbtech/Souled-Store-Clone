@@ -78,7 +78,7 @@ const SecondNavbar = () => {
                     </IconButton>
                     <div>
                         <AccountCircleIcon className="text-gray-700 cursor-pointer" onClick={handleMenuOpen} />
-                        <Menu
+                        {/* <Menu
                             anchorEl={anchorEl}
                             open={Boolean(anchorEl)}
                             onClose={handleMenuClose}
@@ -86,7 +86,7 @@ const SecondNavbar = () => {
                             <MenuItem onClick={handleMenuClose}>My Wishlist</MenuItem>
                             <MenuItem onClick={handleMenuClose}>My Orders</MenuItem>
                             <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
-                        </Menu>
+                        </Menu> */}
                     </div>
                 </div>
             </div>
