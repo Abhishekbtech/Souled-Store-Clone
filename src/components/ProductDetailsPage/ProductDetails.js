@@ -41,7 +41,7 @@ const ProductDetails = () => {
     return (
         <div className="container mx-auto p-4">
             <nav className="breadcrumb mb-4">
-                Home / Men Cargo Jeans / The Souled Store / {product.name}
+                Home / {product.gender}'s {product.subCategory} / The Souled Store / {product.name}
             </nav>
             <div className="flex">
                 <div className="w-1/2">
@@ -63,7 +63,7 @@ const ProductDetails = () => {
                 <div className="w-1/2 p-4 ml-5 mr-5">
                     <h1 className="text-2xl font-bold mb-3">{product.name}</h1>
                     <hr />
-                    <p className="text-xl text-gray-800 mt-4">₹{product.price}</p>
+                    <p className="text-xl text-gray-800 mt-4">₹ {product.price}</p>
                     <p className='text-sm mt-1'>MRP incl. of all taxes</p>
                     <div className="mb-4 mt-5">
                         <h3 className="font-semibold mb-2">Please select a size: <span className="text-blue-500 cursor-pointer">SIZE CHART</span></h3>
