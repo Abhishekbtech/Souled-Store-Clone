@@ -86,7 +86,7 @@ const ProductDetails = () => {
                     </div>
 
                     <div className="flex space-x-4 mb-4 mt-6">
-                        <button className="bg-red-500 text-white px-10 py-2 rounded-md">
+                        <button className="bg-red-500 text-white px-10 py-2 rounded-md" >
                             ADD TO CART
                         </button>
                         <button className="border px-8 py-2 rounded-md">
