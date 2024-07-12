@@ -40,10 +40,10 @@ const ProductDetails = () => {
 
     return (
         <div className="container mx-auto p-4">
-            <nav className="breadcrumb mb-4">
+            {/* <nav className="breadcrumb mb-4">
                 Home / {product.gender}'s {product.subCategory} / The Souled Store / {product.name}
-            </nav>
-            <div className="flex flex-col md:flex-row"> {/* flex-col for mobile, flex-row for laptop */}
+            </nav> */}
+            <div className="flex flex-col md:flex-row"> 
                 <div className="mb-4 md:w-1/2 md:mr-5">
                     <img src={selectedImage} alt={product.name} className="w-full h-auto object-cover mb-4" />
                     <div className="flex space-x-2">
