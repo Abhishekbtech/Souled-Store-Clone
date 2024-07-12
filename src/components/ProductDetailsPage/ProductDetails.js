@@ -60,7 +60,7 @@ const ProductDetails = () => {
                 </div>
                 <div className="w-1/2 p-4 ml-5 mr-5">
                     <h1 className="text-2xl font-bold mb-3">{product.name}</h1>
-                    <hr/>
+                    <hr />
                     <p className="text-xl text-gray-800 mt-4">₹{product.price}</p>
                     <p className='text-sm mt-1'>MRP incl. of all taxes</p>
                     <div className="mb-4 mt-5">
@@ -76,12 +76,15 @@ const ProductDetails = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="quantity" className="font-semibold mb-2 block">Quantity</label>
+                    <div className="mt-5 mb-4 flex items-center">
+                        <label htmlFor="quantity" className="font-semibold mr-4">Quantity</label>
                         <select id="quantity" className="border p-2 rounded-md">
-                            {[...Array(10).keys()].map(i => <option key={i + 1} value={i + 1}>{i + 1}</option>)}
+                            {[...Array(10).keys()].map(i => (
+                                <option key={i + 1} value={i + 1}>{i + 1}</option>
+                            ))}
                         </select>
                     </div>
+
                     <div className="flex space-x-4 mb-4">
                         <button className="bg-red-500 text-white px-4 py-2 rounded-md">
                             ADD TO CART
