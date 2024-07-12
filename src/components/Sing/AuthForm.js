@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AuthForm = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -9,7 +9,7 @@ const AuthForm = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const toggleForm = () => {
         setIsLogin(!isLogin);
@@ -22,25 +22,25 @@ const AuthForm = () => {
         setError('');
         setSuccess('');
 
-        const headers = { projectID: 'YOUR_PROJECT_ID' };
+        const headers = { projectID: '0e7aaiqkxs51' };
 
         if (isLogin) {
             // Handle login
             try {
-                const response = await axios.post('/api/v1/user/login', {
+                const response = await axios.post('https://academics.newtonschool.co/api/v1/user/login', {
                     email,
                     password,
                     appType: 'ecommerce'
                 }, { headers });
                 sessionStorage.setItem('token', response.data.token);
-                history.push('/'); // Redirect to home page or any protected route
+                navigate('/'); // Redirect to home page or any protected route
             } catch (error) {
                 setError('Login failed. Please check your credentials.');
             }
         } else {
             // Handle registration
             try {
-                await axios.post('/api/v1/user/signup', {
+                await axios.post('https://academics.newtonschool.co/api/v1/user/signup', {
                     name,
                     email,
                     password,
@@ -49,6 +49,7 @@ const AuthForm = () => {
                 setSuccess('Registration successful! Please log in.');
                 setIsLogin(true);
             } catch (error) {
+                console.log("ee", error)
                 setError('Registration failed. Please try again.');
             }
         }
