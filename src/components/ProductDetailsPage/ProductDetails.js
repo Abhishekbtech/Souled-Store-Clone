@@ -43,11 +43,9 @@ const ProductDetails = () => {
             <nav className="breadcrumb mb-4">
                 Home / {product.gender}'s {product.subCategory} / The Souled Store / {product.name}
             </nav>
-            <div className="flex">
-                <div className="w-1/2">
-                    <div className="mb-4">
-                        <img src={selectedImage} alt={product.name} className="w-full h-auto object-cover" />
-                    </div>
+            <div className="flex flex-col md:flex-row"> {/* flex-col for mobile, flex-row for laptop */}
+                <div className="mb-4 md:w-1/2 md:mr-5">
+                    <img src={selectedImage} alt={product.name} className="w-full h-auto object-cover mb-4" />
                     <div className="flex space-x-2">
                         {product.images.map((image, index) => (
                             <img
@@ -60,7 +58,7 @@ const ProductDetails = () => {
                         ))}
                     </div>
                 </div>
-                <div className="w-1/2 p-4 ml-5 mr-5">
+                <div className="w-full md:w-1/2 p-4 md:ml-5 md:mr-5">
                     <h1 className="text-2xl font-bold mb-3">{product.name}</h1>
                     <hr />
                     <p className="text-xl text-gray-800 mt-4">₹ {product.price}</p>
