@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 const ProductDetails = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [selectedImage, setSelectedImage] = useState('');
+    const [expandedSections, setExpandedSections] = useState({
+        productDetails: false,
+        productDescription: false,
+        artistDetails: false
+    });
+
     const location = useLocation();
     const { productde } = location.state || {};
 
@@ -20,12 +27,11 @@ const ProductDetails = () => {
         });
     }, [productId]);
 
-    const handleAddToCart = () => {
-        // Add to cart functionality
-    };
-
-    const handleAddToWishlist = () => {
-        // Add to wishlist functionality
+    const handleToggle = (section) => {
+        setExpandedSections(prevState => ({
+            ...prevState,
+            [section]: !prevState[section]
+        }));
     };
 
     if (!product) return <div>Loading...</div>;
@@ -77,10 +83,10 @@ const ProductDetails = () => {
                         </select>
                     </div>
                     <div className="flex space-x-4 mb-4">
-                        <button onClick={handleAddToCart} className="bg-red-500 text-white px-4 py-2 rounded-md">
+                        <button className="bg-red-500 text-white px-4 py-2 rounded-md">
                             ADD TO CART
                         </button>
-                        <button onClick={handleAddToWishlist} className="border px-4 py-2 rounded-md">
+                        <button className="border px-4 py-2 rounded-md">
                             ADD TO WISHLIST
                         </button>
                     </div>
@@ -95,9 +101,47 @@ const ProductDetails = () => {
                         <input type="text" placeholder="Enter Pincode" className="border p-2 rounded-md w-full mb-2" />
                         <button className="bg-gray-500 text-white px-4 py-2 rounded-md">CHECK</button>
                     </div>
-                    <div>
-                        <h3 className="font-semibold mb-2">Product Details</h3>
-                        <div dangerouslySetInnerHTML={{ __html: product.description }} />
+                    <div className="mb-4 border-t">
+                        <button
+                            className="flex justify-between w-full py-2 font-semibold"
+                            onClick={() => handleToggle('productDetails')}
+                        >
+                            Product Details
+                            {expandedSections.productDetails ? <FaChevronUp /> : <FaChevronDown />}
+                        </button>
+                        {expandedSections.productDetails && (
+                            <div className="px-4 pb-4">
+                                <div dangerouslySetInnerHTML={{ __html: product.description }} />
+                            </div>
+                        )}
+                    </div>
+                    <div className="mb-4 border-t">
+                        <button
+                            className="flex justify-between w-full py-2 font-semibold"
+                            onClick={() => handleToggle('productDescription')}
+                        >
+                            Product Description
+                            {expandedSections.productDescription ? <FaChevronUp /> : <FaChevronDown />}
+                        </button>
+                        {expandedSections.productDescription && (
+                            <div className="px-4 pb-4">
+                                <p>{product.description}</p>
+                            </div>
+                        )}
+                    </div>
+                    <div className="mb-4 border-t">
+                        <button
+                            className="flex justify-between w-full py-2 font-semibold"
+                            onClick={() => handleToggle('artistDetails')}
+                        >
+                            Artist's Details
+                            {expandedSections.artistDetails ? <FaChevronUp /> : <FaChevronDown />}
+                        </button>
+                        {expandedSections.artistDetails && (
+                            <div className="px-4 pb-4">
+                                <p>{product.artistDetails}</p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
