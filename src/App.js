@@ -24,7 +24,7 @@ function App() {
           <Route path='/:gender/:type' element={<ProductsByCategory/>}/>
           <Route path='/:productId' element={<ProductDetails/>}/>
         </Routes>
-        <Footer/>
+        {/* <Footer/> */}
       </div>
     </Router>
   );
