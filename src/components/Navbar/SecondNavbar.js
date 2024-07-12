@@ -11,13 +11,13 @@ const SecondNavbar = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [showSearch, setShowSearch] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCategories = async () => {
             const response = await fetch('https://academics.newtonschool.co/api/v1/ecommerce/clothes/categories', {
                 headers: {
-                    projectId: 'your_project_id_here'
+                    projectId: '0e7aaiqkxs51'
                 }
             });
             const data = await response.json();
@@ -27,8 +27,8 @@ const SecondNavbar = () => {
         fetchCategories();
     }, []);
 
-    const handleMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
+    const handleMenuOpen = () => {
+        navigate('/sing')
     };
 
     const handleMenuClose = () => {
@@ -42,7 +42,7 @@ const SecondNavbar = () => {
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value)
         console.log(searchTerm)
-        Navigate("/search", {state :{key :searchTerm}});
+        navigate("/search", {state :{key :searchTerm}});
     };
 
     return (
