@@ -110,7 +110,7 @@ const ProductDetails = () => {
                             <FontAwesomeIcon icon={faInstagram}/>
                         </a>
                     </div>
-                    <div className="mb-4 mt-5">
+                    <div className="mb-6 mt-5">
                         <h3 className="font-semibold mb-2">Delivery Details</h3>
                         <input type="text" placeholder="Enter Pincode" className="border p-2 rounded-md w-full mb-2" />
                         <button className="bg-gray-500 text-white px-4 py-2 rounded-md">CHECK</button>
