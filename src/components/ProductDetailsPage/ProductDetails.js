@@ -62,7 +62,6 @@ const ProductDetails = () => {
                     <h1 className="text-2xl font-bold mb-3">{product.name}</h1>
                     <hr/>
                     <p className="text-xl text-gray-800 mt-4">₹{product.price}</p>
-                    <p className="line-through text-red-500">₹{product.originalPrice}</p>
                     <p>Inclusive of all taxes</p>
                     <div className="mb-4">
                         <h3 className="font-semibold mb-2">Please select a size: <span className="text-blue-500 cursor-pointer">SIZE CHART</span></h3>
