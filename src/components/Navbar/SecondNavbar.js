@@ -4,13 +4,15 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const SecondNavbar = () => {
     const [categories, setCategories] = useState([]);
     const [anchorEl, setAnchorEl] = useState(null);
     const [showSearch, setShowSearch] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [username, setUsername] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -27,8 +29,21 @@ const SecondNavbar = () => {
         fetchCategories();
     }, []);
 
-    const handleMenuOpen = () => {
-        navigate('/sing')
+    useEffect(() => {
+        const token = sessionStorage.getItem('token');
+        if (token) {
+            setIsLoggedIn(true);
+            const storedUsername = sessionStorage.getItem('username');
+            setUsername(storedUsername || '');
+        }
+    }, []);
+
+    const handleMenuOpen = (event) => {
+        if (isLoggedIn) {
+            setAnchorEl(event.currentTarget);
+        } else {
+            navigate('/signup'); // This line should be updated based on how you handle the login flow
+        }
     };
 
     const handleMenuClose = () => {
@@ -40,9 +55,8 @@ const SecondNavbar = () => {
     };
 
     const handleSearchChange = (e) => {
-        setSearchTerm(e.target.value)
-        console.log(searchTerm)
-        navigate("/search", {state :{key :searchTerm}});
+        setSearchTerm(e.target.value);
+        navigate("/search", { state: { key: searchTerm } });
     };
 
     return (
@@ -76,9 +90,16 @@ const SecondNavbar = () => {
                     <IconButton aria-label="show cart items">
                         <ShoppingCartIcon />
                     </IconButton>
-                    <div>
+                    <div className="flex items-center space-x-2">
                         <AccountCircleIcon className="text-gray-700 cursor-pointer" onClick={handleMenuOpen} />
-                        {/* <Menu
+                        {isLoggedIn ? (
+                            <span>Hi {username}</span>
+                        ) : (
+                            <span className="text-gray-700">
+                                Sign up
+                            </span>
+                        )}
+                        <Menu
                             anchorEl={anchorEl}
                             open={Boolean(anchorEl)}
                             onClose={handleMenuClose}
@@ -86,7 +107,7 @@ const SecondNavbar = () => {
                             <MenuItem onClick={handleMenuClose}>My Wishlist</MenuItem>
                             <MenuItem onClick={handleMenuClose}>My Orders</MenuItem>
                             <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
-                        </Menu> */}
+                        </Menu>
                     </div>
                 </div>
             </div>
