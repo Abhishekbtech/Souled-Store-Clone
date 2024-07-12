@@ -63,9 +63,9 @@ const ProductDetails = () => {
                     <hr/>
                     <p className="text-xl text-gray-800 mt-4">₹{product.price}</p>
                     <p className='text-sm mt-1'>MRP incl. of all taxes</p>
-                    <div className="mb-4">
+                    <div className="mb-4 mt-5">
                         <h3 className="font-semibold mb-2">Please select a size: <span className="text-blue-500 cursor-pointer">SIZE CHART</span></h3>
-                        <div className="flex space-x-2">
+                        <div className="flex space-x-2 mt-6">
                             {product.size.map((size) => (
                                 <button
                                     key={size}
