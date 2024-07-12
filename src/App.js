@@ -24,7 +24,7 @@ function App() {
           <Route path='/search' element={<SearchPage/>}/>
           <Route path='/:gender/:type' element={<ProductsByCategory/>}/>
           <Route path='/:productId' element={<ProductDetails/>}/>
-          <Route path='/sing' element={<AuthForm/>}/>
+          <Route path='/signup' element={<AuthForm/>}/>
         </Routes>
         {/* <Footer/> */}
       </div>
