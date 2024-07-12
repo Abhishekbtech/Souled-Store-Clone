@@ -21,9 +21,8 @@ const AuthForm = () => {
         e.preventDefault();
         setError('');
         setSuccess('');
-
         const headers = { projectID: '0e7aaiqkxs51' };
-
+    
         if (isLogin) {
             // Handle login
             try {
@@ -33,23 +32,28 @@ const AuthForm = () => {
                     appType: 'ecommerce'
                 }, { headers });
                 sessionStorage.setItem('token', response.data.token);
-                navigate('/'); // Redirect to home page or any protected route
+                sessionStorage.setItem('name', response.data.data.user.name); // Store name in sessionStorage
+                navigate('/men');
+                window.location.reload();
             } catch (error) {
                 setError('Login failed. Please check your credentials.');
             }
         } else {
             // Handle registration
             try {
-                await axios.post('https://academics.newtonschool.co/api/v1/user/signup', {
+                const response = await axios.post('https://academics.newtonschool.co/api/v1/user/signup', {
                     name,
                     email,
                     password,
                     appType: 'ecommerce'
                 }, { headers });
+                sessionStorage.setItem('token', response.data.token);
+                sessionStorage.setItem('name', response.data.data.user.name); // Store name in sessionStorage
                 setSuccess('Registration successful! Please log in.');
                 setIsLogin(true);
+                navigate('/men');
+                window.location.reload();
             } catch (error) {
-                console.log("ee", error)
                 setError('Registration failed. Please try again.');
             }
         }
