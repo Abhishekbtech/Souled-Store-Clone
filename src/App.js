@@ -8,6 +8,7 @@ import Women from './components/WomenPage/WomenPage';
 import SearchPage from './components/Search/SearchPage';
 import Footer from './components/Footer/Footer';
 import ProductsByCategory from './components/CategoryData/ProductsByCategory';
+import ProductDetails from './components/ProductDetailsPage/ProductDetails';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/women" element={<Women />} />
           <Route path='/search' element={<SearchPage/>}/>
           <Route path='/:gender/:type' element={<ProductsByCategory/>}/>
+          <Route path='/:productId' element={<ProductDetails/>}/>
         </Routes>
         <Footer/>
       </div>
