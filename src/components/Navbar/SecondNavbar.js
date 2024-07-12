@@ -33,7 +33,7 @@ const SecondNavbar = () => {
         const token = sessionStorage.getItem('token');
         if (token) {
             setIsLoggedIn(true);
-            const storedUsername = sessionStorage.getItem('username');
+            const storedUsername = sessionStorage.getItem('name');
             setUsername(storedUsername || '');
         }
     }, []);
@@ -57,6 +57,15 @@ const SecondNavbar = () => {
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
         navigate("/search", { state: { key: searchTerm } });
+    };
+
+    const handleLogout = () => {
+        // Clear token from sessionStorage
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('username');
+        setIsLoggedIn(false);
+        setUsername('');
+        handleMenuClose();
     };
 
     return (
@@ -95,7 +104,7 @@ const SecondNavbar = () => {
                         {isLoggedIn ? (
                             <span>Hi {username}</span>
                         ) : (
-                            <span className="text-gray-700">
+                            <span className="text-gray-700" onClick={() => navigate('/signup')}>
                                 Sign up
                             </span>
                         )}
@@ -106,7 +115,7 @@ const SecondNavbar = () => {
                         >
                             <MenuItem onClick={handleMenuClose}>My Wishlist</MenuItem>
                             <MenuItem onClick={handleMenuClose}>My Orders</MenuItem>
-                            <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+                            <MenuItem onClick={handleLogout}>Logout</MenuItem>
                         </Menu>
                     </div>
                 </div>
