@@ -9,6 +9,7 @@ import SearchPage from './components/Search/SearchPage';
 import Footer from './components/Footer/Footer';
 import ProductsByCategory from './components/CategoryData/ProductsByCategory';
 import ProductDetails from './components/ProductDetailsPage/ProductDetails';
+import AuthForm from './components/Sing/AuthForm';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/search' element={<SearchPage/>}/>
           <Route path='/:gender/:type' element={<ProductsByCategory/>}/>
           <Route path='/:productId' element={<ProductDetails/>}/>
+          <Route path='/sing' element={<AuthForm/>}/>
         </Routes>
         {/* <Footer/> */}
       </div>
