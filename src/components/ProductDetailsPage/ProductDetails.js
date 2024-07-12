@@ -60,6 +60,7 @@ const ProductDetails = () => {
                 </div>
                 <div className="w-1/2 p-4 ml-5 mr-5">
                     <h1 className="text-2xl font-bold mb-2">{product.name}</h1>
+                    <hr/>
                     <p className="text-xl text-gray-800">₹{product.price}</p>
                     <p className="line-through text-red-500">₹{product.originalPrice}</p>
                     <p>Inclusive of all taxes</p>
