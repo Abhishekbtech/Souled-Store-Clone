@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
@@ -9,6 +9,7 @@ function ProductsByCategory() {
     const [sellerTag, setSellerTag] = useState('');
     const [brand, setBrand] = useState('');
     const [error, setError] = useState(null);
+    const navigate = useNavigate()
     const location = useLocation();
     const { category } = location.state || {};
 
@@ -49,6 +50,11 @@ function ProductsByCategory() {
     const handleAddToWishlist = (product) => {
         console.log(`Product added to wishlist: ${product.name}`);
     };
+
+    const productWithDetailPage = (product) => {
+        // console.log(`Product added to wishlist: ${product._id}`);
+        navigate(`/${product._id}`, { state: { product } });
+    }
 
     if (!category) {
         return <div className="container mx-auto px-4 py-8">Loading...</div>;
@@ -221,12 +227,12 @@ function ProductsByCategory() {
                             <div className="col-span-4 text-center">No items found</div>
                         ) : (
                             products.map((product) => (
-                                <div key={product._id} className="p-2 mb-4 mt-4 relative">
-                                    <div className="border rounded-md overflow-hidden hover:shadow-md hover:scale-105 transition duration-300">
+                                <div key={product._id} className="p-2 mb-4 mt-4 relative" >
+                                    <div className="border rounded-md overflow-hidden hover:shadow-md hover:scale-105 transition duration-300" >
                                         <div>
                                             <img src={product.displayImage} alt={product.name} className="w-full h-35 object-cover" />
                                         </div>
-                                        <h3 className='ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis'>{product.name}</h3>
+                                        <h3 className='ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer' onClick={() => productWithDetailPage(product)}>{product.name}</h3>
                                         <p className="text-gray-700 ml-2">₹ {product.price}</p>
                                         <p className="text-gray-500 mb-2 ml-2">Rating: {parseFloat(product.ratings).toFixed(1)}</p>
                                         <button
