@@ -115,7 +115,7 @@ const ProductDetails = () => {
                         <input type="text" placeholder="Enter Pincode" className="border p-2 rounded-md w-full mb-2" />
                         <button className="bg-gray-500 text-white px-4 py-2 rounded-md">CHECK</button>
                     </div>
-                    <div className="mb-4 border-t">
+                    <div className="mb-2 border-t">
                         <button
                             className="flex justify-between w-full py-2 font-semibold"
                             onClick={() => handleToggle('productDetails')}
@@ -129,7 +129,7 @@ const ProductDetails = () => {
                             </div>
                         )}
                     </div>
-                    <div className="mb-4 border-t">
+                    <div className="mb-2 border-t">
                         <button
                             className="flex justify-between w-full py-2 font-semibold"
                             onClick={() => handleToggle('productDescription')}
@@ -143,7 +143,7 @@ const ProductDetails = () => {
                             </div>
                         )}
                     </div>
-                    <div className="mb-4 border-t">
+                    <div className="mb-2 border-t">
                         <button
                             className="flex justify-between w-full py-2 font-semibold"
                             onClick={() => handleToggle('artistDetails')}
