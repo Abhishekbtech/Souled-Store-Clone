@@ -85,11 +85,11 @@ const ProductDetails = () => {
                         </select>
                     </div>
 
-                    <div className="flex space-x-4 mb-4">
-                        <button className="bg-red-500 text-white px-4 py-2 rounded-md">
+                    <div className="flex space-x-4 mb-4 mt-6">
+                        <button className="bg-red-500 text-white px-10 py-2 rounded-md">
                             ADD TO CART
                         </button>
-                        <button className="border px-4 py-2 rounded-md">
+                        <button className="border px-8 py-2 rounded-md">
                             ADD TO WISHLIST
                         </button>
                     </div>
