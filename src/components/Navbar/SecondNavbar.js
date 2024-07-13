@@ -59,8 +59,11 @@ const SecondNavbar = () => {
         navigate("/search", { state: { key: searchTerm } });
     };
 
+    const handlingCart = () => {
+        navigate('/cart');
+    }
+
     const handleLogout = () => {
-        // Clear token from sessionStorage
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('username');
         setIsLoggedIn(false);
@@ -96,7 +99,7 @@ const SecondNavbar = () => {
                     <IconButton aria-label="show wishlist">
                         <FavoriteIcon />
                     </IconButton>
-                    <IconButton aria-label="show cart items">
+                    <IconButton aria-label="show cart items" onClick={handlingCart}>
                         <ShoppingCartIcon />
                     </IconButton>
                     <div className="flex items-center space-x-2">
