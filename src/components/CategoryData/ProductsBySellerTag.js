@@ -5,9 +5,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 function ProductsBySellerTag({gender, sellerTag}) {
     const [products, setProducts] = useState([]);
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -53,6 +55,11 @@ function ProductsBySellerTag({gender, sellerTag}) {
         ]
     };
 
+    const productWithDetailPage = (product) => {
+        // console.log(`Product added to wishlist: ${product._id}`);
+        navigate(`/${product._id}`, { state: { product } });
+    }
+
     const handleAddToWishlist = (product) => {
         console.log(`Product added to wishlist: ${product.name}`);
     };
@@ -70,7 +77,7 @@ function ProductsBySellerTag({gender, sellerTag}) {
                                 <div>
                                     <img src={product.displayImage} alt={product.name} className="w-full h-35 object-cover" />
                                 </div>
-                                <h3 className='ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis'>{product.name}</h3>
+                                <h3 className='ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer' onClick={() => productWithDetailPage(product)}>{product.name}</h3>
                                 <p className="text-gray-700 ml-2">₹ {product.price}</p>
                                 <p className="text-gray-500 mb-2 ml-2">Rating: {parseFloat(product.ratings).toFixed(1)}</p>
                                 <button
