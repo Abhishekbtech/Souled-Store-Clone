@@ -19,8 +19,8 @@ function App() {
         <Navbar />
         <SecondNavbar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/men" element={<Men />} />
+          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/" element={<Men />} />
           <Route path="/women" element={<Women />} />
           <Route path='/search' element={<SearchPage/>}/>
           <Route path='/:gender/:type' element={<ProductsByCategory/>}/>
