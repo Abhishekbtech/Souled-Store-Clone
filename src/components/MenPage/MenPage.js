@@ -7,8 +7,8 @@ function MenPage() {
     return (
         <div className='m-3'>
             <ScorlPage/>
-            <ProductsBySellerTag gender="Men" sellerTag="trending"/>
             <Categorie/>
+            <ProductsBySellerTag gender="Men" sellerTag="trending"/>
             <ProductsBySellerTag gender="Men" sellerTag="top rated"/>
             <ProductsBySellerTag gender="Men" sellerTag="new arrival"/>
             <ProductsBySellerTag gender="Men" sellerTag="best seller"/>
