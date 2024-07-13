@@ -5,8 +5,9 @@ import ProductsBySellerTag from '../CategoryData/ProductsBySellerTag'
 function MenPage() {
     return (
         <div className='m-3'>
-            <Categorie/>
+            
             <ProductsBySellerTag gender="Men" sellerTag="trending"/>
+            <Categorie/>
             <ProductsBySellerTag gender="Men" sellerTag="top rated"/>
             <ProductsBySellerTag gender="Men" sellerTag="new arrival"/>
             <ProductsBySellerTag gender="Men" sellerTag="best seller"/>
