@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,14 +9,15 @@ const ProductDetails = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [selectedImage, setSelectedImage] = useState('');
+    const [quantity, setQuantity] = useState(1); // State to hold quantity
+    const [size, setSize] = useState('S'); // State to hold size
     const [expandedSections, setExpandedSections] = useState({
         productDetails: false,
         productDescription: false,
         artistDetails: false
     });
 
-    const location = useLocation();
-    const { productde } = location.state || {};
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/product/${productId}`, {
@@ -29,20 +30,34 @@ const ProductDetails = () => {
         });
     }, [productId]);
 
-    const handleToggle = (section) => {
-        setExpandedSections(prevState => ({
-            ...prevState,
-            [section]: !prevState[section]
-        }));
+    const handleAddToCart = () => {
+        const token = sessionStorage.getItem('token');
+        if (!token) {
+            navigate('/signup');
+            return;
+        }
+
+        // Example API call to add item to cart
+        axios.patch(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${productId}`, {
+            quantity: quantity,
+            size: size
+        }, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'projectID': '0e7aaiqkxs51'
+            }
+        }).then(response => {
+            console.log('Item added to cart:', response.data);
+            // Optionally redirect to cart or show success message
+        }).catch(error => {
+            console.error('Error adding item to cart:', error);
+        });
     };
 
     if (!product) return <div>Loading...</div>;
 
     return (
         <div className="container mx-auto p-4">
-            {/* <nav className="breadcrumb mb-4">
-                Home / {product.gender}'s {product.subCategory} / The Souled Store / {product.name}
-            </nav> */}
             <div className="flex flex-col md:flex-row"> 
                 <div className="mb-4 md:w-1/2 md:mr-5">
                     <img src={selectedImage} alt={product.name} className="w-full h-auto object-cover mb-4" />
@@ -66,19 +81,25 @@ const ProductDetails = () => {
                     <div className="mb-4 mt-5">
                         <h3 className="font-semibold mb-2">Please select a size: <span className="text-blue-500 cursor-pointer">SIZE CHART</span></h3>
                         <div className="flex space-x-2 mt-6">
-                            {product.size.map((size) => (
+                            {product.size.map((sz) => (
                                 <button
-                                    key={size}
-                                    className="border px-4 py-2 rounded-md hover:bg-gray-200"
+                                    key={sz}
+                                    className={`border px-4 py-2 rounded-md ${sz === size ? 'bg-blue-500 text-white' : 'hover:bg-gray-200'}`}
+                                    onClick={() => setSize(sz)}
                                 >
-                                    {size}
+                                    {sz}
                                 </button>
                             ))}
                         </div>
                     </div>
                     <div className="mt-5 mb-4 flex items-center">
                         <label htmlFor="quantity" className="font-semibold mr-4">Quantity</label>
-                        <select id="quantity" className="border p-2 rounded-md">
+                        <select
+                            id="quantity"
+                            className="border p-2 rounded-md"
+                            value={quantity}
+                            onChange={(e) => setQuantity(parseInt(e.target.value))}
+                        >
                             {[...Array(10).keys()].map(i => (
                                 <option key={i + 1} value={i + 1}>{i + 1}</option>
                             ))}
@@ -86,7 +107,7 @@ const ProductDetails = () => {
                     </div>
 
                     <div className="flex space-x-4 mb-4 mt-6">
-                        <button className="bg-red-500 text-white px-10 py-2 rounded-md" >
+                        <button className="bg-red-500 text-white px-10 py-2 rounded-md" onClick={handleAddToCart}>
                             ADD TO CART
                         </button>
                         <button className="border px-8 py-2 rounded-md">
@@ -116,7 +137,7 @@ const ProductDetails = () => {
                     <div className="mb-2 border-t">
                         <button
                             className="flex justify-between w-full py-2 font-semibold"
-                            onClick={() => handleToggle('productDetails')}
+                            onClick={() => setExpandedSections(prevState => ({ ...prevState, productDetails: !prevState.productDetails }))}
                         >
                             Product Details
                             {expandedSections.productDetails ? <FaChevronUp /> : <FaChevronDown />}
@@ -130,7 +151,7 @@ const ProductDetails = () => {
                     <div className="mb-2 border-t">
                         <button
                             className="flex justify-between w-full py-2 font-semibold"
-                            onClick={() => handleToggle('productDescription')}
+                            onClick={() => setExpandedSections(prevState => ({ ...prevState, productDescription: !prevState.productDescription }))}
                         >
                             Product Description
                             {expandedSections.productDescription ? <FaChevronUp /> : <FaChevronDown />}
@@ -144,7 +165,7 @@ const ProductDetails = () => {
                     <div className="mb-2 border-t">
                         <button
                             className="flex justify-between w-full py-2 font-semibold"
-                            onClick={() => handleToggle('artistDetails')}
+                            onClick={() => setExpandedSections(prevState => ({ ...prevState, artistDetails: !prevState.artistDetails }))}
                         >
                             Artist's Details
                             {expandedSections.artistDetails ? <FaChevronUp /> : <FaChevronDown />}
