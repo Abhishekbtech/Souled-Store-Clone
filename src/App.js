@@ -10,6 +10,7 @@ import Footer from './components/Footer/Footer';
 import ProductsByCategory from './components/CategoryData/ProductsByCategory';
 import ProductDetails from './components/ProductDetailsPage/ProductDetails';
 import AuthForm from './components/Sing/AuthForm';
+import CartPage from './components/Cart/CartPage';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/:gender/:type' element={<ProductsByCategory/>}/>
           <Route path='/:productId' element={<ProductDetails/>}/>
           <Route path='/signup' element={<AuthForm/>}/>
+          <Route path='/cart' element={<CartPage/>}/>
         </Routes>
         {/* <Footer/> */}
       </div>
