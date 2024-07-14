@@ -10,7 +10,7 @@ const Navbar = () => {
                 </Link>
                 <div className="hidden md:flex space-x-4">
                     <Link to="/women" className="text-white">Women</Link>
-                    <Link to="/men" className="text-white">Men</Link>
+                    <Link to="/" className="text-white">Men</Link>
                     <Link to="/kids" className="text-white">Kids</Link>
                 </div>
                 <div className="flex items-center space-x-4">
