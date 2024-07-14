@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const AuthForm = () => {
     const [isLogin, setIsLogin] = useState(true);
+    const [isForgotPassword, setIsForgotPassword] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,8 +14,30 @@ const AuthForm = () => {
 
     const toggleForm = () => {
         setIsLogin(!isLogin);
+        setIsForgotPassword(false);
         setError('');
         setSuccess('');
+    };
+
+    const handleForgotPassword = async (e) => {
+        e.preventDefault();
+        setError('');
+        setSuccess('');
+        const headers = { projectID: '0e7aaiqkxs51' };
+
+        try {
+            await axios.post('https://academics.newtonschool.co/api/v1/user/forgotPassword', {
+                name,
+                email,
+                password,
+                appType: 'ecommerce'
+            }, { headers });
+            setSuccess('Password reset successful! Please log in with your new password.');
+            setIsLogin(true);
+            setIsForgotPassword(false);
+        } catch (error) {
+            setError('Password reset failed. Please check your details.');
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -24,7 +47,6 @@ const AuthForm = () => {
         const headers = { projectID: '0e7aaiqkxs51' };
     
         if (isLogin) {
-            // Handle login
             try {
                 const response = await axios.post('https://academics.newtonschool.co/api/v1/user/login', {
                     email,
@@ -32,14 +54,13 @@ const AuthForm = () => {
                     appType: 'ecommerce'
                 }, { headers });
                 sessionStorage.setItem('token', response.data.token);
-                sessionStorage.setItem('name', response.data.data.user.name); // Store name in sessionStorage
+                sessionStorage.setItem('name', response.data.data.user.name);
                 navigate('/men');
                 window.location.reload();
             } catch (error) {
                 setError('Login failed. Please check your credentials.');
             }
         } else {
-            // Handle registration
             try {
                 const response = await axios.post('https://academics.newtonschool.co/api/v1/user/signup', {
                     name,
@@ -48,7 +69,7 @@ const AuthForm = () => {
                     appType: 'ecommerce'
                 }, { headers });
                 sessionStorage.setItem('token', response.data.token);
-                sessionStorage.setItem('name', response.data.data.user.name); // Store name in sessionStorage
+                sessionStorage.setItem('name', response.data.data.user.name);
                 setSuccess('Registration successful! Please log in.');
                 setIsLogin(true);
                 navigate('/men');
@@ -61,11 +82,13 @@ const AuthForm = () => {
 
     return (
         <div className="container mx-auto p-4">
-            <h2 className="text-2xl font-bold mb-4">{isLogin ? 'Login' : 'Register'}</h2>
+            <h2 className="text-2xl font-bold mb-4">
+                {isForgotPassword ? 'Forgot Password' : isLogin ? 'Login' : 'Register'}
+            </h2>
             {error && <p className="text-red-500 mb-4">{error}</p>}
             {success && <p className="text-green-500 mb-4">{success}</p>}
-            <form onSubmit={handleSubmit}>
-                {!isLogin && (
+            {isForgotPassword ? (
+                <form onSubmit={handleForgotPassword}>
                     <div className="mb-4">
                         <label htmlFor="name" className="block font-semibold mb-2">Name</label>
                         <input
@@ -77,38 +100,89 @@ const AuthForm = () => {
                             required
                         />
                     </div>
-                )}
-                <div className="mb-4">
-                    <label htmlFor="email" className="block font-semibold mb-2">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="border p-2 rounded-md w-full"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="password" className="block font-semibold mb-2">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="border p-2 rounded-md w-full"
-                        required
-                    />
-                </div>
-                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
-                    {isLogin ? 'Login' : 'Register'}
-                </button>
-            </form>
+                    <div className="mb-4">
+                        <label htmlFor="email" className="block font-semibold mb-2">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="border p-2 rounded-md w-full"
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="password" className="block font-semibold mb-2">New Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="border p-2 rounded-md w-full"
+                            required
+                        />
+                    </div>
+                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
+                        Reset Password
+                    </button>
+                </form>
+            ) : (
+                <form onSubmit={handleSubmit}>
+                    {!isLogin && (
+                        <div className="mb-4">
+                            <label htmlFor="name" className="block font-semibold mb-2">Name</label>
+                            <input
+                                type="text"
+                                id="name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className="border p-2 rounded-md w-full"
+                                required
+                            />
+                        </div>
+                    )}
+                    <div className="mb-4">
+                        <label htmlFor="email" className="block font-semibold mb-2">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="border p-2 rounded-md w-full"
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="password" className="block font-semibold mb-2">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="border p-2 rounded-md w-full"
+                            required
+                        />
+                    </div>
+                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
+                        {isLogin ? 'Login' : 'Register'}
+                    </button>
+                </form>
+            )}
             <p className="mt-4">
-                {isLogin ? "Don't have an account?" : 'Already have an account?'}
-                <button onClick={toggleForm} className="text-blue-500 ml-2">
-                    {isLogin ? 'Register' : 'Login'}
-                </button>
+                {isLogin ? (
+                    <>
+                        Don't have an account?
+                        <button onClick={toggleForm} className="text-blue-500 ml-2">Register</button>
+                        <br />
+                        Forgot your password?
+                        <button onClick={() => setIsForgotPassword(true)} className="text-blue-500 ml-2">Reset Password</button>
+                    </>
+                ) : (
+                    <>
+                        Already have an account?
+                        <button onClick={toggleForm} className="text-blue-500 ml-2">Login</button>
+                    </>
+                )}
             </p>
         </div>
     );
