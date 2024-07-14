@@ -81,10 +81,22 @@ const AuthForm = () => {
     };
 
     return (
-        <div className="container mx-auto p-4">
-            <h2 className="text-2xl font-bold mb-4">
-                {isForgotPassword ? 'Forgot Password' : isLogin ? 'Login' : 'Register'}
-            </h2>
+        <div className="max-w-md mx-auto bg-white p-8 shadow-md rounded-md mt-5">
+            <div className="flex mb-4">
+                <button
+                    className={`flex-1 py-2 ${isLogin && !isForgotPassword ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+                    onClick={() => { setIsLogin(true); setIsForgotPassword(false); }}
+                >
+                    Login
+                </button>
+                <button
+                    className={`flex-1 py-2 ${!isLogin && !isForgotPassword ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+                    onClick={() => { setIsLogin(false); setIsForgotPassword(false); }}
+                >
+                    Register
+                </button>
+            </div>
+            <h2 className="text-2xl font-bold mb-4 text-center">{isForgotPassword ? 'Forgot Password' : isLogin ? 'Login' : 'Register'}</h2>
             {error && <p className="text-red-500 mb-4">{error}</p>}
             {success && <p className="text-green-500 mb-4">{success}</p>}
             {isForgotPassword ? (
@@ -122,7 +134,7 @@ const AuthForm = () => {
                             required
                         />
                     </div>
-                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
+                    <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded-md w-full">
                         Reset Password
                     </button>
                 </form>
@@ -163,27 +175,29 @@ const AuthForm = () => {
                             required
                         />
                     </div>
-                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
+                    <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded-md w-full">
                         {isLogin ? 'Login' : 'Register'}
                     </button>
                 </form>
             )}
-            <p className="mt-4">
-                {isLogin ? (
-                    <>
-                        Don't have an account?
-                        <button onClick={toggleForm} className="text-blue-500 ml-2">Register</button>
-                        <br />
-                        Forgot your password?
-                        <button onClick={() => setIsForgotPassword(true)} className="text-blue-500 ml-2">Reset Password</button>
-                    </>
-                ) : (
-                    <>
-                        Already have an account?
-                        <button onClick={toggleForm} className="text-blue-500 ml-2">Login</button>
-                    </>
-                )}
-            </p>
+            {!isForgotPassword && (
+                <p className="mt-4 text-center">
+                    {isLogin ? (
+                        <>
+                            Don't have an account?
+                            <button onClick={toggleForm} className="text-green-600 ml-2">Register</button>
+                            <br />
+                            Forgot your password?
+                            <button onClick={() => setIsForgotPassword(true)} className="text-green-600 ml-2">Reset Password</button>
+                        </>
+                    ) : (
+                        <>
+                            Already have an account?
+                            <button onClick={toggleForm} className="text-green-600 ml-2">Login</button>
+                        </>
+                    )}
+                </p>
+            )}
         </div>
     );
 };
