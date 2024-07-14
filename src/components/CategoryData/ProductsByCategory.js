@@ -52,7 +52,6 @@ function ProductsByCategory() {
     };
 
     const productWithDetailPage = (product) => {
-        // console.log(`Product added to wishlist: ${product._id}`);
         navigate(`/${product._id}`, { state: { product } });
     }
 
