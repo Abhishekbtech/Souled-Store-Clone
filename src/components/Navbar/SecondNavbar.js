@@ -13,6 +13,7 @@ const SecondNavbar = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
+    const [isScrolled, setIsScrolled] = useState(false); // State to track if scrolled
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -38,6 +39,22 @@ const SecondNavbar = () => {
         }
     }, []);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     const handleMenuOpen = (event) => {
         if (isLoggedIn) {
             setAnchorEl(event.currentTarget);
@@ -61,7 +78,7 @@ const SecondNavbar = () => {
 
     const handlingCart = () => {
         navigate('/cart');
-    }
+    };
 
     const handleLogout = () => {
         sessionStorage.removeItem('token');
@@ -72,14 +89,14 @@ const SecondNavbar = () => {
     };
 
     return (
-        <nav className="bg-gray-100 p-2">
+        <nav className={`bg-gray-100 p-2 ${isScrolled ? 'fixed w-full top-0 z-50' : ''}`}>
             <div className="container mx-auto flex items-center justify-between flex-wrap">
                 <div className="flex space-x-4 overflow-x-auto flex-1">
-                    {categories.map((category, index) => (
+                    {/* {categories.map((category, index) => (
                         <button key={index} className="text-gray-700 hover:text-gray-900 whitespace-nowrap">
                             {category.toUpperCase()}
                         </button>
-                    ))}
+                    ))} */}
                 </div>
                 <div className="flex items-center space-x-4">
                     {showSearch && (
