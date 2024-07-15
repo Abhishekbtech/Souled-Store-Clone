@@ -211,20 +211,20 @@ function ProductsByCategory() {
                     </div>
                     <div className="flex justify-between items-center mb-4">
                         <p>{products.length} items</p>
-                        <button 
-                            className="md:hidden bg-blue-500 text-white p-2 rounded"
-                            onClick={() => setShowFilters(!showFilters)}
-                        >
-                            {showFilters ? 'Hide Filters' : 'Show Filters'}
-                        </button>
-                        {sellerTag && <p>Seller Tag: {sellerTag.toUpperCase()}</p>}
-                        {brand && <p>Brand: {brand.toUpperCase()}</p>}
-                        <select className="border p-2 rounded">
-                            <option value="default">Select Sorting Options</option>
-                            <option value="price-asc">Price: Low to High</option>
-                            <option value="price-desc">Price: High to Low</option>
-                            {/* Add more sorting options as needed */}
-                        </select>
+                        <div className="flex flex-col md:flex-row items-center md:space-x-4">
+                            <button 
+                                className="md:hidden bg-blue-500 text-white p-2 rounded mb-2 md:mb-0"
+                                onClick={() => setShowFilters(!showFilters)}
+                            >
+                                {showFilters ? 'Hide Filters' : 'Show Filters'}
+                            </button>
+                            <select className="border p-2 rounded w-full md:w-auto">
+                                <option value="default">Select Sorting Options</option>
+                                <option value="price-asc">Price: Low to High</option>
+                                <option value="price-desc">Price: High to Low</option>
+                                {/* Add more sorting options as needed */}
+                            </select>
+                        </div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {error ? (
