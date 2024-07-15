@@ -36,6 +36,10 @@ const SearchPage = () => {
                     filter.gender = gender;
                 }
 
+                if (color){
+                    filter.color = color;
+                }
+
                 const url = `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?filter=${encodeURIComponent(JSON.stringify(filter))}`;
 
                 const response = await axios.get(url, {
@@ -52,7 +56,7 @@ const SearchPage = () => {
 
     useEffect(() => {
         fetchProducts();
-    }, [searchTerm, sellerTag, brand, gender]);
+    }, [searchTerm, sellerTag, brand, gender, color]);
 
     const handleAddToWishlist = (product) => {
         console.log(`Product added to wishlist: ${product.name}`);
