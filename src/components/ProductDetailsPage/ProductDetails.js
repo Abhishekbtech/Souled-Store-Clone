@@ -69,11 +69,12 @@ const ProductDetails = () => {
         }
 
         axios.patch(`https://academics.newtonschool.co/api/v1/ecommerce/wishlist`, {
-            productId: productId
-        }, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'projectID': '0e7aaiqkxs51'
+            },
+            body:{
+                productId: productId
             }
         }).then(response => {
             console.log('Item added to wishlist:', response.data);
