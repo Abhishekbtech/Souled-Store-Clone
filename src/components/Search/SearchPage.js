@@ -16,6 +16,7 @@ const SearchPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const searchTerm = location.state?.key;
+    const [sortBy, setSortBy] = useState('default');
 
     const fetchProducts = async () => {
         try {
@@ -36,7 +37,7 @@ const SearchPage = () => {
                     filter.gender = gender;
                 }
 
-                if (color){
+                if (color) {
                     filter.color = color;
                 }
 
@@ -45,7 +46,15 @@ const SearchPage = () => {
                 const response = await axios.get(url, {
                     headers: { projectId: '0e7aaiqkxs51' }
                 });
-                setProducts(response.data.data);
+                let sortedProducts = response.data.data;
+
+                if (sortBy === 'price-asc') {
+                    sortedProducts.sort((a, b) => a.price - b.price);
+                } else if (sortBy === 'price-desc') {
+                    sortedProducts.sort((a, b) => b.price - a.price);
+                }
+
+                setProducts(sortedProducts);
                 setError(null);
             }
         } catch (error) {
@@ -56,7 +65,7 @@ const SearchPage = () => {
 
     useEffect(() => {
         fetchProducts();
-    }, [searchTerm, sellerTag, brand, gender, color]);
+    }, [searchTerm, sellerTag, brand, gender, color, sortBy]);
 
     const handleAddToWishlist = (product) => {
         console.log(`Product added to wishlist: ${product.name}`);
@@ -339,7 +348,7 @@ const SearchPage = () => {
                         {brand && <p>Brand: {brand.toUpperCase()}</p>}
                         {gender && <p>Gender: {gender.toUpperCase()}</p>}
                         {color && <p>Color : {color.toUpperCase()}</p>}
-                        <select className="hidden md:block border p-2 rounded w-full md:w-auto">
+                        <select className="hidden md:block border p-2 rounded w-full md:w-auto" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
                             <option value="default">Default</option>
                             <option value="price-asc">Price: Low to High</option>
                             <option value="price-desc">Price: High to Low</option>
@@ -657,13 +666,31 @@ const SearchPage = () => {
                     <h2 className="text-lg font-bold mb-4">Sort by</h2>
                     <ul>
                         <li className="mb-2">
-                            <input type="radio" name="sort" value="default" /> Default
+                            <input
+                                type='checkbox'
+                                name='sortBy'
+                                value='default'
+                                checked={sortBy === 'default'}
+                                onChange={() => setSortBy(sortBy === 'default' ? '' : 'default')}
+                            /> Default
                         </li>
                         <li className="mb-2">
-                            <input type="radio" name="sort" value="price-asc" /> Price: Low to High
+                            <input
+                                type='checkbox'
+                                name='sortBy'
+                                value='price-asc'
+                                checked={sortBy === 'price-asc'}
+                                onChange={() => setSortBy(sortBy === 'price-asc' ? '' : 'price-asc')}
+                            /> Price: Low to High
                         </li>
                         <li className="mb-2">
-                            <input type="radio" name="sort" value="price-desc" /> Price: High to Low
+                            <input
+                                type='checkbox'
+                                name='sortBy'
+                                value='price-desc'
+                                checked={sortBy === 'price-desc'}
+                                onChange={() => setSortBy(sortBy === 'price-desc' ? '' : 'price-desc')}
+                            /> Price: High to Low
                         </li>
                     </ul>
                     <button onClick={() => setShowSort(false)} className="mt-4 bg-blue-500 text-white p-2 rounded">Close</button>
