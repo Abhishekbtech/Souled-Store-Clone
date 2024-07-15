@@ -76,7 +76,7 @@ const SearchPage = () => {
                 {/* Sidebar */}
                 <div className="w-1/4 pr-4 pl-5 hidden md:block">
                     <h2 className="text-lg font-bold mb-4">Gender</h2>
-                    <ul>
+                    <ul className='mb-8'>
                         <li className="mb-2">
                             <input
                                 type="checkbox"
