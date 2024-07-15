@@ -73,6 +73,7 @@ const SecondNavbar = () => {
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
+        console.log("nav", e.target.value)
         navigate("/search", { state: { key: searchTerm } });
     };
 
