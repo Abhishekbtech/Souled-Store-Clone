@@ -19,6 +19,7 @@ const ProductDetails = () => {
         productDescription: false,
         artistDetails: false,
     });
+    const [wishlist, setWishlist] = useState([]);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -53,6 +54,28 @@ const ProductDetails = () => {
             console.log('Item added to cart:', response.data);
         }).catch(error => {
             console.error('Error adding item to cart:', error);
+        });
+    };
+
+    const handleAddToWishlist = () => {
+        const token = sessionStorage.getItem('token');
+        if (!token) {
+            navigate('/signup', { state: { from: location } });
+            return;
+        }
+
+        axios.patch(`https://academics.newtonschool.co/api/v1/ecommerce/wishlist`, {
+            productId: productId
+        }, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'projectID': '0e7aaiqkxs51'
+            }
+        }).then(response => {
+            console.log('Item added to wishlist:', response.data);
+            setWishlist([...wishlist, productId]);
+        }).catch(error => {
+            console.error('Error adding item to wishlist:', error);
         });
     };
 
@@ -127,9 +150,11 @@ const ProductDetails = () => {
                         <button className="bg-red-500 text-white px-10 py-2 rounded-md" onClick={handleAddToCart}>
                             ADD TO CART
                         </button>
-                        <button className="border px-8 py-2 rounded-md">
-                            ADD TO WISHLIST
-                        </button>
+                        {!wishlist.includes(productId) && (
+                            <button className="border px-8 py-2 rounded-md" onClick={handleAddToWishlist}>
+                                ADD TO WISHLIST
+                            </button>
+                        )}
                     </div>
                     <div className="flex space-x-2 mb-4 mt-5">
                         <span className='pr-5'>Share:</span>
