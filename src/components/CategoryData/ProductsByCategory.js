@@ -15,6 +15,8 @@ function ProductsByCategory() {
     const navigate = useNavigate()
     const location = useLocation();
     const { category } = location.state || {};
+    const [sortBy, setSortBy] = useState('default'); // State for sorting criteria
+    const [sortOrder, setSortOrder] = useState('asc');
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -42,7 +44,16 @@ function ProductsByCategory() {
                     const response = await axios.get(url, {
                         headers: { projectId: '0e7aaiqkxs51' }
                     });
-                    setProducts(response.data.data);
+
+                    let sortedProducts = response.data.data;
+                    
+                    if (sortBy === 'price-asc') {
+                        sortedProducts.sort((a, b) => a.price - b.price);
+                    } else if (sortBy === 'price-desc') {
+                        sortedProducts.sort((a, b) => b.price - a.price);
+                    }
+    
+                    setProducts(sortedProducts);
                     setError(null);
                 }
             } catch (err) {
@@ -52,7 +63,7 @@ function ProductsByCategory() {
         };
 
         fetchProducts();
-    }, [category, sellerTag, brand, color]);
+    }, [category, sellerTag, brand, color, sortBy, sortOrder]);
 
     const handleAddToWishlist = (product) => {
         console.log(`Product added to wishlist: ${product.name}`);
@@ -313,7 +324,7 @@ function ProductsByCategory() {
                         {sellerTag && <p>Seller Tag: {sellerTag.toUpperCase()}</p>}
                         {brand && <p>Brand: {brand.toUpperCase()}</p>}
                         {color && <p>Color: {color.toUpperCase()}</p>}
-                        <select className="hidden md:block border p-2 rounded w-full md:w-auto">
+                        <select className="hidden md:block border p-2 rounded w-full md:w-auto" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
                             <option value="default">Default</option>
                             <option value="price-asc">Price: Low to High</option>
                             <option value="price-desc">Price: High to Low</option>
