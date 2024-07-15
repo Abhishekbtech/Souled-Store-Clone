@@ -9,12 +9,13 @@ const ProductDetails = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [selectedImage, setSelectedImage] = useState('');
-    const [quantity, setQuantity] = useState(1); // State to hold quantity
-    const [size, setSize] = useState('S'); // State to hold size
+    const [quantity, setQuantity] = useState(1);
+    const [size, setSize] = useState('S');
     const [expandedSections, setExpandedSections] = useState({
         productDetails: false,
         productDescription: false,
-        artistDetails: false
+        artistDetails: false,
+        deliveryDetails: false,  // New section
     });
 
     const navigate = useNavigate();
@@ -37,7 +38,6 @@ const ProductDetails = () => {
             return;
         }
 
-        // Example API call to add item to cart
         axios.patch(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${productId}`, {
             quantity: quantity,
             size: size
@@ -48,7 +48,6 @@ const ProductDetails = () => {
             }
         }).then(response => {
             console.log('Item added to cart:', response.data);
-            // Optionally redirect to cart or show success message
         }).catch(error => {
             console.error('Error adding item to cart:', error);
         });
@@ -58,7 +57,7 @@ const ProductDetails = () => {
 
     return (
         <div className="container mx-auto p-4">
-            <div className="flex flex-col md:flex-row"> 
+            <div className="flex flex-col md:flex-row">
                 <div className="mb-4 md:w-1/2 md:mr-5">
                     <img src={selectedImage} alt={product.name} className="w-full h-auto object-cover mb-4" />
                     <div className="flex space-x-2">
@@ -117,22 +116,25 @@ const ProductDetails = () => {
                     <div className="flex space-x-2 mb-4 mt-5">
                         <span className='pr-5'>Share:</span>
                         <a href="#" className="text-black text-2xl pr-2">
-                            <FontAwesomeIcon icon={faFacebook}/>
+                            <FontAwesomeIcon icon={faFacebook} />
                         </a>
                         <a href="#" className="text-black text-2xl pr-2">
-                            <FontAwesomeIcon icon={faTwitter}/>
+                            <FontAwesomeIcon icon={faTwitter} />
                         </a>
                         <a href="#" className="text-black text-2xl pr-2">
-                            <FontAwesomeIcon icon={faWhatsapp}/>
+                            <FontAwesomeIcon icon={faWhatsapp} />
                         </a>
                         <a href="#" className="text-black text-2xl pr-2">
-                            <FontAwesomeIcon icon={faInstagram}/>
+                            <FontAwesomeIcon icon={faInstagram} />
                         </a>
                     </div>
                     <div className="mb-6 mt-5">
                         <h3 className="font-semibold mb-2">Delivery Details</h3>
                         <input type="text" placeholder="Enter Pincode" className="border p-2 rounded-md w-full mb-2" />
                         <button className="bg-gray-500 text-white px-4 py-2 rounded-md">CHECK</button>
+                    </div>
+                    <div className="border p-4 mb-4">
+                        <p>This product is eligible for return or exchange under our 30-day return or exchange policy. No questions asked.</p>
                     </div>
                     <div className="mb-2 border-t">
                         <button
@@ -174,6 +176,20 @@ const ProductDetails = () => {
                             <div className="px-4 pb-4">
                                 <p>The Souled Store was born out of a simple idea - love what you do and follow your soul! Thus, our goal is to give everyone something they'll love, something they can use to express themselves, and, simply put, something to put a smile on their face. So, whether it's superheroes like Superman, TV shows like F.R.I.E.N.D.S, pop culture, music, sports, or quirky, funny stuff you're looking for, we have something for everyone.</p>
                                 <p className='mt-3'>TSS Originals or The Souled Store Originals is our exclusive range of funny, funky, trendy and stylish designs. Designed by our kick-ass team of in-house designers, TSS Originals are some cool and quirky designs that help you speak your vibe.</p>
+                            </div>
+                        )}
+                    </div>
+                    <div className="mb-2 border-t">
+                        <button
+                            className="flex justify-between w-full py-2 font-semibold"
+                            onClick={() => setExpandedSections(prevState => ({ ...prevState, deliveryDetails: !prevState.deliveryDetails }))}
+                        >
+                            Delivery Details
+                            {expandedSections.deliveryDetails ? <FaChevronUp /> : <FaChevronDown />}
+                        </button>
+                        {expandedSections.deliveryDetails && (
+                            <div className="px-4 pb-4">
+                                <p>This product is eligible for return or exchange under our 30-day return or exchange policy. No questions asked.</p>
                             </div>
                         )}
                     </div>
