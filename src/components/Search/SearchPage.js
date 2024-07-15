@@ -141,7 +141,7 @@ const SearchPage = () => {
                         </li>
                     </ul>
                     <h2 className="text-lg font-bold mb-4">Brand</h2>
-                    <ul className='m-8'>
+                    <ul className='mb-8'>
                         <li className="mb-2">
                             <input
                                 type="checkbox"
