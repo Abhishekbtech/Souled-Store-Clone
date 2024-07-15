@@ -104,7 +104,7 @@ const SecondNavbar = () => {
                             <input
                                 type="search"
                                 className="px-4 py-2 w-full"
-                                placeholder="Search..."
+                                placeholder="Search by Category"
                                 value={searchTerm}
                                 onChange={handleSearchChange}
                             />
