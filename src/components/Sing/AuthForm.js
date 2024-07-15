@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const AuthForm = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -11,6 +11,9 @@ const AuthForm = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     const toggleForm = () => {
         setIsLogin(!isLogin);
@@ -55,7 +58,7 @@ const AuthForm = () => {
                 }, { headers });
                 sessionStorage.setItem('token', response.data.token);
                 sessionStorage.setItem('name', response.data.data.user.name);
-                navigate('/men');
+                navigate(from, { replace: true });
                 window.location.reload();
             } catch (error) {
                 setError('Login failed. Please check your credentials.');
@@ -72,7 +75,7 @@ const AuthForm = () => {
                 sessionStorage.setItem('name', response.data.data.user.name);
                 setSuccess('Registration successful! Please log in.');
                 setIsLogin(true);
-                navigate('/men');
+                navigate(from, { replace: true });
                 window.location.reload();
             } catch (error) {
                 setError('Registration failed. Please try again.');
