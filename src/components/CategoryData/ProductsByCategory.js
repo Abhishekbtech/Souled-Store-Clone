@@ -213,7 +213,7 @@ function ProductsByCategory() {
                     <div className="flex justify-between items-center mb-4">
                         <p>{products.length} items</p>
                         <select className="hidden md:block border p-2 rounded w-full md:w-auto">
-                            <option value="default">Select Sorting Options</option>
+                            <option value="default">Default</option>
                             <option value="price-asc">Price: Low to High</option>
                             <option value="price-desc">Price: High to Low</option>
                             {/* Add more sorting options as needed */}
