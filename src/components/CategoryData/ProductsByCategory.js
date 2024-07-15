@@ -16,7 +16,6 @@ function ProductsByCategory() {
     const location = useLocation();
     const { category } = location.state || {};
     const [sortBy, setSortBy] = useState('default'); // State for sorting criteria
-    const [sortOrder, setSortOrder] = useState('asc');
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -63,7 +62,7 @@ function ProductsByCategory() {
         };
 
         fetchProducts();
-    }, [category, sellerTag, brand, color, sortBy, sortOrder]);
+    }, [category, sellerTag, brand, color, sortBy]);
 
     const handleAddToWishlist = (product) => {
         console.log(`Product added to wishlist: ${product.name}`);
