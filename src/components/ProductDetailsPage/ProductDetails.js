@@ -179,20 +179,6 @@ const ProductDetails = () => {
                             </div>
                         )}
                     </div>
-                    <div className="mb-2 border-t">
-                        <button
-                            className="flex justify-between w-full py-2 font-semibold"
-                            onClick={() => setExpandedSections(prevState => ({ ...prevState, deliveryDetails: !prevState.deliveryDetails }))}
-                        >
-                            Delivery Details
-                            {expandedSections.deliveryDetails ? <FaChevronUp /> : <FaChevronDown />}
-                        </button>
-                        {expandedSections.deliveryDetails && (
-                            <div className="px-4 pb-4">
-                                <p>This product is eligible for return or exchange under our 30-day return or exchange policy. No questions asked.</p>
-                            </div>
-                        )}
-                    </div>
                 </div>
             </div>
         </div>
