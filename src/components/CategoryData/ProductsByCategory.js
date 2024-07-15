@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart,faFilter, faSort } from '@fortawesome/free-solid-svg-icons';
 
 function ProductsByCategory() {
     const [products, setProducts] = useState([]);
@@ -254,14 +254,14 @@ function ProductsByCategory() {
                     onClick={() => setShowFilter(!showFilter)}
                     className="flex items-center space-x-2"
                 >
-                    <FontAwesomeIcon icon={faHeart} size="lg" />
+                    <FontAwesomeIcon icon={faFilter} size="lg" />
                     <span>FILTER</span>
                 </button>
                 <button
                     onClick={() => setShowSort(!showSort)}
                     className="flex items-center space-x-2"
                 >
-                    <FontAwesomeIcon icon={faHeart} size="lg" />
+                    <FontAwesomeIcon icon={faSort} size="lg" />
                     <span>SORT</span>
                 </button>
             </div>
