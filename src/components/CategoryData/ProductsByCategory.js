@@ -33,6 +33,10 @@ function ProductsByCategory() {
                         filter.brand = brand;
                     }
 
+                    if (color){
+                        filter.color = color;
+                    }
+
                     const url = `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?filter=${encodeURIComponent(JSON.stringify(filter))}`;
 
                     const response = await axios.get(url, {
@@ -220,7 +224,7 @@ function ProductsByCategory() {
                                 type='checkbox'
                                 name='color'
                                 value='BLUE'
-                                checked={color === 'BLACK'}
+                                checked={color === 'BLUE'}
                                 onChange={() => setColor(color === 'BLUE' ? '' : 'BLUE')}
                             /> BLUE
                             <button className='ml-2 pl-4 pr-4 pt-4 border bg-blue-800'></button>
