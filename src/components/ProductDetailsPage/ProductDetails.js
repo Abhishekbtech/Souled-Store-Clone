@@ -12,6 +12,8 @@ const ProductDetails = () => {
     const [selectedImage, setSelectedImage] = useState('');
     const [quantity, setQuantity] = useState(1);
     const [size, setSize] = useState('S');
+    const [pincode, setPincode] = useState('');
+    const [pincodeMessage, setPincodeMessage] = useState('');
     const [expandedSections, setExpandedSections] = useState({
         productDetails: false,
         productDescription: false,
@@ -51,6 +53,21 @@ const ProductDetails = () => {
         }).catch(error => {
             console.error('Error adding item to cart:', error);
         });
+    };
+
+    const handlePincodeChange = (e) => {
+        const { value } = e.target;
+        if (/^\d{0,6}$/.test(value)) {
+            setPincode(value);
+        }
+    };
+
+    const handlePincodeCheck = () => {
+        if (pincode.length === 6) {
+            setPincodeMessage(`Delivery available at ${pincode}`);
+        } else {
+            setPincodeMessage('Please enter a valid 6-digit pincode.');
+        }
     };
 
     if (!product) return <div>Loading...</div>;
@@ -130,9 +147,23 @@ const ProductDetails = () => {
                     </div>
                     <h1 className='font-semibold mb-2'>Delivery Details</h1>
                     <div className="flex items-center mb-2">
-                        <input type="text" placeholder="Enter Pincode" minLength={6} maxLength={6} className="border p-2 rounded-md w-full" />
-                        <button className="bg-gray-500 text-white px-4 py-2 rounded-md ml-2">CHECK</button>
+                        <input
+                            type="text"
+                            placeholder="Enter Pincode"
+                            minLength={6}
+                            maxLength={6}
+                            value={pincode}
+                            onChange={handlePincodeChange}
+                            className="border p-2 rounded-md w-full"
+                        />
+                        <button
+                            className="bg-gray-500 text-white px-4 py-2 rounded-md ml-2"
+                            onClick={handlePincodeCheck}
+                        >
+                            CHECK
+                        </button>
                     </div>
+                    {pincodeMessage && <p className="mt-2 text-green-600">{pincodeMessage}</p>}
                     <p className="text-gray-700 mt-5 mb-5 p-2 text-sm border shadow-md">
                         <FontAwesomeIcon icon={faUndoAlt} className="mr-4" />
                         This product is eligible for return or exchange under our 30-day return or exchange policy. No questions asked.
