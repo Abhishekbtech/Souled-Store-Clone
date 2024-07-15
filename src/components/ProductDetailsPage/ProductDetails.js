@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faInstagram, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faInstagram, faTwitter, faWhatsapp, faUndoAlt } from '@fortawesome/free-brands-svg-icons';
 
 const ProductDetails = () => {
     const { productId } = useParams();
@@ -15,7 +15,6 @@ const ProductDetails = () => {
         productDetails: false,
         productDescription: false,
         artistDetails: false,
-        deliveryDetails: false,  // New section
     });
 
     const navigate = useNavigate();
@@ -128,14 +127,14 @@ const ProductDetails = () => {
                             <FontAwesomeIcon icon={faInstagram} />
                         </a>
                     </div>
-                    <div className="mb-6 mt-5">
-                        <h3 className="font-semibold mb-2">Delivery Details</h3>
-                        <input type="text" placeholder="Enter Pincode" className="border p-2 rounded-md w-full mb-2" />
-                        <button className="bg-gray-500 text-white px-4 py-2 rounded-md">CHECK</button>
-                    </div>
-                    <div className="border p-4 mb-4">
-                        <p>This product is eligible for return or exchange under our 30-day return or exchange policy. No questions asked.</p>
-                    </div>
+                    <div className="flex items-center mb-2">
+                            <input type="text" placeholder="Enter Pincode" className="border p-2 rounded-md w-full" />
+                            <button className="bg-gray-500 text-white px-4 py-2 rounded-md ml-2">CHECK</button>
+                        </div>
+                        <p className="text-gray-700 text-sm flex items-center">
+                            <FontAwesomeIcon icon={faUndoAlt} className="mr-2" />
+                            This product is eligible for return or exchange under our 30-day return or exchange policy. No questions asked.
+                        </p>
                     <div className="mb-2 border-t">
                         <button
                             className="flex justify-between w-full py-2 font-semibold"
