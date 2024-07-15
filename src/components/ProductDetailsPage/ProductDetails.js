@@ -20,6 +20,7 @@ const ProductDetails = () => {
         artistDetails: false,
     });
     const [wishlist, setWishlist] = useState([]);
+    const [showPopup, setShowPopup] = useState(false); // State for showing popup message
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -52,6 +53,7 @@ const ProductDetails = () => {
             }
         }).then(response => {
             console.log('Item added to cart:', response.data);
+            showPopupMessage('Item added to cart');
         }).catch(error => {
             console.error('Error adding item to cart:', error);
         });
@@ -74,9 +76,17 @@ const ProductDetails = () => {
         }).then(response => {
             console.log('Item added to wishlist:', response.data);
             setWishlist([...wishlist, productId]);
+            showPopupMessage('Item added to wishlist');
         }).catch(error => {
             console.error('Error adding item to wishlist:', error);
         });
+    };
+
+    const showPopupMessage = (message) => {
+        setShowPopup(true);
+        setTimeout(() => {
+            setShowPopup(false);
+        }, 5000); // 5000 milliseconds = 5 seconds
     };
 
     const handlePincodeChange = (e) => {
@@ -98,6 +108,11 @@ const ProductDetails = () => {
 
     return (
         <div className="container mx-auto p-4">
+            {showPopup && (
+                <div className="fixed bottom-0 right-0 mb-4 mr-4 bg-white p-4 shadow-md rounded-md">
+                    <p>{showPopup}</p>
+                </div>
+            )}
             <div className="flex flex-col md:flex-row">
                 <div className="mb-4 md:w-1/2 md:mr-5">
                     <img src={selectedImage} alt={product.name} className="w-full h-auto object-cover mb-4" />
