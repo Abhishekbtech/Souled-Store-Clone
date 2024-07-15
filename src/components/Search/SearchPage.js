@@ -298,6 +298,28 @@ const SearchPage = () => {
             {/* Mobile filter options */}
             {showFilter && (
                 <div className="fixed inset-0 bg-white p-4 z-10 md:hidden overflow-y-auto">
+                    <h2 className="text-lg font-bold mb-4">Gender</h2>
+                    <ul>
+                        <li className="mb-2">
+                            <input
+                                type="checkbox"
+                                name="gender"
+                                value="Men"
+                                checked={gender === 'Men'}
+                                onChange={() => setGender(gender === 'Men' ? '' : 'Men')}
+                            /> Men
+                        </li>
+                        <li className="mb-2">
+                            <input
+                                type="checkbox"
+                                name="gender"
+                                value="Women"
+                                checked={gender === 'Women'}
+                                onChange={() => setGender(gender === 'Women' ? '' : 'Women')}
+                            /> Women
+                        </li>
+                        {/* Add more options as needed */}
+                    </ul>
                     <h2 className="text-lg font-bold mb-4">SellerTag</h2>
                     <ul className="mb-8">
                         <li className="mb-2">
