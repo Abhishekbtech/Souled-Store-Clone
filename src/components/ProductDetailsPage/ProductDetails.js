@@ -132,8 +132,8 @@ const ProductDetails = () => {
                         <input type="text" placeholder="Enter Pincode" className="border p-2 rounded-md w-full" />
                         <button className="bg-gray-500 text-white px-4 py-2 rounded-md ml-2">CHECK</button>
                     </div>
-                    <p className="text-gray-700 text-sm flex items-center">
-                        <FontAwesomeIcon icon={faUndoAlt} className="mr-2" />
+                    <p className="text-gray-700 mt-5 mb-5 p-2 text-sm border shadow-md">
+                        <FontAwesomeIcon icon={faUndoAlt} className="mr-4" />
                         This product is eligible for return or exchange under our 30-day return or exchange policy. No questions asked.
                     </p>
                     <div className="mb-2 border-t">
