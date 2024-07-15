@@ -252,6 +252,7 @@ function ProductsByCategory() {
                         <p>{products.length} items</p>
                         {sellerTag && <p>Seller Tag: {sellerTag.toUpperCase()}</p>}
                         {brand && <p>Brand: {brand.toUpperCase()}</p>}
+                        {color && <p>Color: {color.toUpperCase()}</p>}
                         <select className="hidden md:block border p-2 rounded w-full md:w-auto">
                             <option value="default">Default</option>
                             <option value="price-asc">Price: Low to High</option>
