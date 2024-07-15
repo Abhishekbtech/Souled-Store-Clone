@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,6 +21,7 @@ const ProductDetails = () => {
     });
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/product/${productId}`, {
@@ -36,7 +37,7 @@ const ProductDetails = () => {
     const handleAddToCart = () => {
         const token = sessionStorage.getItem('token');
         if (!token) {
-            navigate('/signup');
+            navigate('/signup', { state: { from: location } });
             return;
         }
 
