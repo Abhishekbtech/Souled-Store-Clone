@@ -20,7 +20,7 @@ const ProductDetails = () => {
         artistDetails: false,
     });
     const [wishlist, setWishlist] = useState([]);
-    const [showPopup, setShowPopup] = useState(false); 
+    const [showPopup, setShowPopup] = useState(false);
     const [message, setMessage] = useState('')
 
     const navigate = useNavigate();
@@ -68,21 +68,22 @@ const ProductDetails = () => {
             return;
         }
 
-        axios.patch(`https://academics.newtonschool.co/api/v1/ecommerce/wishlist`, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'projectID': '0e7aaiqkxs51'
-            },
-            body:{
-                productId: productId
+        axios.patch(
+            'https://academics.newtonschool.co/api/v1/ecommerce/wishlist',
+            { productId: productId },
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'projectID': '0e7aaiqkxs51'
+                }
             }
-        }).then(response => {
+        ).then(response => {
             console.log('Item added to wishlist:', response.data);
-            setWishlist([...wishlist, productId]);
+            setWishlist([...wishlist, productId]); // Update wishlist state
             showPopupMessage('Item added to wishlist');
             setMessage('Item added to wishlist');
         }).catch(error => {
-            console.error('Error adding item to wishlist:', error);
+            console.error('Error adding item to wishlist:', error.response.data.message);
         });
     };
 
@@ -169,7 +170,11 @@ const ProductDetails = () => {
                         <button className="bg-red-500 text-white px-10 py-2 rounded-md" onClick={handleAddToCart}>
                             ADD TO CART
                         </button>
-                        {!wishlist.includes(productId) && (
+                        {wishlist.includes(productId) ? (
+                            <button className="bg-gray-300 text-gray-600 px-8 py-2 rounded-md cursor-not-allowed" disabled>
+                                ADDED TO WISHLIST
+                            </button>
+                        ) : (
                             <button className="border px-8 py-2 rounded-md" onClick={handleAddToWishlist}>
                                 ADD TO WISHLIST
                             </button>
