@@ -129,6 +129,7 @@ const ProductDetails = () => {
                         </a>
                     </div>
                     <div className="flex items-center mb-2">
+                        <h1>Delivery Details</h1>
                         <input type="text" placeholder="Enter Pincode" className="border p-2 rounded-md w-full" />
                         <button className="bg-gray-500 text-white px-4 py-2 rounded-md ml-2">CHECK</button>
                     </div>
