@@ -16,6 +16,7 @@ const SearchPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const searchTerm = location.state?.key;
+    console.log('sear', searchTerm)
     const [sortBy, setSortBy] = useState('default');
 
     const fetchProducts = async () => {
