@@ -129,13 +129,13 @@ const ProductDetails = () => {
                         </a>
                     </div>
                     <div className="flex items-center mb-2">
-                            <input type="text" placeholder="Enter Pincode" className="border p-2 rounded-md w-full" />
-                            <button className="bg-gray-500 text-white px-4 py-2 rounded-md ml-2">CHECK</button>
-                        </div>
-                        <p className="text-gray-700 text-sm flex items-center">
-                            <FontAwesomeIcon icon={faUndoAlt} className="mr-2" />
-                            This product is eligible for return or exchange under our 30-day return or exchange policy. No questions asked.
-                        </p>
+                        <input type="text" placeholder="Enter Pincode" className="border p-2 rounded-md w-full" />
+                        <button className="bg-gray-500 text-white px-4 py-2 rounded-md ml-2">CHECK</button>
+                    </div>
+                    <p className="text-gray-700 text-sm flex items-center">
+                        <FontAwesomeIcon icon={faUndoAlt} className="mr-2" />
+                        This product is eligible for return or exchange under our 30-day return or exchange policy. No questions asked.
+                    </p>
                     <div className="mb-2 border-t">
                         <button
                             className="flex justify-between w-full py-2 font-semibold"
