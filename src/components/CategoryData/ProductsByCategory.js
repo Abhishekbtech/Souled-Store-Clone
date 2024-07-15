@@ -7,6 +7,7 @@ import { faHeart,faFilter, faSort } from '@fortawesome/free-solid-svg-icons';
 function ProductsByCategory() {
     const [products, setProducts] = useState([]);
     const [sellerTag, setSellerTag] = useState('');
+    const [color, setColor] = useState('')
     const [brand, setBrand] = useState('');
     const [error, setError] = useState(null);
     const [showFilter, setShowFilter] = useState(false);
@@ -200,6 +201,29 @@ function ProductsByCategory() {
                                 checked={brand === 'OFFICIAL NARUTO MERCHANDISE'}
                                 onChange={() => setBrand(brand === 'OFFICIAL NARUTO MERCHANDISE' ? '' : 'OFFICIAL NARUTO MERCHANDISE')}
                             /> OFFICIAL NARUTO MERCHANDISE
+                        </li>
+                    </ul>
+                    <h2 className="text-lg font-bold mb-4">Color</h2>
+                    <ul className='mb-8'>
+                        <li className="mb-2">
+                            <input
+                                type='checkbox'
+                                name='color'
+                                value='BLACK'
+                                checked={color === 'BLACK'}
+                                onChange={() => setColor(color === 'BLACK' ? '' : 'BLACK')}
+                            /> BLACK
+                            <button className='ml-2 pl-4 pr-4 pt-4 border bg-black'></button>
+                        </li>
+                        <li className="mb-2">
+                            <input
+                                type='checkbox'
+                                name='color'
+                                value='BLUE'
+                                checked={color === 'BLACK'}
+                                onChange={() => setColor(color === 'BLUE' ? '' : 'BLUE')}
+                            /> BLUE
+                            <button className='ml-2 pl-4 pr-4 pt-4 border bg-blue-800'></button>
                         </li>
                     </ul>
                 </div>
