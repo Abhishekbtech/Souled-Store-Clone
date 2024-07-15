@@ -20,7 +20,8 @@ const ProductDetails = () => {
         artistDetails: false,
     });
     const [wishlist, setWishlist] = useState([]);
-    const [showPopup, setShowPopup] = useState(false); // State for showing popup message
+    const [showPopup, setShowPopup] = useState(false); 
+    const [message, setMessage] = useState('')
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -54,6 +55,7 @@ const ProductDetails = () => {
         }).then(response => {
             console.log('Item added to cart:', response.data);
             showPopupMessage('Item added to cart');
+            setMessage('Item added to cart');
         }).catch(error => {
             console.error('Error adding item to cart:', error);
         });
@@ -77,6 +79,7 @@ const ProductDetails = () => {
             console.log('Item added to wishlist:', response.data);
             setWishlist([...wishlist, productId]);
             showPopupMessage('Item added to wishlist');
+            setMessage('Item added to wishlist');
         }).catch(error => {
             console.error('Error adding item to wishlist:', error);
         });
@@ -86,7 +89,7 @@ const ProductDetails = () => {
         setShowPopup(true);
         setTimeout(() => {
             setShowPopup(false);
-        }, 5000); // 5000 milliseconds = 5 seconds
+        }, 5000);
     };
 
     const handlePincodeChange = (e) => {
@@ -109,8 +112,8 @@ const ProductDetails = () => {
     return (
         <div className="container mx-auto p-4">
             {showPopup && (
-                <div className="fixed bottom-0 right-0 mb-4 mr-4 bg-white p-4 shadow-md rounded-md">
-                    <p>{showPopup}</p>
+                <div className="text-white fixed top-30 right-0 mb-4 mr-4 bg-red-600 p-4 shadow-md rounded-md">
+                    <p>{message}</p>
                 </div>
             )}
             <div className="flex flex-col md:flex-row">
