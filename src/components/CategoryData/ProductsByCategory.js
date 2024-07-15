@@ -52,7 +52,7 @@ function ProductsByCategory() {
         };
 
         fetchProducts();
-    }, [category, sellerTag, brand]);
+    }, [category, sellerTag, brand, color]);
 
     const handleAddToWishlist = (product) => {
         console.log(`Product added to wishlist: ${product.name}`);
@@ -228,6 +228,16 @@ function ProductsByCategory() {
                                 onChange={() => setColor(color === 'BLUE' ? '' : 'BLUE')}
                             /> BLUE
                             <button className='ml-2 pl-4 pr-4 pt-4 border bg-blue-800'></button>
+                        </li>
+                        <li className="mb-2">
+                            <input
+                                type='checkbox'
+                                name='color'
+                                value='WHITE'
+                                checked={color === 'WHITE'}
+                                onChange={() => setColor(color === 'WHITE' ? '' : 'WHITE')}
+                            /> WHITE
+                            <button className='ml-2 pl-4 pr-4 pt-4 border bg-white'></button>
                         </li>
                     </ul>
                 </div>
