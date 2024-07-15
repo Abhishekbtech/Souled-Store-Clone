@@ -620,13 +620,31 @@ function ProductsByCategory() {
                     <h2 className="text-lg font-bold mb-4">Sort by</h2>
                     <ul>
                         <li className="mb-2">
-                            <input type="radio" name="sort" value="default" /> Default
+                            <input
+                                type='checkbox'
+                                name='sortBy'
+                                value='default'
+                                checked={sortBy === 'default'}
+                                onChange={() => setSortBy(sortBy === 'default' ? '' : 'default')}
+                            /> Default
                         </li>
                         <li className="mb-2">
-                            <input type="radio" name="sort" value="price-asc" /> Price: Low to High
+                            <input
+                                type='checkbox'
+                                name='sortBy'
+                                value='price-asc'
+                                checked={sortBy === 'price-asc'}
+                                onChange={() => setSortBy(sortBy === 'price-asc' ? '' : 'price-asc')}
+                            /> Price: Low to High
                         </li>
                         <li className="mb-2">
-                            <input type="radio" name="sort" value="price-desc" /> Price: High to Low
+                            <input
+                                type='checkbox'
+                                name='sortBy'
+                                value='price-desc'
+                                checked={sortBy === 'price-desc'}
+                                onChange={() => setSortBy(sortBy === 'price-desc' ? '' : 'price-desc')}
+                            /> Price: High to Low
                         </li>
                     </ul>
                     <button onClick={() => setShowSort(false)} className="mt-4 bg-blue-500 text-white p-2 rounded">Close</button>
