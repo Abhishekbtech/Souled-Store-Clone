@@ -3,7 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faInstagram, faTwitter, faWhatsapp, faUndoAlt } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faInstagram, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { faUndoAlt } from '@fortawesome/free-solid-svg-icons';
 
 const ProductDetails = () => {
     const { productId } = useParams();
