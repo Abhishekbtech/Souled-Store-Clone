@@ -130,7 +130,7 @@ const ProductDetails = () => {
                     </div>
                     <h1 className='font-semibold mb-2'>Delivery Details</h1>
                     <div className="flex items-center mb-2">
-                        <input type="text" placeholder="Enter Pincode" className="border p-2 rounded-md w-full" />
+                        <input type="text" placeholder="Enter Pincode" minLength={6} maxLength={6} className="border p-2 rounded-md w-full" />
                         <button className="bg-gray-500 text-white px-4 py-2 rounded-md ml-2">CHECK</button>
                     </div>
                     <p className="text-gray-700 mt-5 mb-5 p-2 text-sm border shadow-md">
