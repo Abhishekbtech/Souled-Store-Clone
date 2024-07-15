@@ -9,6 +9,7 @@ const SearchPage = () => {
     const [sellerTag, setSellerTag] = useState('');
     const [brand, setBrand] = useState('');
     const [gender, setGender] = useState('');
+    const [color, setColor] = useState('')
     const [error, setError] = useState(null);
     const [showFilter, setShowFilter] = useState(false);
     const [showSort, setShowSort] = useState(false);
@@ -228,7 +229,99 @@ const SearchPage = () => {
                             /> OFFICIAL NARUTO MERCHANDISE
                         </li>
                     </ul>
-
+                    <h2 className="text-lg font-bold mb-4">Color</h2>
+                    <ul className='mb-8'>
+                        <li className="mb-2">
+                            <input
+                                type='checkbox'
+                                name='color'
+                                value='BLACK'
+                                checked={color === 'BLACK'}
+                                onChange={() => setColor(color === 'BLACK' ? '' : 'BLACK')}
+                            /> BLACK
+                            <button className='ml-2 pl-4 pr-4 pt-4 border bg-black'></button>
+                        </li>
+                        <li className="mb-2">
+                            <input
+                                type='checkbox'
+                                name='color'
+                                value='BLUE'
+                                checked={color === 'BLUE'}
+                                onChange={() => setColor(color === 'BLUE' ? '' : 'BLUE')}
+                            /> BLUE
+                            <button className='ml-2 pl-4 pr-4 pt-4 border bg-blue-800'></button>
+                        </li>
+                        <li className="mb-2">
+                            <input
+                                type='checkbox'
+                                name='color'
+                                value='WHITE'
+                                checked={color === 'WHITE'}
+                                onChange={() => setColor(color === 'WHITE' ? '' : 'WHITE')}
+                            /> WHITE
+                            <button className='ml-2 pl-4 pr-4 pt-4 border bg-white'></button>
+                        </li>
+                        <li className="mb-2">
+                            <input
+                                type='checkbox'
+                                name='color'
+                                value='GREEN'
+                                checked={color === 'GREEN'}
+                                onChange={() => setColor(color === 'GREEN' ? '' : 'GREEN')}
+                            /> GREEN
+                            <button className='ml-2 pl-4 pr-4 pt-4 border bg-green-800'></button>
+                        </li>
+                        <li className="mb-2">
+                            <input
+                                type='checkbox'
+                                name='color'
+                                value='RED'
+                                checked={color === 'RED'}
+                                onChange={() => setColor(color === 'RED' ? '' : 'RED')}
+                            /> RED
+                            <button className='ml-2 pl-4 pr-4 pt-4 border bg-red-800'></button>
+                        </li>
+                        <li className="mb-2">
+                            <input
+                                type='checkbox'
+                                name='color'
+                                value='ORANGE'
+                                checked={color === 'ORANGE'}
+                                onChange={() => setColor(color === 'ORANGE' ? '' : 'ORANGE')}
+                            /> ORANGE
+                            <button className='ml-2 pl-4 pr-4 pt-4 border bg-orange-800'></button>
+                        </li>
+                        <li className="mb-2">
+                            <input
+                                type='checkbox'
+                                name='color'
+                                value='PURPLE'
+                                checked={color === 'PURPLE'}
+                                onChange={() => setColor(color === 'PURPLE' ? '' : 'PURPLE')}
+                            /> PURPLE
+                            <button className='ml-2 pl-4 pr-4 pt-4 border bg-purple-800'></button>
+                        </li>
+                        <li className="mb-2">
+                            <input
+                                type='checkbox'
+                                name='color'
+                                value='PINK'
+                                checked={color === 'PINK'}
+                                onChange={() => setColor(color === 'PINK' ? '' : 'PINK')}
+                            /> PINK
+                            <button className='ml-2 pl-4 pr-4 pt-4 border bg-pink-800'></button>
+                        </li>
+                        <li className="mb-2">
+                            <input
+                                type='checkbox'
+                                name='color'
+                                value='YELLOW'
+                                checked={color === 'YELLOW'}
+                                onChange={() => setColor(color === 'YELLOW' ? '' : 'YELLOW')}
+                            /> YELLOW
+                            <button className='ml-2 pl-4 pr-4 pt-4 border bg-yellow-800'></button>
+                        </li>
+                    </ul>
                 </div>
 
                 {/* Main content */}
