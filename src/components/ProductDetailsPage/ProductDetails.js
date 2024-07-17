@@ -44,7 +44,7 @@ const ProductDetails = () => {
                     'projectID': '0e7aaiqkxs51'
                 }
             }).then(response => {
-                setWishlist(response.data.data.items);
+                setWishlist(response.data.data.items.map(item => item.products._id));
                 console.log("i am wor", response.data.data.items)
             }).catch(error => {
                 console.error('Error fetching product details:', error);
