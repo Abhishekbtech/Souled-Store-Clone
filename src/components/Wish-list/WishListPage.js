@@ -67,6 +67,7 @@ function WishListPage() {
             showPopupMessage('Item added to cart');
             setMessage('Item added to cart');
             setAddedToCart(prevState => new Set(prevState).add(productId));
+            setWishlist(wishlist.filter(item => item.products._id !== productId));
         } catch (error) {
             console.error('Error adding item to cart:', error);
         }
