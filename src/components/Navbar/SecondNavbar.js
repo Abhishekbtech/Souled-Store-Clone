@@ -139,6 +139,7 @@ const SecondNavbar = () => {
                             onClose={handleMenuClose}
                         >
                             <MenuItem onClick={handlingWishList}>My Wishlist</MenuItem>
+                            <MenuItem onClick={handlingCart}>My Cart</MenuItem>
                             <MenuItem onClick={handleMenuClose}>My Orders</MenuItem>
                             <MenuItem onClick={handleLogout}>Logout</MenuItem>
                         </Menu>
