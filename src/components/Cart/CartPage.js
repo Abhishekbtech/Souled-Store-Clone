@@ -69,7 +69,7 @@ function CartPage() {
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
             <Typography variant="h4" className="mb-4">My Bag</Typography>
             {cartItems.length === 0 ? (
-                <div className="p-4 text-center">
+                <div className="p-4 text-center space-y-4">
                     <Typography variant="body1">
                         Your cart is empty. Continue shopping to add items.
                     </Typography>
@@ -79,7 +79,7 @@ function CartPage() {
                         className="mt-4"
                         onClick={() => navigate('/')}
                     >
-                        Go to Home Page
+                        Continue shopping
                     </Button>
                 </div>
             ) : (
