@@ -9,7 +9,6 @@ function WishListPage() {
     const navigate = useNavigate();
     const [showPopup, setShowPopup] = useState(false);
     const [message, setMessage] = useState('');
-    const [addedToCart, setAddedToCart] = useState(new Set());
 
     useEffect(() => {
         const fetchWishlist = async () => {
@@ -66,7 +65,6 @@ function WishListPage() {
             console.log('Item added to cart:', response.data);
             showPopupMessage('Item added to cart');
             setMessage('Item added to cart');
-            setAddedToCart(prevState => new Set(prevState).add(productId));
             setWishlist(wishlist.filter(item => item.products._id !== productId));
         } catch (error) {
             console.error('Error adding item to cart:', error);
@@ -102,9 +100,8 @@ function WishListPage() {
                             <button
                                 className="mt-2 bg-green-500 text-white px-4 py-2 rounded w-full"
                                 onClick={() => addToCart(item.products._id)}
-                                disabled={addedToCart.has(item.products._id)}
                             >
-                                {addedToCart.has(item.products._id) ? 'Added to Cart' : 'Move to Cart'}
+                                Move to Cart
                             </button>
                         </div>
                         <button
