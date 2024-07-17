@@ -60,8 +60,8 @@ function WishListPage() {
             <h2 className="text-2xl font-bold mb-4">My Wishlist ({wishlist.length} items)</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {wishlist.map(item => (
-                    <div key={item.products._id} className="border rounded-md overflow-hidden hover:shadow-md hover:scale-105 transition duration-300">
-                        <img src={item.products.displayImage} alt={item.products.name} className="w-30 h-40" />
+                    <div key={item.products._id} className="border p-4 rounded-lg shadow-lg relative">
+                        <img src={item.products.displayImage} alt={item.products.name} className="w-full h-64 object-cover rounded-t-lg" />
                         <div className="p-4">
                             <h3 className="text-lg font-semibold mb-2">{item.products.name}</h3>
                             <p className="text-gray-500 mb-1">{item.products.category}</p>
