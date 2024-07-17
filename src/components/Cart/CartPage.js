@@ -113,7 +113,7 @@ function CartPage() {
                             <span>Total Amount:</span>
                             <span>₹{totalAmount}</span>
                         </p>
-                        <button className="w-full py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 mb-4">
+                        <button className="w-full py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 mb-4" onClick={() => navigate('/address')}>
                             Place Order
                         </button>
                     </div>
