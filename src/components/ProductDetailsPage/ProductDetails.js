@@ -21,12 +21,13 @@ const ProductDetails = () => {
     });
     const [wishlist, setWishlist] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState('');
 
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
+        // Fetch product details
         axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/product/${productId}`, {
             headers: { projectID: '0e7aaiqkxs51' }
         }).then(response => {
@@ -35,6 +36,21 @@ const ProductDetails = () => {
         }).catch(error => {
             console.error('Error fetching product details:', error);
         });
+
+        // Fetch wishlist data
+        const token = sessionStorage.getItem('token');
+        if (token) {
+            axios.get('https://academics.newtonschool.co/api/v1/ecommerce/wishlist', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'projectID': '0e7aaiqkxs51'
+                }
+            }).then(response => {
+                setWishlist(response.data.data.map(item => item.productId));
+            }).catch(error => {
+                console.error('Error fetching wishlist:', error);
+            });
+        }
     }, [productId]);
 
     const handleAddToCart = () => {
@@ -79,7 +95,7 @@ const ProductDetails = () => {
             }
         ).then(response => {
             console.log('Item added to wishlist:', response.data);
-            setWishlist([...wishlist, productId]); // Update wishlist state
+            setWishlist([...wishlist, productId]);
             showPopupMessage('Item added to wishlist');
             setMessage('Item added to wishlist');
         }).catch(error => {
@@ -172,7 +188,7 @@ const ProductDetails = () => {
                         </button>
                         {wishlist.includes(productId) ? (
                             <button className="bg-gray-300 text-gray-600 px-8 py-2 rounded-md cursor-not-allowed" disabled>
-                                ADDED TO WISHLIST
+                                Remove TO WISHLIST
                             </button>
                         ) : (
                             <button className="border px-8 py-2 rounded-md" onClick={handleAddToWishlist}>
@@ -214,54 +230,62 @@ const ProductDetails = () => {
                         </button>
                     </div>
                     {pincodeMessage && <p className="mt-2 text-green-600">{pincodeMessage}</p>}
-                    <p className="text-gray-700 mt-5 mb-5 p-2 text-sm border shadow-md">
-                        <FontAwesomeIcon icon={faUndoAlt} className="mr-4" />
-                        This product is eligible for return or exchange under our 30-day return or exchange policy. No questions asked.
-                    </p>
-                    <div className="mb-2 border-t">
-                        <button
-                            className="flex justify-between w-full py-2 font-semibold"
-                            onClick={() => setExpandedSections(prevState => ({ ...prevState, productDetails: !prevState.productDetails }))}
-                        >
-                            Product Details
-                            {expandedSections.productDetails ? <FaChevronUp /> : <FaChevronDown />}
-                        </button>
-                        {expandedSections.productDetails && (
-                            <div className="px-4 pb-4">
-                                <div dangerouslySetInnerHTML={{ __html: product.description }} />
-                            </div>
-                        )}
-                    </div>
-                    <div className="mb-2 border-t">
-                        <button
-                            className="flex justify-between w-full py-2 font-semibold"
-                            onClick={() => setExpandedSections(prevState => ({ ...prevState, productDescription: !prevState.productDescription }))}
-                        >
-                            Product Description
-                            {expandedSections.productDescription ? <FaChevronUp /> : <FaChevronDown />}
-                        </button>
-                        {expandedSections.productDescription && (
-                            <div className="px-4 pb-4">
-                                <p>{product.description}</p>
-                            </div>
-                        )}
-                    </div>
-                    <div className="mb-2 border-t">
-                        <button
-                            className="flex justify-between w-full py-2 font-semibold"
-                            onClick={() => setExpandedSections(prevState => ({ ...prevState, artistDetails: !prevState.artistDetails }))}
-                        >
-                            Artist's Details
-                            {expandedSections.artistDetails ? <FaChevronUp /> : <FaChevronDown />}
-                        </button>
-                        {expandedSections.artistDetails && (
-                            <div className="px-4 pb-4">
-                                <p>The Souled Store was born out of a simple idea - love what you do and follow your soul! Thus, our goal is to give everyone something they'll love, something they can use to express themselves, and, simply put, something to put a smile on their face. So, whether it's superheroes like Superman, TV shows like F.R.I.E.N.D.S, pop culture, music, sports, or quirky, funny stuff you're looking for, we have something for everyone.</p>
-                                <p className='mt-3'>TSS Originals or The Souled Store Originals is our exclusive range of funny, funky, trendy and stylish designs. Designed by our kick-ass team of in-house designers, TSS Originals are some cool and quirky designs that help you speak your vibe.</p>
-                            </div>
-                        )}
-                    </div>
+                    <p className="mt-4 text-sm">Sold by: <span className='font-semibold'>Arunima.com</span></p>
                 </div>
+            </div>
+
+            <div className="mt-8">
+                <h2 className="text-xl font-semibold mb-3 cursor-pointer"
+                    onClick={() => setExpandedSections({ ...expandedSections, productDetails: !expandedSections.productDetails })}
+                >
+                    Product Details
+                    {expandedSections.productDetails ? (
+                        <FaChevronUp className="inline-block ml-2 mb-1" />
+                    ) : (
+                        <FaChevronDown className="inline-block ml-2 mb-1" />
+                    )}
+                </h2>
+                {expandedSections.productDetails && (
+                    <div className="border p-4 rounded-md bg-gray-100">
+                        <p>{product.details}</p>
+                    </div>
+                )}
+            </div>
+
+            <div className="mt-8">
+                <h2 className="text-xl font-semibold mb-3 cursor-pointer"
+                    onClick={() => setExpandedSections({ ...expandedSections, productDescription: !expandedSections.productDescription })}
+                >
+                    Product Description
+                    {expandedSections.productDescription ? (
+                        <FaChevronUp className="inline-block ml-2 mb-1" />
+                    ) : (
+                        <FaChevronDown className="inline-block ml-2 mb-1" />
+                    )}
+                </h2>
+                {expandedSections.productDescription && (
+                    <div className="border p-4 rounded-md bg-gray-100">
+                        <p>{product.description}</p>
+                    </div>
+                )}
+            </div>
+
+            <div className="mt-8">
+                <h2 className="text-xl font-semibold mb-3 cursor-pointer"
+                    onClick={() => setExpandedSections({ ...expandedSections, artistDetails: !expandedSections.artistDetails })}
+                >
+                    Artist Details
+                    {expandedSections.artistDetails ? (
+                        <FaChevronUp className="inline-block ml-2 mb-1" />
+                    ) : (
+                        <FaChevronDown className="inline-block ml-2 mb-1" />
+                    )}
+                </h2>
+                {expandedSections.artistDetails && (
+                    <div className="border p-4 rounded-md bg-gray-100">
+                        <p>Artist: {product.artist}</p>
+                    </div>
+                )}
             </div>
         </div>
     );
