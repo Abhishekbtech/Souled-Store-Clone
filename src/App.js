@@ -13,6 +13,7 @@ import AuthForm from './components/Sing/AuthForm';
 import CartPage from './components/Cart/CartPage';
 import WishListPage from './components/Wish-list/WishListPage';
 import Address from './components/Cart/Address';
+import Payment from './components/Cart/Payment';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path='/cart' element={<CartPage/>}/>
           <Route path='/wishlist' element={<WishListPage/>}/>
           <Route path='/address' element={<Address/>}/>
+          <Route path='/payment' element={<Payment/>}/>
         </Routes>
         {/* <Footer/> */}
       </div>
