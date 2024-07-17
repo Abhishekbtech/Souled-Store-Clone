@@ -59,7 +59,7 @@ function CartPage() {
                                 <div className="ml-4 flex flex-col justify-between w-full">
                                     <div>
                                         <h3 className="text-lg font-medium">{item.name}</h3>
-                                        <p className="text-sm text-gray-500">Men Textured Shirts</p>
+                                        <p className="text-sm text-gray-500">{item.product.description}</p>
                                         <div className="flex space-x-4 mt-2">
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700">Size</label>
