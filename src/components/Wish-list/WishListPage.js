@@ -45,6 +45,7 @@ function WishListPage() {
                 }
             });
             setWishlist(wishlist.filter(item => item.products._id !== productId));
+            window.location.reload();
         } catch (error) {
             console.error(error);
         }
