@@ -35,6 +35,21 @@ const ProductDetails = () => {
         }).catch(error => {
             console.error('Error fetching product details:', error);
         });
+
+        const token = sessionStorage.getItem('token');
+        if (token) {
+            axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/wishlist`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'projectID': '0e7aaiqkxs51'
+                }
+            }).then(response => {
+                setWishlist(response.data.data.items);
+                console.log("i am wor", response.data.data.items)
+            }).catch(error => {
+                console.error('Error fetching product details:', error);
+            });
+        }
     }, [productId]);
 
     const handleAddToCart = () => {
@@ -77,7 +92,7 @@ const ProductDetails = () => {
                 }
             }
         ).then(response => {
-            console.log('Item added to wishlist:', response.data);
+            console.log('Item added to wishlist:', response.data.data.items);
             setWishlist([...wishlist, productId]);
             showPopupMessage('Item added to wishlist');
         }).catch(error => {
@@ -87,11 +102,6 @@ const ProductDetails = () => {
 
     const handleRemoveFromWishlist = () => {
         const token = sessionStorage.getItem('token');
-        if (!token) {
-            navigate('/signup', { state: { from: location } });
-            return;
-        }
-
         axios.delete(
             `https://academics.newtonschool.co/api/v1/ecommerce/wishlist/${productId}`,
             {
