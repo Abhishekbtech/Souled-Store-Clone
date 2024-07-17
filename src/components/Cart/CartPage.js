@@ -19,6 +19,7 @@ import {
     List,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import FavoriteIcon from '@mui/icons-material/Favorite'; // Assuming you have a favorite icon
 
 function CartPage() {
     const [cartItems, setCartItems] = useState([]);
@@ -65,6 +66,11 @@ function CartPage() {
         }
     };
 
+    const moveToWishlist = async (productId) => {
+        // Logic to move item to wishlist, similar to removeFromCart
+        console.log(`Moving product ${productId} to wishlist`);
+    };
+
     return (
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
             <Typography variant="h4" className="mb-4">My Bag</Typography>
@@ -85,18 +91,23 @@ function CartPage() {
             ) : (
                 <Grid container spacing={3}>
                     <Grid item xs={12} lg={8}>
-                        <Paper elevation={3} className="p-4">
+                        <Paper elevation={3} className="p-1">
                             <List>
                                 {cartItems.map((item) => (
-                                    <ListItem key={item._id} className="py-6">
-                                        <Avatar variant="rounded" alt={item.product.name} src={item.product.displayImage} className="h-24 w-24" />
+                                    <ListItem key={item._id} alignItems="center" className="space-x-4">
+                                        <Avatar
+                                            variant="rounded"
+                                            alt={item.product.name}
+                                            src={item.product.displayImage}
+                                            sx={{ width: 90, height: 150 }} // Adjust size here
+                                        />
                                         <ListItemText
                                             primary={
-                                                <Typography variant="subtitle1" className="font-medium">{item.product.name}</Typography>
+                                                <Typography variant="subtitle1" className="font-medium ">{item.product.name}</Typography>
                                             }
                                             secondary={
                                                 <>
-                                                    <Typography variant="body2" className="text-gray-500">{item.product.description}</Typography>
+                                                    <Typography variant="body2" className="text-gray-500 " style={{ marginBottom: 10 }}>{item.product.description}</Typography>
                                                     <Grid container spacing={2} className="mt-2">
                                                         <Grid item xs={6}>
                                                             <FormControl fullWidth>
@@ -129,7 +140,7 @@ function CartPage() {
                                                             </FormControl>
                                                         </Grid>
                                                     </Grid>
-                                                    <Typography variant="body2" className="text-gray-500 mt-2">₹{item.product.price}</Typography>
+                                                    <Typography variant="body2" className="text-gray-500 mt-2 font-lg" style={{ marginBottom: 2, marginTop: 5 }}>₹{item.product.price}</Typography>
                                                     <Typography variant="body2" className="text-gray-500 mt-1">MRP incl. of all taxes</Typography>
                                                 </>
                                             }
@@ -137,6 +148,9 @@ function CartPage() {
                                         <ListItemSecondaryAction>
                                             <IconButton edge="end" aria-label="delete" onClick={() => removeFromCart(item.product._id)}>
                                                 <DeleteIcon />
+                                            </IconButton>
+                                            <IconButton edge="end" aria-label="move-to-wishlist" onClick={() => moveToWishlist(item.product._id)}>
+                                                <FavoriteIcon /> {/* Assuming you have a favorite icon */}
                                             </IconButton>
                                         </ListItemSecondaryAction>
                                     </ListItem>
