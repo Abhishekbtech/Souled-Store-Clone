@@ -30,7 +30,7 @@ function CartPage() {
         };
 
         fetchCartItems();
-    }, [navigate]);
+    }, [navigate, location]);
 
     const removeFromCart = async (productId) => {
         const token = sessionStorage.getItem('token');
@@ -48,7 +48,7 @@ function CartPage() {
     };
 
     return (
-        <div className="container mx-auto my-10">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
             <h1 className="text-2xl font-bold mb-4">My Bag</h1>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 <div className="lg:col-span-8">
