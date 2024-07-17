@@ -48,49 +48,6 @@ function CartPage() {
         }
     };
 
-    const increaseQuantity = async (itemId) => {
-        const token = sessionStorage.getItem('token');
-        try {
-            const response = await axios.put(`https://academics.newtonschool.co/api/v1/ecommerce/cart/increaseQuantity/${itemId}`, null, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    projectID: '0e7aaiqkxs51'
-                }
-            });
-            const updatedItem = response.data.data;
-            setCartItems((prevItems) =>
-                prevItems.map((item) =>
-                    item._id === updatedItem._id ? { ...item, quantity: updatedItem.quantity } : item
-                )
-            );
-            setTotalAmount(response.data.data.totalPrice);
-        } catch (error) {
-            console.error('Error increasing quantity:', error);
-        }
-    };
-
-    const decreaseQuantity = async (itemId) => {
-        const token = sessionStorage.getItem('token');
-        try {
-            const response = await axios.put(`https://academics.newtonschool.co/api/v1/ecommerce/cart/decreaseQuantity/${itemId}`, null, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    projectID: '0e7aaiqkxs51'
-                }
-            });
-            const updatedItem = response.data.data;
-            setCartItems((prevItems) =>
-                prevItems.map((item) =>
-                    item._id === updatedItem._id ? { ...item, quantity: updatedItem.quantity } : item
-                )
-            );
-            
-            setTotalAmount(response.data.data.totalPrice);
-        } catch (error) {
-            console.error('Error decreasing quantity:', error);
-        }
-    };
-
     return (
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
             <h1 className="text-2xl font-bold mb-4">My Bag</h1>
@@ -114,21 +71,10 @@ function CartPage() {
                                             </div>
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700">Qty</label>
-                                                <div className="flex items-center">
-                                                    <button
-                                                        onClick={() => decreaseQuantity(item._id)}
-                                                        className="text-gray-500 hover:text-gray-700 px-2"
-                                                    >
-                                                        -
-                                                    </button>
-                                                    <span className="mx-2">{item.quantity}</span>
-                                                    <button
-                                                        onClick={() => increaseQuantity(item._id)}
-                                                        className="text-gray-500 hover:text-gray-700 px-2"
-                                                    >
-                                                        +
-                                                    </button>
-                                                </div>
+                                                <select className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                    <option>{item.quantity}</option>
+                                                    {/* Add more quantities as needed */}
+                                                </select>
                                             </div>
                                         </div>
                                         <p className="text-sm text-gray-500 mt-2">₹{item.product.price}</p>
