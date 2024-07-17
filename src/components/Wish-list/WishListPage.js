@@ -7,6 +7,8 @@ function WishListPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const [showPopup, setShowPopup] = useState(false);
+    const [message, setMessage] = useState('')
 
     useEffect(() => {
         const fetchWishlist = async () => {
@@ -50,6 +52,29 @@ function WishListPage() {
 
     const addToCart = async (productId) => {
         // Implement add to cart functionality
+        const token = sessionStorage.getItem('token');
+        axios.patch(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${productId}`, {
+            quantity: '1',
+            size: 's'
+        }, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'projectID': '0e7aaiqkxs51'
+            }
+        }).then(response => {
+            console.log('Item added to cart:', response.data);
+            showPopupMessage('Item added to cart');
+            setMessage('Item added to cart');
+        }).catch(error => {
+            console.error('Error adding item to cart:', error);
+        });
+    };
+
+    const showPopupMessage = (message) => {
+        setShowPopup(true);
+        setTimeout(() => {
+            setShowPopup(false);
+        }, 5000);
     };
 
     if (loading) return <div>Loading...</div>;
@@ -57,6 +82,11 @@ function WishListPage() {
 
     return (
         <div className="p-4 m-2 sm:m-5">
+            {showPopup && (
+                <div className="text-white fixed top-30 right-0 mb-4 mr-4 bg-red-600 p-4 shadow-md rounded-md">
+                    <p>{message}</p>
+                </div>
+            )}
             <h2 className="text-xl sm:text-2xl font-bold mb-4">My Wishlist ({wishlist.length} items)</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {wishlist.map(item => (
