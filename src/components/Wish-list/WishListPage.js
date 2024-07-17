@@ -56,17 +56,15 @@ function WishListPage() {
     if (error) return <div>Error loading wishlist.</div>;
 
     return (
-        <div className="p-4 m-5 ml-20 mr-20">
-            <h2 className="text-2xl font-bold mb-4">My Wishlist ({wishlist.length} items)</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="p-4 m-2 sm:m-5">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4">My Wishlist ({wishlist.length} items)</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {wishlist.map(item => (
-                    <div key={item.products._id} className="border rounded-lg shadow-lg relative w-64">
-                        <img src={item.products.displayImage} alt={item.products.name} className="w-full h-65 object-cover rounded-t-lg" />
+                    <div key={item.products._id} className="border rounded-lg shadow-lg relative">
+                        <img src={item.products.displayImage} alt={item.products.name} className="w-full h-50 object-cover rounded-t-lg" />
                         <div className="p-4">
                             <h3 className="text-lg font-semibold mb-2">{item.products.name}</h3>
-                            <p className="text-gray-500 mb-1">{item.products.category}</p>
-                            <p className="text-red-500 font-bold">{`₹${item.products.price}`} <span className="line-through text-gray-500 ml-2">{`₹${item.products.originalPrice}`}</span></p>
-                            <p className="text-green-500">{`₹${item.products.discountedPrice} OFF`}</p>
+                            <p className="text-red-500 font-bold">{`₹${item.products.price}`}</p>
                             <p className="text-gray-500 text-sm">MRP incl. of all taxes</p>
                             <button
                                 className="mt-2 bg-green-500 text-white px-4 py-2 rounded w-full"
