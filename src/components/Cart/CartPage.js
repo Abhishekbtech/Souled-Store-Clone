@@ -94,56 +94,28 @@ function CartPage() {
                     </ul>
                 </div>
                 <div className="lg:col-span-4 bg-gray-50 p-6 rounded-lg shadow-lg">
-                    <h2 className="text-xl font-semibold mb-4">Place Order</h2>
-                    <button className="w-full py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 mb-4">
-                        Place Order
-                    </button>
-                    <div className="bg-yellow-100 p-4 rounded-lg text-yellow-800 mb-4">
-                        Save an additional ₹223.21 on this order.
-                    </div>
-                    <div className="space-y-4">
-                        <div className="border-t pt-4">
-                            <button className="flex items-center justify-between w-full text-left text-gray-500 hover:text-gray-700">
-                                Apply Coupon <span>&#x25BC;</span>
-                            </button>
-                        </div>
-                        <div className="border-t pt-4">
-                            <button className="flex items-center justify-between w-full text-left text-gray-500 hover:text-gray-700">
-                                Gift Voucher <span>&#x25BC;</span>
-                            </button>
-                        </div>
-                        <div className="border-t pt-4 flex items-center">
-                            <label className="text-gray-500 hover:text-gray-700 flex-grow">Gift Wrap (₹25)</label>
-                            <input type="checkbox" className="form-checkbox h-4 w-4 text-green-600 transition duration-150 ease-in-out" />
-                        </div>
-                        <div className="border-t pt-4">
-                            <button className="flex items-center justify-between w-full text-left text-gray-500 hover:text-gray-700">
-                                TSS Money / TSS Points <span>&#x25BC;</span>
-                            </button>
-                        </div>
-                    </div>
-                    <h2 className="text-xl font-semibold mt-6 mb-4">Billing Details</h2>
-                    <div className="space-y-4">
+                    <h2 className="text-xl font-semibold mb-2">Billing Details</h2>
+                    <hr/>
+                    <div className="space-y-4 mt-4">
                         <p className="flex justify-between">
                             <span>Cart Total (Excl. of all taxes):</span>
                             <span>₹{totalAmount}</span>
                         </p>
                         <p className="flex justify-between">
                             <span>Discount:</span>
-                            <span className="text-red-500">- ₹1000.00</span>
-                        </p>
-                        <p className="flex justify-between">
-                            <span>GST:</span>
-                            <span>₹481.82</span>
+                            <span className="text-red-500">₹ 0</span>
                         </p>
                         <p className="flex justify-between">
                             <span>Shipping Charges:</span>
-                            <span>₹0.00</span>
+                            <span className="text-red-500">₹ 0</span>
                         </p>
                         <p className="flex justify-between text-lg font-semibold">
                             <span>Total Amount:</span>
-                            <span>₹{totalAmount + 481.82 - 1000}</span>
+                            <span>₹{totalAmount}</span>
                         </p>
+                        <button className="w-full py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 mb-4">
+                            Place Order
+                        </button>
                     </div>
                 </div>
             </div>
