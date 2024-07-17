@@ -133,9 +133,8 @@ function CartPage() {
                                         </div>
                                         <p className="text-sm text-gray-500 mt-2">₹{item.product.price}</p>
                                         <p className="text-sm text-gray-500 mt-2">MRP incl. of all taxes</p>
-                                        <p className="text-sm text-red-500 mt-2">₹1000 OFF</p>
                                     </div>
-                                    <div className="flex space-x-2 mt-4">
+                                    <div className="flex space-x-2 mt-4 gap-4">
                                         <button onClick={() => removeFromCart(item.product._id)} className="text-red-500 hover:text-red-700">
                                             Remove
                                         </button>
