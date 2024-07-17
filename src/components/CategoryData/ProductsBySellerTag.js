@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
-function ProductsBySellerTag({gender, sellerTag}) {
+function ProductsBySellerTag({ gender, sellerTag }) {
     const [products, setProducts] = useState([]);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -20,7 +20,7 @@ function ProductsBySellerTag({gender, sellerTag}) {
         };
 
         fetchProducts();
-    }, []);
+    }, [gender, sellerTag]);
 
     const settings = {
         dots: true,
@@ -56,12 +56,27 @@ function ProductsBySellerTag({gender, sellerTag}) {
     };
 
     const productWithDetailPage = (product) => {
-        // console.log(`Product added to wishlist: ${product._id}`);
         navigate(`/${product._id}`, { state: { product } });
-    }
+    };
 
-    const handleAddToWishlist = (product) => {
-        console.log(`Product added to wishlist: ${product.name}`);
+    const handleAddToWishlist = async (productId) => {
+        const token = sessionStorage.getItem('token');
+        try {
+            await axios.post('https://academics.newtonschool.co/api/v1/ecommerce/wishlist', 
+            {
+                productId: productId,
+                quantity: 1
+            }, 
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'projectID': '0e7aaiqkxs51'
+                }
+            });
+            console.log(`Product added to wishlist: ${productId}`);
+        } catch (error) {
+            console.error('Error adding product to wishlist:', error);
+        }
     };
 
     return (
@@ -81,7 +96,7 @@ function ProductsBySellerTag({gender, sellerTag}) {
                                 <p className="text-gray-700 ml-2">₹ {product.price}</p>
                                 <p className="text-gray-500 mb-2 ml-2">Rating: {parseFloat(product.ratings).toFixed(1)}</p>
                                 <button
-                                    onClick={() => handleAddToWishlist(product)}
+                                    onClick={() => handleAddToWishlist(product._id)}
                                     className="absolute top-2 right-3 text-white hover:text-red-700 transition duration-300"
                                 >
                                     <FontAwesomeIcon icon={faHeart} size="lg" />
@@ -95,4 +110,4 @@ function ProductsBySellerTag({gender, sellerTag}) {
     )
 }
 
-export default ProductsBySellerTag
+export default ProductsBySellerTag;
