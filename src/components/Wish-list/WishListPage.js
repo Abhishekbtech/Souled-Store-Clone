@@ -8,7 +8,8 @@ function WishListPage() {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const [showPopup, setShowPopup] = useState(false);
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState('');
+    const [addedToCart, setAddedToCart] = useState(new Set());
 
     useEffect(() => {
         const fetchWishlist = async () => {
@@ -51,23 +52,24 @@ function WishListPage() {
     };
 
     const addToCart = async (productId) => {
-        // Implement add to cart functionality
         const token = sessionStorage.getItem('token');
-        axios.patch(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${productId}`, {
-            quantity: '1',
-            size: 's'
-        }, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'projectID': '0e7aaiqkxs51'
-            }
-        }).then(response => {
+        try {
+            const response = await axios.patch(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${productId}`, {
+                quantity: '1',
+                size: 's'
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'projectID': '0e7aaiqkxs51'
+                }
+            });
             console.log('Item added to cart:', response.data);
             showPopupMessage('Item added to cart');
             setMessage('Item added to cart');
-        }).catch(error => {
+            setAddedToCart(prevState => new Set(prevState).add(productId));
+        } catch (error) {
             console.error('Error adding item to cart:', error);
-        });
+        }
     };
 
     const showPopupMessage = (message) => {
@@ -99,8 +101,9 @@ function WishListPage() {
                             <button
                                 className="mt-2 bg-green-500 text-white px-4 py-2 rounded w-full"
                                 onClick={() => addToCart(item.products._id)}
+                                disabled={addedToCart.has(item.products._id)}
                             >
-                                Move to Cart
+                                {addedToCart.has(item.products._id) ? 'Added to Cart' : 'Move to Cart'}
                             </button>
                         </div>
                         <button
