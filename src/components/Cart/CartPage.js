@@ -47,6 +47,26 @@ function CartPage() {
         }
     };
 
+    const increaseQuantity = (itemId) => {
+        const updatedCartItems = cartItems.map((item) => {
+            if (item.id === itemId) {
+                return { ...item, quantity: item.quantity + 1 };
+            }
+            return item;
+        });
+        setCartItems(updatedCartItems);
+    };
+
+    const decreaseQuantity = (itemId) => {
+        const updatedCartItems = cartItems.map((item) => {
+            if (item.id === itemId && item.quantity > 1) {
+                return { ...item, quantity: item.quantity - 1 };
+            }
+            return item;
+        });
+        setCartItems(updatedCartItems);
+    };
+
     return (
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
             <h1 className="text-2xl font-bold mb-4">My Bag</h1>
@@ -70,10 +90,21 @@ function CartPage() {
                                             </div>
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700">Qty</label>
-                                                <select className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                                                    <option>{item.quantity}</option>
-                                                    {/* Add more quantities as needed */}
-                                                </select>
+                                                <div className="flex items-center">
+                                                    <button
+                                                        onClick={() => decreaseQuantity(item.id)}
+                                                        className="text-gray-500 hover:text-gray-700 px-2"
+                                                    >
+                                                        -
+                                                    </button>
+                                                    <span className="mx-2">{item.quantity}</span>
+                                                    <button
+                                                        onClick={() => increaseQuantity(item.id)}
+                                                        className="text-gray-500 hover:text-gray-700 px-2"
+                                                    >
+                                                        +
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                         <p className="text-sm text-gray-500 mt-2">₹{item.product.price}</p>
