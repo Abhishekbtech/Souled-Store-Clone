@@ -14,6 +14,7 @@ function Address() {
         zip: ''
     });
     const [isFormValid, setIsFormValid] = useState(false);
+    const [zipError, setZipError] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -37,9 +38,21 @@ function Address() {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
+
+        if (name === 'zip') {
+            const zipRegex = /^\d{0,6}$/; // Allows only numbers up to 6 digits
+            if (!zipRegex.test(value)) {
+                setZipError('ZIP Code must be exactly 6 digits');
+                return;
+            } else {
+                setZipError('');
+            }
+        }
+
         setAddress(prevAddress => {
             const newAddress = { ...prevAddress, [name]: value };
-            setIsFormValid(Object.values(newAddress).every(field => field.trim() !== ''));
+            const formIsValid = Object.values(newAddress).every(field => field.trim() !== '') && !zipError && newAddress.zip.length === 6;
+            setIsFormValid(formIsValid);
             return newAddress;
         });
     };
@@ -122,6 +135,9 @@ function Address() {
                                 value={address.zip}
                                 onChange={handleInputChange}
                                 className="mb-3"
+                                error={!!zipError}
+                                helperText={zipError}
+                                inputProps={{ maxLength: 6 }}
                             />
                             <Button
                                 type="submit"
@@ -162,6 +178,7 @@ function Address() {
                                 color="primary"
                                 fullWidth
                                 className="py-2"
+                                disabled={!isFormValid}
                                 onClick={() => navigate('/payment')}
                             >
                                 Continue Payment
