@@ -82,6 +82,10 @@ function WishListPage() {
         }, 5000);
     };
 
+    const handLingClick = () =>{
+        navigate('/')
+    }
+
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error loading wishlist.</div>;
 
@@ -120,7 +124,7 @@ function WishListPage() {
             {wishlist.length === 0 && (
                 <div className="text-center mt-4">
                     <p>Your wishlist is empty.</p>
-                    <button className="mt-2 bg-blue-500 text-white px-4 py-2 rounded">
+                    <button className="mt-2 bg-blue-500 text-white px-4 py-2 rounded" onClick={handLingClick}>
                         Add Products
                     </button>
                 </div>
