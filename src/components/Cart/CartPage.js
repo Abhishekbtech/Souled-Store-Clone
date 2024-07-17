@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function CartPage() {
     const [cartItems, setCartItems] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         const fetchCartItems = async () => {
             const token = sessionStorage.getItem('token');
             if (!token) {
-                navigate('/signup');
+                navigate('/signup', { state: { from: location } });
                 return;
             }
             try {
