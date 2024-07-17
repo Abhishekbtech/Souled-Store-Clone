@@ -95,7 +95,7 @@ function WishListPage() {
             <h2 className="text-xl sm:text-2xl font-bold mb-4">My Wishlist ({wishlist.length} items)</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {wishlist.map(item => (
-                    <div key={item.products._id} className="border rounded-lg shadow-lg relative">
+                    <div key={item.products._id} className="border rounded-lg shadow-lg relative hover:scale-105 transition duration-300">
                         <img src={item.products.displayImage} alt={item.products.name} className="w-full h-50 object-cover rounded-t-lg" />
                         <div className="p-4">
                             <h3 className="overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer" onClick={() => productWithDetailPage(item.products)}>{item.products.name}</h3>
