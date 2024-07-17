@@ -138,7 +138,7 @@ const SecondNavbar = () => {
                             open={Boolean(anchorEl)}
                             onClose={handleMenuClose}
                         >
-                            <MenuItem onClick={handleMenuClose}>My Wishlist</MenuItem>
+                            <MenuItem onClick={handlingWishList}>My Wishlist</MenuItem>
                             <MenuItem onClick={handleMenuClose}>My Orders</MenuItem>
                             <MenuItem onClick={handleLogout}>Logout</MenuItem>
                         </Menu>
