@@ -184,6 +184,7 @@ function Payment() {
                                 className="py-2"
                                 disabled={!isFormValid}
                                 type="submit"
+                                onClick={() => navigate('/ordermessage')}
                             >
                                 Confirm Order
                             </Button>
