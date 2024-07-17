@@ -63,7 +63,7 @@ function WishListPage() {
                     <div key={item.products._id} className="border rounded-lg shadow-lg relative">
                         <img src={item.products.displayImage} alt={item.products.name} className="w-full h-50 object-cover rounded-t-lg" />
                         <div className="p-4">
-                            <h3 className="text-lg font-semibold mb-2">{item.products.name}</h3>
+                            <h3 className="overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer">{item.products.name}</h3>
                             <p className="text-red-500 font-bold">{`₹${item.products.price}`}</p>
                             <p className="text-gray-500 text-sm">MRP incl. of all taxes</p>
                             <button
