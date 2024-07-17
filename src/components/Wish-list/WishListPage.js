@@ -60,21 +60,23 @@ function WishListPage() {
             <h2 className="text-2xl font-bold mb-4">My Wishlist ({wishlist.length} items)</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {wishlist.map(item => (
-                    <div key={item.products._id} className="border p-4 rounded-lg shadow-lg relative">
-                        <img src={item.products.displayImage} alt={item.products.name} className="w-full h-48 object-cover rounded-lg" />
-                        <div className="mt-2">
-                            <h3 className="text-lg font-semibold">{item.products.name}</h3>
-                            <p>Ratings: {item.products.ratings}</p>
-                            <p className="text-red-500">{`₹${item.products.price}`}</p>
+                    <div key={item.products._id} className="border rounded-lg shadow-lg relative">
+                        <img src={item.products.displayImage} alt={item.products.name} className="w-full h-35 object-cover" />
+                        <div className="p-4">
+                            <h3 className="text-lg font-semibold mb-2">{item.products.name}</h3>
+                            <p className="text-gray-500 mb-1">{item.products.category}</p>
+                            <p className="text-red-500 font-bold">{`₹${item.products.price}`} <span className="line-through text-gray-500 ml-2">{`₹${item.products.originalPrice}`}</span></p>
+                            <p className="text-green-500">{`₹${item.products.discountedPrice} OFF`}</p>
+                            <p className="text-gray-500 text-sm">MRP incl. of all taxes</p>
                             <button
-                                className="mt-2 bg-green-500 text-white px-4 py-2 rounded"
+                                className="mt-2 bg-green-500 text-white px-4 py-2 rounded w-full"
                                 onClick={() => addToCart(item.products._id)}
                             >
                                 Move to Cart
                             </button>
                         </div>
                         <button
-                            className="absolute top-2 right-2 text-red-500"
+                            className="absolute top-2 right-2 text-red-500 bg-white rounded-full w-6 h-6 flex items-center justify-center"
                             onClick={() => removeFromWishlist(item.products._id)}
                         >
                             &times;
