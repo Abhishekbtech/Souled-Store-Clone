@@ -81,11 +81,11 @@ function Address() {
                             />
                             <TextField
                                 fullWidth
-                                id="addressLine"
-                                name="addressLine"
-                                label="Address"
+                                id="street"
+                                name="street"
+                                label="street"
                                 variant="outlined"
-                                value={address.addressLine}
+                                value={address.v}
                                 onChange={handleInputChange}
                                 className="mb-3"
                             />
