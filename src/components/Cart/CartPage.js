@@ -94,57 +94,64 @@ function CartPage() {
                         <Paper elevation={3} className="p-1">
                             <List>
                                 {cartItems.map((item) => (
-                                    <ListItem key={item._id} alignItems="center" className="space-x-4">
-                                        <Avatar
-                                            variant="rounded"
-                                            alt={item.product.name}
-                                            src={item.product.displayImage}
-                                            sx={{ width: 90, height: 150 }} // Adjust size here
-                                        />
-                                        <ListItemText
-                                            primary={
-                                                <Typography variant="subtitle1" className="font-medium ">{item.product.name}</Typography>
-                                            }
-                                            secondary={
-                                                <>
-                                                    <Typography variant="body2" className="text-gray-500 " style={{ marginBottom: 10 }}>{item.product.description}</Typography>
-                                                    <Grid container spacing={2} className="mt-2">
-                                                        <Grid item xs={6}>
-                                                            <FormControl fullWidth>
-                                                                <InputLabel id={`size-label-${item._id}`} className="text-sm font-medium text-gray-700">Size</InputLabel>
-                                                                <Select
-                                                                    labelId={`size-label-${item._id}`}
-                                                                    id={`size-${item._id}`}
-                                                                    value={item.size}
-                                                                    label="Size"
-                                                                    disabled
-                                                                >
-                                                                    <MenuItem value={item.size}>{item.size}</MenuItem>
-                                                                    {/* Add more sizes as needed */}
-                                                                </Select>
-                                                            </FormControl>
+                                    <ListItem
+                                        key={item._id}
+                                        alignItems="center"
+                                        className="flex items-center space-x-4"
+                                        style={{ display: 'flex', justifyContent: 'space-between' }}
+                                    >
+                                        <div className="flex items-center space-x-4">
+                                            <Avatar
+                                                variant="rounded"
+                                                alt={item.product.name}
+                                                src={item.product.displayImage}
+                                                sx={{ width: 90, height: 150 }} // Adjust size here
+                                            />
+                                            <ListItemText
+                                                primary={
+                                                    <Typography variant="subtitle1" className="font-medium ">{item.product.name}</Typography>
+                                                }
+                                                secondary={
+                                                    <>
+                                                        <Typography variant="body2" className="text-gray-500 " style={{ marginBottom: 10 }}>{item.product.description}</Typography>
+                                                        <Grid container spacing={2} className="mt-2">
+                                                            <Grid item xs={6}>
+                                                                <FormControl fullWidth>
+                                                                    <InputLabel id={`size-label-${item._id}`} className="text-sm font-medium text-gray-700">Size</InputLabel>
+                                                                    <Select
+                                                                        labelId={`size-label-${item._id}`}
+                                                                        id={`size-${item._id}`}
+                                                                        value={item.size}
+                                                                        label="Size"
+                                                                        disabled
+                                                                    >
+                                                                        <MenuItem value={item.size}>{item.size}</MenuItem>
+                                                                        {/* Add more sizes as needed */}
+                                                                    </Select>
+                                                                </FormControl>
+                                                            </Grid>
+                                                            <Grid item xs={6}>
+                                                                <FormControl fullWidth>
+                                                                    <InputLabel id={`qty-label-${item._id}`} className="text-sm font-medium text-gray-700">Qty</InputLabel>
+                                                                    <Select
+                                                                        labelId={`qty-label-${item._id}`}
+                                                                        id={`qty-${item._id}`}
+                                                                        value={item.quantity}
+                                                                        label="Qty"
+                                                                        disabled
+                                                                    >
+                                                                        <MenuItem value={item.quantity}>{item.quantity}</MenuItem>
+                                                                        {/* Add more quantities as needed */}
+                                                                    </Select>
+                                                                </FormControl>
+                                                            </Grid>
                                                         </Grid>
-                                                        <Grid item xs={6}>
-                                                            <FormControl fullWidth>
-                                                                <InputLabel id={`qty-label-${item._id}`} className="text-sm font-medium text-gray-700">Qty</InputLabel>
-                                                                <Select
-                                                                    labelId={`qty-label-${item._id}`}
-                                                                    id={`qty-${item._id}`}
-                                                                    value={item.quantity}
-                                                                    label="Qty"
-                                                                    disabled
-                                                                >
-                                                                    <MenuItem value={item.quantity}>{item.quantity}</MenuItem>
-                                                                    {/* Add more quantities as needed */}
-                                                                </Select>
-                                                            </FormControl>
-                                                        </Grid>
-                                                    </Grid>
-                                                    <Typography variant="body2" className="text-gray-500 mt-2 font-lg" style={{ marginBottom: 2, marginTop: 5 }}>₹{item.product.price}</Typography>
-                                                    <Typography variant="body2" className="text-gray-500 mt-1">MRP incl. of all taxes</Typography>
-                                                </>
-                                            }
-                                        />
+                                                        <Typography variant="body2" className="text-gray-500 mt-2 font-lg" style={{ marginBottom: 2, marginTop: 5 }}>₹{item.product.price}</Typography>
+                                                        <Typography variant="body2" className="text-gray-500 mt-1">MRP incl. of all taxes</Typography>
+                                                    </>
+                                                }
+                                            />
+                                        </div>
                                         <ListItemSecondaryAction>
                                             <IconButton edge="end" aria-label="delete" onClick={() => removeFromCart(item.product._id)}>
                                                 <DeleteIcon />
