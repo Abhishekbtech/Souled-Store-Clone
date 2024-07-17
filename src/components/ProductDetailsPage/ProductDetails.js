@@ -205,16 +205,16 @@ const ProductDetails = () => {
                     </div>
                     <div className="flex space-x-2 mb-4 mt-5">
                         <span className='pr-5'>Share:</span>
-                        <a href="#" className="text-black text-2xl pr-2">
+                        <a href="#" className="text-2xl text-blue-600">
                             <FontAwesomeIcon icon={faFacebook} />
                         </a>
-                        <a href="#" className="text-black text-2xl pr-2">
+                        <a href="#" className="text-2xl text-blue-500">
                             <FontAwesomeIcon icon={faTwitter} />
                         </a>
-                        <a href="#" className="text-black text-2xl pr-2">
+                        <a href="#" className="text-2xl text-green-600">
                             <FontAwesomeIcon icon={faWhatsapp} />
                         </a>
-                        <a href="#" className="text-black text-2xl pr-2">
+                        <a href="#" className="text-2xl text-pink-500">
                             <FontAwesomeIcon icon={faInstagram} />
                         </a>
                     </div>
