@@ -13,6 +13,7 @@ function Address() {
         state: '',
         zip: ''
     });
+    const [isFormValid, setIsFormValid] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,7 +36,12 @@ function Address() {
     }, []);
 
     const handleInputChange = (e) => {
-        setAddress({ ...address, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setAddress(prevAddress => {
+            const newAddress = { ...prevAddress, [name]: value };
+            setIsFormValid(Object.values(newAddress).every(field => field.trim() !== ''));
+            return newAddress;
+        });
     };
 
     const handleSubmit = (e) => {
@@ -123,6 +129,7 @@ function Address() {
                                 color="primary"
                                 fullWidth
                                 className="py-2"
+                                disabled={!isFormValid}
                             >
                                 Save Address
                             </Button>
