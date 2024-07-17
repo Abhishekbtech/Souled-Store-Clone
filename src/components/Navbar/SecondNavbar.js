@@ -81,6 +81,10 @@ const SecondNavbar = () => {
         navigate('/cart');
     };
 
+    const handlingWishList = () => {
+        navigate('/wishlist');
+    }
+
     const handleLogout = () => {
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('username');
@@ -114,7 +118,7 @@ const SecondNavbar = () => {
                     <IconButton type="button" aria-label="search" onClick={toggleSearch}>
                         <SearchIcon />
                     </IconButton>
-                    <IconButton aria-label="show wishlist">
+                    <IconButton aria-label="show wishlist" onClick={handlingWishList}>
                         <FavoriteIcon />
                     </IconButton>
                     <IconButton aria-label="show cart items" onClick={handlingCart}>
