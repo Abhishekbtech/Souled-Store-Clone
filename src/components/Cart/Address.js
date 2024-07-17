@@ -59,8 +59,7 @@ function Address() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Here you can add logic to handle form submission, e.g., sending data to backend
-        console.log('Address submitted:', address);
+        navigate('/payment', { state: { address, totalAmount } });
     };
 
     return (
@@ -82,21 +81,11 @@ function Address() {
                             />
                             <TextField
                                 fullWidth
-                                id="addressLine1"
-                                name="addressLine1"
-                                label="Address Line 1"
+                                id="addressLine"
+                                name="addressLine"
+                                label="Address"
                                 variant="outlined"
-                                value={address.addressLine1}
-                                onChange={handleInputChange}
-                                className="mb-3"
-                            />
-                            <TextField
-                                fullWidth
-                                id="addressLine2"
-                                name="addressLine2"
-                                label="Address Line 2"
-                                variant="outlined"
-                                value={address.addressLine2}
+                                value={address.addressLine}
                                 onChange={handleInputChange}
                                 className="mb-3"
                             />
@@ -126,20 +115,45 @@ function Address() {
                                     />
                                 </Grid>
                             </Grid>
-                            <TextField
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} md={6}>
+                                    <TextField
+                                        fullWidth
+                                        id="country"
+                                        name="country"
+                                        label="Country"
+                                        variant="outlined"
+                                        value={address.country}
+                                        onChange={handleInputChange}
+                                        className="mb-3"
+                                    />
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <TextField
+                                        fullWidth
+                                        id="zip"
+                                        name="zip"
+                                        label="ZIP Code"
+                                        variant="outlined"
+                                        value={address.zip}
+                                        onChange={handleInputChange}
+                                        className="mb-3"
+                                        error={!!zipError}
+                                        helperText={zipError}
+                                        inputProps={{ maxLength: 6 }}
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Button
+                                variant="contained"
+                                color="primary"
                                 fullWidth
-                                id="zip"
-                                name="zip"
-                                label="ZIP Code"
-                                variant="outlined"
-                                value={address.zip}
-                                onChange={handleInputChange}
-                                className="mb-3"
-                                error={!!zipError}
-                                helperText={zipError}
-                                inputProps={{ maxLength: 6 }}
-                            />
-                            
+                                className="py-2"
+                                disabled={!isFormValid}
+                                type="submit"
+                            >
+                                Continue Payment
+                            </Button>
                         </form>
                     </Paper>
                 </Grid>
@@ -164,22 +178,12 @@ function Address() {
                                 <span>Total Amount:</span>
                                 <span>₹{totalAmount}</span>
                             </Typography>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                fullWidth
-                                className="py-2"
-                                disabled={!isFormValid}
-                                onClick={() => navigate('/payment')}
-                            >
-                                Continue Payment
-                            </Button>
                         </div>
                     </Paper>
                 </Grid>
             </Grid>
         </div>
-    )
+    );
 }
 
 export default Address;
