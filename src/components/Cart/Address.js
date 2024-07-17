@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { TextField, Button, Grid, Typography, Paper, Divider } from '@mui/material';
 
 function Address() {
     const [totalAmount, setTotalAmount] = useState(0);
@@ -45,70 +46,125 @@ function Address() {
 
     return (
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
-            <h1 className="text-2xl font-bold mb-4">My Address</h1>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div className="lg:col-span-8">
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div>
-                            <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">Full Name</label>
-                            <input type="text" id="fullName" name="fullName" value={address.fullName} onChange={handleInputChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" />
+            <Typography variant="h4" className="mb-6">My Address</Typography>
+            <Grid container spacing={3}>
+                <Grid item xs={12} lg={8}>
+                    <Paper elevation={3} className="p-4">
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <TextField
+                                fullWidth
+                                id="fullName"
+                                name="fullName"
+                                label="Full Name"
+                                variant="outlined"
+                                value={address.fullName}
+                                onChange={handleInputChange}
+                                className="mb-3"
+                            />
+                            <TextField
+                                fullWidth
+                                id="addressLine1"
+                                name="addressLine1"
+                                label="Address Line 1"
+                                variant="outlined"
+                                value={address.addressLine1}
+                                onChange={handleInputChange}
+                                className="mb-3"
+                            />
+                            <TextField
+                                fullWidth
+                                id="addressLine2"
+                                name="addressLine2"
+                                label="Address Line 2"
+                                variant="outlined"
+                                value={address.addressLine2}
+                                onChange={handleInputChange}
+                                className="mb-3"
+                            />
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} md={6}>
+                                    <TextField
+                                        fullWidth
+                                        id="city"
+                                        name="city"
+                                        label="City"
+                                        variant="outlined"
+                                        value={address.city}
+                                        onChange={handleInputChange}
+                                        className="mb-3"
+                                    />
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <TextField
+                                        fullWidth
+                                        id="state"
+                                        name="state"
+                                        label="State"
+                                        variant="outlined"
+                                        value={address.state}
+                                        onChange={handleInputChange}
+                                        className="mb-3"
+                                    />
+                                </Grid>
+                            </Grid>
+                            <TextField
+                                fullWidth
+                                id="zip"
+                                name="zip"
+                                label="ZIP Code"
+                                variant="outlined"
+                                value={address.zip}
+                                onChange={handleInputChange}
+                                className="mb-3"
+                            />
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                                className="py-2"
+                            >
+                                Save Address
+                            </Button>
+                        </form>
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} lg={4}>
+                    <Paper elevation={3} className="p-4">
+                        <Typography variant="h5" className="mb-2">Billing Details</Typography>
+                        <Divider className="mb-2" />
+                        <div className="space-y-4 mt-4">
+                            <Typography variant="body1" className="flex justify-between">
+                                <span>Cart Total (Excl. of all taxes):</span>
+                                <span>₹{totalAmount}</span>
+                            </Typography>
+                            <Typography variant="body1" className="flex justify-between">
+                                <span>Discount:</span>
+                                <span className="text-red-500">₹ 0</span>
+                            </Typography>
+                            <Typography variant="body1" className="flex justify-between">
+                                <span>Shipping Charges:</span>
+                                <span className="text-red-500">₹ 0</span>
+                            </Typography>
+                            <Typography variant="body1" className="flex justify-between font-semibold">
+                                <span>Total Amount:</span>
+                                <span>₹{totalAmount}</span>
+                            </Typography>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                                className="py-2"
+                                onClick={() => navigate('/payment')}
+                            >
+                                Continue Payment
+                            </Button>
                         </div>
-                        <div>
-                            <label htmlFor="addressLine1" className="block text-sm font-medium text-gray-700">Address Line 1</label>
-                            <input type="text" id="addressLine1" name="addressLine1" value={address.addressLine1} onChange={handleInputChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" />
-                        </div>
-                        <div>
-                            <label htmlFor="addressLine2" className="block text-sm font-medium text-gray-700">Address Line 2</label>
-                            <input type="text" id="addressLine2" name="addressLine2" value={address.addressLine2} onChange={handleInputChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" />
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                            <div>
-                                <label htmlFor="city" className="block text-sm font-medium text-gray-700">City</label>
-                                <input type="text" id="city" name="city" value={address.city} onChange={handleInputChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" />
-                            </div>
-                            <div>
-                                <label htmlFor="state" className="block text-sm font-medium text-gray-700">State</label>
-                                <input type="text" id="state" name="state" value={address.state} onChange={handleInputChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" />
-                            </div>
-                        </div>
-                        <div>
-                            <label htmlFor="zip" className="block text-sm font-medium text-gray-700">ZIP Code</label>
-                            <input type="text" id="zip" name="zip" value={address.zip} onChange={handleInputChange} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" />
-                        </div>
-                        <button type="submit" className="w-full py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 mb-4">
-                            Save Address
-                        </button>
-                    </form>
-                </div>
-                <div className="lg:col-span-4 bg-gray-50 p-6 rounded-lg shadow-lg">
-                    <h2 className="text-xl font-semibold mb-2">Billing Details</h2>
-                    <hr />
-                    <div className="space-y-4 mt-4">
-                        <p className="flex justify-between">
-                            <span>Cart Total (Excl. of all taxes):</span>
-                            <span>₹{totalAmount}</span>
-                        </p>
-                        <p className="flex justify-between">
-                            <span>Discount:</span>
-                            <span className="text-red-500">₹ 0</span>
-                        </p>
-                        <p className="flex justify-between">
-                            <span>Shipping Charges:</span>
-                            <span className="text-red-500">₹ 0</span>
-                        </p>
-                        <p className="flex justify-between text-lg font-semibold">
-                            <span>Total Amount:</span>
-                            <span>₹{totalAmount}</span>
-                        </p>
-                        <button className="w-full py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 mb-4" onClick={() => navigate('/payment')}>
-                            Continue Payment
-                        </button>
-                    </div>
-                </div>
-            </div>
+                    </Paper>
+                </Grid>
+            </Grid>
         </div>
     )
 }
 
-export default Address
-
+export default Address;
