@@ -21,7 +21,7 @@ const ProductDetails = () => {
     });
     const [wishlist, setWishlist] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState('');
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -55,7 +55,6 @@ const ProductDetails = () => {
         }).then(response => {
             console.log('Item added to cart:', response.data);
             showPopupMessage('Item added to cart');
-            setMessage('Item added to cart');
         }).catch(error => {
             console.error('Error adding item to cart:', error);
         });
@@ -81,13 +80,37 @@ const ProductDetails = () => {
             console.log('Item added to wishlist:', response.data);
             setWishlist([...wishlist, productId]);
             showPopupMessage('Item added to wishlist');
-            setMessage('Item added to wishlist');
         }).catch(error => {
             console.error('Error adding item to wishlist:', error.response.data.message);
         });
     };
 
+    const handleRemoveFromWishlist = () => {
+        const token = sessionStorage.getItem('token');
+        if (!token) {
+            navigate('/signup', { state: { from: location } });
+            return;
+        }
+
+        axios.delete(
+            `https://academics.newtonschool.co/api/v1/ecommerce/wishlist/${productId}`,
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'projectID': '0e7aaiqkxs51'
+                }
+            }
+        ).then(response => {
+            console.log('Item removed from wishlist:', response.data);
+            setWishlist(wishlist.filter(id => id !== productId));
+            showPopupMessage('Item removed from wishlist');
+        }).catch(error => {
+            console.error('Error removing item from wishlist:', error.response.data.message);
+        });
+    };
+
     const showPopupMessage = (message) => {
+        setMessage(message);
         setShowPopup(true);
         setTimeout(() => {
             setShowPopup(false);
@@ -171,8 +194,8 @@ const ProductDetails = () => {
                             ADD TO CART
                         </button>
                         {wishlist.includes(productId) ? (
-                            <button className="bg-gray-300 text-gray-600 px-8 py-2 rounded-md cursor-not-allowed" disabled>
-                                Remove TO WISHLIST
+                            <button className="bg-gray-300 text-gray-600 px-8 py-2 rounded-md" onClick={handleRemoveFromWishlist}>
+                                REMOVE FROM WISHLIST
                             </button>
                         ) : (
                             <button className="border px-8 py-2 rounded-md" onClick={handleAddToWishlist}>
