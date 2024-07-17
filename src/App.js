@@ -11,6 +11,7 @@ import ProductsByCategory from './components/CategoryData/ProductsByCategory';
 import ProductDetails from './components/ProductDetailsPage/ProductDetails';
 import AuthForm from './components/Sing/AuthForm';
 import CartPage from './components/Cart/CartPage';
+import WishListPage from './components/Wish-list/WishListPage';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path='/:productId' element={<ProductDetails/>}/>
           <Route path='/signup' element={<AuthForm/>}/>
           <Route path='/cart' element={<CartPage/>}/>
+          <Route path='/wishlist' element={<WishListPage/>}/>
         </Routes>
         {/* <Footer/> */}
       </div>
