@@ -23,6 +23,7 @@ function CartPage() {
                     }
                 });
                 setCartItems(response.data.data.items);
+                console.log("data cart", response.data.data.items)
                 setTotalAmount(response.data.data.totalPrice);
             } catch (error) {
                 console.error('Error fetching cart items:', error);
@@ -41,30 +42,53 @@ function CartPage() {
                     projectID: '0e7aaiqkxs51'
                 }
             });
-            setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+            setCartItems((prevItems) => prevItems.filter((item) => item._id !== productId));
         } catch (error) {
             console.error('Error removing item from cart:', error);
         }
     };
 
-    const increaseQuantity = (itemId) => {
-        const updatedCartItems = cartItems.map((item) => {
-            if (item.id === itemId) {
-                return { ...item, quantity: item.quantity + 1 };
-            }
-            return item;
-        });
-        setCartItems(updatedCartItems);
+    const increaseQuantity = async (itemId) => {
+        const token = sessionStorage.getItem('token');
+        try {
+            const response = await axios.put(`https://academics.newtonschool.co/api/v1/ecommerce/cart/increaseQuantity/${itemId}`, null, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    projectID: '0e7aaiqkxs51'
+                }
+            });
+            const updatedItem = response.data.data;
+            setCartItems((prevItems) =>
+                prevItems.map((item) =>
+                    item._id === updatedItem._id ? { ...item, quantity: updatedItem.quantity } : item
+                )
+            );
+            setTotalAmount(response.data.data.totalPrice);
+        } catch (error) {
+            console.error('Error increasing quantity:', error);
+        }
     };
 
-    const decreaseQuantity = (itemId) => {
-        const updatedCartItems = cartItems.map((item) => {
-            if (item.id === itemId && item.quantity > 1) {
-                return { ...item, quantity: item.quantity - 1 };
-            }
-            return item;
-        });
-        setCartItems(updatedCartItems);
+    const decreaseQuantity = async (itemId) => {
+        const token = sessionStorage.getItem('token');
+        try {
+            const response = await axios.put(`https://academics.newtonschool.co/api/v1/ecommerce/cart/decreaseQuantity/${itemId}`, null, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    projectID: '0e7aaiqkxs51'
+                }
+            });
+            const updatedItem = response.data.data;
+            setCartItems((prevItems) =>
+                prevItems.map((item) =>
+                    item._id === updatedItem._id ? { ...item, quantity: updatedItem.quantity } : item
+                )
+            );
+            
+            setTotalAmount(response.data.data.totalPrice);
+        } catch (error) {
+            console.error('Error decreasing quantity:', error);
+        }
     };
 
     return (
@@ -74,11 +98,11 @@ function CartPage() {
                 <div className="lg:col-span-8">
                     <ul className="divide-y divide-gray-200">
                         {cartItems.map((item) => (
-                            <li key={item.id} className="flex py-6">
-                                <img className="h-24 w-24 object-cover" src={item.product.displayImage} alt={item.name} />
+                            <li key={item._id} className="flex py-6">
+                                <img className="h-24 w-24 object-cover" src={item.product.displayImage} alt={item.product.name} />
                                 <div className="ml-4 flex flex-col justify-between w-full">
                                     <div>
-                                        <h3 className="text-lg font-medium">{item.name}</h3>
+                                        <h3 className="text-lg font-medium">{item.product.name}</h3>
                                         <p className="text-sm text-gray-500">{item.product.description}</p>
                                         <div className="flex space-x-4 mt-2">
                                             <div>
@@ -92,14 +116,14 @@ function CartPage() {
                                                 <label className="block text-sm font-medium text-gray-700">Qty</label>
                                                 <div className="flex items-center">
                                                     <button
-                                                        onClick={() => decreaseQuantity(item.id)}
+                                                        onClick={() => decreaseQuantity(item._id)}
                                                         className="text-gray-500 hover:text-gray-700 px-2"
                                                     >
                                                         -
                                                     </button>
                                                     <span className="mx-2">{item.quantity}</span>
                                                     <button
-                                                        onClick={() => increaseQuantity(item.id)}
+                                                        onClick={() => increaseQuantity(item._id)}
                                                         className="text-gray-500 hover:text-gray-700 px-2"
                                                     >
                                                         +
@@ -112,7 +136,7 @@ function CartPage() {
                                         <p className="text-sm text-red-500 mt-2">₹1000 OFF</p>
                                     </div>
                                     <div className="flex space-x-2 mt-4">
-                                        <button onClick={() => removeFromCart(item.id)} className="text-red-500 hover:text-red-700">
+                                        <button onClick={() => removeFromCart(item.product._id)} className="text-red-500 hover:text-red-700">
                                             Remove
                                         </button>
                                         <button className="text-blue-500 hover:text-blue-700">
