@@ -1,24 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation, json } from 'react-router-dom';
-import {
-    Grid,
-    Typography,
-    Paper,
-    Select,
-    MenuItem,
-    Button,
-    Divider,
-    FormControl,
-    InputLabel,
-    IconButton,
-    ListItem,
-    ListItemText,
-    ListItemSecondaryAction,
-    Avatar,
-    List,
-    Snackbar,
-} from '@mui/material';
+import { useNavigate, useLocation } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
@@ -73,29 +55,27 @@ function CartPage() {
         const token = sessionStorage.getItem('token');
         try {
             // Remove from cart
-            const res = await axios.delete(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${productId}`, {
+            await axios.delete(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${productId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     projectID: '0e7aaiqkxs51'
                 }
             });
-            console.log('delet', json.res)
-    
+
             // Add to wishlist
             await axios.patch('https://academics.newtonschool.co/api/v1/ecommerce/wishlist', {
                 productId: productId
-                // Other wishlist data as needed
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     projectID: '0e7aaiqkxs51'
                 }
             });
-    
+
             // Show snackbar message
             setSnackbarMessage(`${productName} moved to Wishlist`);
             setSnackbarOpen(true);
-    
+
             // Update cart items after moving to wishlist
             fetchCartItems();
         } catch (error) {
@@ -109,132 +89,96 @@ function CartPage() {
 
     return (
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
-            <Typography variant="h4" className="mb-4">My Bag</Typography>
+            <h1 className="text-2xl sm:text-4xl font-bold mb-8">My Bag</h1>
             {cartItems.length === 0 ? (
-                <div className="p-4 text-center space-y-4">
-                    <Typography variant="body1">
+                <div className="p-4 text-center space-y-6">
+                    <p className="text-lg">
                         Your cart is empty. Continue shopping to add items.
-                    </Typography>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        className="mt-4"
+                    </p>
+                    <button
+                        className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
                         onClick={() => navigate('/')}
                     >
                         Continue shopping
-                    </Button>
+                    </button>
                 </div>
             ) : (
-                <Grid container spacing={3}>
-                    <Grid item xs={12} lg={8}>
-                        <Paper elevation={3} className="p-1">
-                            <List>
-                                {cartItems.map((item) => (
-                                    <ListItem
-                                        key={item._id}
-                                        alignItems="center"
-                                        className="flex items-center space-x-4"
-                                        style={{ display: 'flex', justifyContent: 'space-between' }}
-                                    >
-                                        <div className="flex items-center space-x-4">
-                                            <Avatar
-                                                variant="rounded"
-                                                alt={item.product.name}
-                                                src={item.product.displayImage}
-                                                sx={{ width: 90, height: 150 }} // Adjust size here
-                                            />
-                                            <ListItemText
-                                                primary={
-                                                    <Typography variant="subtitle1" className="font-medium">{item.product.name}</Typography>
-                                                }
-                                                secondary={
-                                                    <>
-                                                        <Typography variant="body2" className="text-gray-500 mb-10">{item.product.description}</Typography>
-                                                        <FormControl variant="outlined" size="small" className="mt-40">
-                                                            <InputLabel id={`size-label-${item._id}`}>Size</InputLabel>
-                                                            <Select
-                                                                labelId={`size-label-${item._id}`}
-                                                                id={`size-${item._id}`}
-                                                                value={item.size}
-                                                                label="Size"
-                                                                disabled
-                                                            >
-                                                                <MenuItem value={item.size}>{item.size}</MenuItem>
-                                                            </Select>
-                                                        </FormControl>
-                                                        <FormControl variant="outlined" size="small" className="mt-2">
-                                                            <InputLabel id={`qty-label-${item._id}`}>Qty</InputLabel>
-                                                            <Select
-                                                                labelId={`qty-label-${item._id}`}
-                                                                id={`qty-${item._id}`}
-                                                                value={item.quantity}
-                                                                label="Qty"
-                                                                disabled
-                                                            >
-                                                                <MenuItem value={item.quantity}>{item.quantity}</MenuItem>
-                                                            </Select>
-                                                        </FormControl>
-                                                    </>
-                                                }
-                                            />
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <div className="lg:col-span-2 space-y-6">
+                        {cartItems.map((item) => (
+                            <div key={item._id} className="flex flex-col sm:flex-row items-center justify-between bg-white p-4 rounded shadow-md">
+                                <div className="flex items-center space-x-4">
+                                    <img
+                                        alt={item.product.name}
+                                        src={item.product.displayImage}
+                                        className="w-32 h-32 sm:w-48 sm:h-48 rounded"
+                                    />
+                                    <div className="flex-1">
+                                        <h2 className="text-base sm:text-lg">{item.product.name}</h2>
+                                        <div className="flex space-x-4 mt-2">
+                                            <div>
+                                                <label className="block text-gray-700">Size</label>
+                                                <select value={item.size} disabled className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                    <option>{item.size}</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label className="block text-gray-700">Qty</label>
+                                                <select value={item.quantity} disabled className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                    <option>{item.quantity}</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div className="text-right">
-                                            <Typography variant="body1" className="font-medium mb-2">₹{item.product.price}</Typography>
-                                            <Typography variant="body2" className="text-gray-500 mb-4">MRP incl. of all taxes</Typography>
-                                            <IconButton edge="end" aria-label="delete" onClick={() => removeFromCart(item.product._id)}>
-                                                <DeleteIcon sx={{ color: 'red' }}/>
-                                            </IconButton>
-                                            <IconButton edge="end" aria-label="move-to-wishlist" onClick={() => moveToWishlist(item.product._id, item.product.name)}>
-                                                <FavoriteIcon sx={{ color: 'pink' }}/>
-                                            </IconButton>
-                                        </div>
-                                    </ListItem>
-                                ))}
-                            </List>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12} lg={4}>
-                        <Paper elevation={3} className="p-4">
-                            <Typography variant="h5" className="mb-2">Billing Details</Typography>
-                            <Divider className="mb-2" />
-                            <div className="space-y-4 mt-4">
-                                <Typography variant="body1" className="flex justify-between">
-                                    <span>Cart Total (Excl. of all taxes):</span>
-                                    <span>₹{totalAmount}</span>
-                                </Typography>
-                                <Typography variant="body1" className="flex justify-between">
-                                    <span>Discount:</span>
-                                    <span className="text-red-500">₹ 0</span>
-                                </Typography>
-                                <Typography variant="body1" className="flex justify-between">
-                                    <span>Shipping Charges:</span>
-                                    <span className="text-red-500">₹ 0</span>
-                                </Typography>
-                                <Typography variant="body1" className="flex justify-between font-semibold">
-                                    <span>Total Amount:</span>
-                                    <span>₹{totalAmount}</span>
-                                </Typography>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    fullWidth
-                                    className="py-2"
-                                    onClick={() => navigate('/address')}
-                                >
-                                    Place Order
-                                </Button>
+                                    </div>
+                                </div>
+                                <div className="text-right mt-4 sm:mt-0">
+                                    <p className="font-medium text-lg">₹{item.product.price}</p>
+                                    <p className="text-gray-500">Incl. of all taxes</p>
+                                    <button onClick={() => removeFromCart(item.product._id)} className="text-red-500 mr-5 mt-5 sm:mt-0 hover:text-red-700">
+                                        <DeleteIcon />
+                                    </button>
+                                    <button onClick={() => moveToWishlist(item.product._id, item.product.name)} className="text-pink-500 hover:text-pink-700">
+                                        <FavoriteIcon />
+                                    </button>
+                                </div>
                             </div>
-                        </Paper>
-                    </Grid>
-                </Grid>
+                        ))}
+                    </div>
+                    <div className="bg-white p-4 rounded shadow-md space-y-6">
+                        <h2 className="text-2xl font-bold mb-2">Billing Details</h2>
+                        <hr className="mb-2" />
+                        <div className="space-y-4">
+                            <p className="flex justify-between text-lg">
+                                <span>Cart Total (Excl. of all taxes):</span>
+                                <span>₹{totalAmount}</span>
+                            </p>
+                            <p className="flex justify-between text-lg">
+                                <span>Discount:</span>
+                                <span className="text-red-500">₹ 0</span>
+                            </p>
+                            <p className="flex justify-between text-lg">
+                                <span>Shipping Charges:</span>
+                                <span className="text-red-500">₹ 0</span>
+                            </p>
+                            <p className="flex justify-between text-lg font-semibold">
+                                <span>Total Amount:</span>
+                                <span>₹{totalAmount}</span>
+                            </p>
+                            <button
+                                className="bg-blue-500 text-white w-full py-2 rounded"
+                                onClick={() => navigate('/address')}
+                            >
+                                Place Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
             )}
-            <Snackbar
-                open={snackbarOpen}
-                autoHideDuration={4000}
-                onClose={handleSnackbarClose}
-                message={snackbarMessage}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            />
+            {snackbarOpen && (
+                <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-black text-white py-2 px-4 rounded">
+                    {snackbarMessage}
+                </div>
+            )}
         </div>
     );
 }
