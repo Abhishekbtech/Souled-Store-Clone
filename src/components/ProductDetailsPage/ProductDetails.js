@@ -153,20 +153,20 @@ const ProductDetails = () => {
             )}
             <div className="flex flex-col md:flex-row">
                 <div className="mb-4 md:w-1/2 md:mr-5">
-                    <img src={selectedImage} alt={product.name} className="w-full h-auto object-cover mb-4" />
+                    <img src={selectedImage} alt={product.name} className="w-full h-auto object-cover mb-4 md:max-w-md md:ml-14" />
                     <div className="flex space-x-2">
                         {product.images.map((image, index) => (
                             <img
                                 key={index}
                                 src={image}
                                 alt={`Thumbnail ${index}`}
-                                className="w-10 h-10 object-cover cursor-pointer"
+                                className={`w-10 h-10 object-cover cursor-pointer ${index === 0 ? 'md:ml-14' : ''}`}
                                 onClick={() => setSelectedImage(image)}
                             />
                         ))}
                     </div>
                 </div>
-                <div className="w-full md:w-1/2 p-4 md:ml-5 md:mr-5">
+                <div className="w-full md:w-1/2 p-4 md:mr-5">
                     <h1 className="text-2xl font-bold mb-3">{product.name}</h1>
                     <hr />
                     <p className="text-xl text-gray-800 mt-4">₹ {product.price}</p>
@@ -275,7 +275,7 @@ const ProductDetails = () => {
                         </button>
                         {expandedSections.productDescription && (
                             <div className="px-4 pb-4">
-                                <p>{product.description}</p>
+                                <p>Comming Soon .....</p>
                             </div>
                         )}
                     </div>
