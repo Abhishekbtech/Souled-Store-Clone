@@ -182,10 +182,10 @@ function CartPage() {
                                             <Typography variant="body1" className="font-medium mb-2">₹{item.product.price}</Typography>
                                             <Typography variant="body2" className="text-gray-500 mb-4">MRP incl. of all taxes</Typography>
                                             <IconButton edge="end" aria-label="delete" onClick={() => removeFromCart(item.product._id)}>
-                                                <DeleteIcon />
+                                                <DeleteIcon sx={{ color: 'red' }}/>
                                             </IconButton>
                                             <IconButton edge="end" aria-label="move-to-wishlist" onClick={() => moveToWishlist(item.product._id, item.product.name)}>
-                                                <FavoriteIcon />
+                                                <FavoriteIcon sx={{ color: 'pink' }}/>
                                             </IconButton>
                                         </div>
                                     </ListItem>
