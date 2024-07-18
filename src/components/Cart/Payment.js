@@ -24,13 +24,14 @@ function Payment() {
         const fetchCartData = async () => {
             try {
                 const token = sessionStorage.getItem('token');
-                const response = await axios.get('https://academics.newtonschool.co/api/v1/cart', {
+                const response = await axios.get('https://academics.newtonschool.co/api/v1/ecommerce/cart', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         projectID: '0e7aaiqkxs51'
                     }
                 });
-                setCartData(response.data.cartItems);
+                setCartData(response.data.data.items);
+                console.log("cart dtaa", response.data.data.items)
             } catch (error) {
                 console.error('Error fetching cart data:', error);
             }
@@ -87,7 +88,7 @@ function Payment() {
         if (isValid && cartData.length > 0) {
             const token = sessionStorage.getItem('token');
             const orderData = cartData.map(item => ({
-                productId: item.productId,
+                productId: item.product._id,
                 quantity: item.quantity,
                 addressType: 'HOME',
                 address: {
