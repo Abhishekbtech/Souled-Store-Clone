@@ -16,7 +16,7 @@ import Address from './components/Cart/Address';
 import Payment from './components/Cart/Payment';
 import OrderMessage from './components/Order/OrderMessage';
 import OrderDetails from './components/Order/OrderDetails';
-import ScrolManData from './components/CategoryData/ScrolManData';
+import ScrolManData from './components/MenPage/ScrolManData';
 
 function App() {
   return (
