@@ -6,7 +6,7 @@ function Categorie() {
     const navigate = useNavigate()
     const handelclick =((category) =>{
         console.log(category);
-        const gender = "men"
+        const gender = "Women"
         navigate(`/${gender}/${category.title}`, { state: { category } })
     })
 
