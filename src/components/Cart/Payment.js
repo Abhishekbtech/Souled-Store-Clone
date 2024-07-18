@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Grid, Typography, Paper, Divider } from '@mui/material';
 
 function Payment() {
-    const [totalAmount, setTotalAmount] = useState(0);
+    const location = useLocation();
+    const { address, totalAmount } = location.state || {};
     const [payment, setPayment] = useState({
         cardNumber: '',
         expiryDate: '',
@@ -16,26 +17,6 @@ function Payment() {
         cvv: ''
     });
     const [isFormValid, setIsFormValid] = useState(false);
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const fetchCartItems = async () => {
-            const token = sessionStorage.getItem('token');
-            try {
-                const response = await axios.get('https://academics.newtonschool.co/api/v1/ecommerce/cart', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        projectID: '0e7aaiqkxs51'
-                    }
-                });
-                setTotalAmount(response.data.data.totalPrice);
-            } catch (error) {
-                console.error('Error fetching cart items:', error);
-            }
-        };
-
-        fetchCartItems();
-    }, []);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -79,24 +60,53 @@ function Payment() {
         validateField(name, value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const isValid = Object.keys(payment).every(field => validateField(field, payment[field]) === '');
         setIsFormValid(isValid);
         if (isValid) {
-            // Here you can add logic to handle form submission, e.g., sending data to backend
-            console.log('Payment details submitted:', payment);
-            // You can also navigate to another page or show a success message
+            const token = sessionStorage.getItem('token');
+            const orderData = {
+                productId: 'productID',
+                quantity: 2, 
+                addressType: 'HOME',
+                address: {
+                    street:address.street,
+                    city: address.city,
+                    state: address.state,
+                    zip: address.zip
+                }
+            };
+
+            try {
+                const response = await axios.post('https://your-backend-endpoint.com/api/v1/orders', orderData, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        projectID: '0e7aaiqkxs51'
+                    }
+                });
+                console.log('Order placed successfully:', response.data);
+            } catch (error) {
+                console.error('Error placing order:', error);
+            }
         }
     };
 
     return (
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
-            <Typography variant="h4" className="mb-6">Payment Page</Typography>
+            <Typography variant="h4" className="mb-6">Payment</Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12} lg={8}>
                     <Paper elevation={3} className="p-4">
                         <form onSubmit={handleSubmit} className="space-y-4">
+                            <Typography variant="h6" className="mb-4">Billing Address</Typography>
+                            <Typography variant="body1" className="mb-2">
+                                {address.fullName}<br />
+                                {address.street}, {address.city}<br />
+                                {address.state}, {address.country} - {address.zip}
+                            </Typography>
+                            <Divider className="mb-4" />
+                            <Typography variant="h6" className="mb-4">Payment Information</Typography>
                             <TextField
                                 fullWidth
                                 id="cardNumber"
@@ -106,15 +116,8 @@ function Payment() {
                                 value={payment.cardNumber}
                                 onChange={handleInputChange}
                                 onBlur={handleBlur}
-                                error={Boolean(errors.cardNumber)}
+                                error={!!errors.cardNumber}
                                 helperText={errors.cardNumber}
-                                className="mb-3"
-                                inputProps={{
-                                    maxLength: 16,
-                                    minLength: 16,
-                                    inputMode: 'numeric',
-                                    pattern: '[0-9]*'
-                                }}
                             />
                             <TextField
                                 fullWidth
@@ -125,17 +128,11 @@ function Payment() {
                                 value={payment.expiryDate}
                                 onChange={handleInputChange}
                                 onBlur={handleBlur}
-                                error={Boolean(errors.expiryDate)}
+                                error={!!errors.expiryDate}
                                 helperText={errors.expiryDate}
-                                className="mb-3"
-                                inputProps={{
-                                    inputMode: 'numeric',
-                                    pattern: '(0[1-9]|1[0-2])\/[0-9]{2}'
-                                }}
                             />
                             <TextField
                                 fullWidth
-                                type='password'
                                 id="cvv"
                                 name="cvv"
                                 label="CVV"
@@ -143,16 +140,19 @@ function Payment() {
                                 value={payment.cvv}
                                 onChange={handleInputChange}
                                 onBlur={handleBlur}
-                                error={Boolean(errors.cvv)}
+                                error={!!errors.cvv}
                                 helperText={errors.cvv}
-                                className="mb-3"
-                                inputProps={{
-                                    maxLength: 3,
-                                    inputMode: 'numeric',
-                                    pattern: '[0-9]*'
-                                }}
                             />
-                            
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                                className="py-2"
+                                type="submit"
+                                disabled={!isFormValid}
+                            >
+                                Submit Payment
+                            </Button>
                         </form>
                     </Paper>
                 </Grid>
@@ -177,17 +177,6 @@ function Payment() {
                                 <span>Total Amount:</span>
                                 <span>₹{totalAmount}</span>
                             </Typography>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                fullWidth
-                                className="py-2"
-                                disabled={!isFormValid}
-                                type="submit"
-                                onClick={() => navigate('/ordermessage')}
-                            >
-                                Confirm Order
-                            </Button>
                         </div>
                     </Paper>
                 </Grid>
