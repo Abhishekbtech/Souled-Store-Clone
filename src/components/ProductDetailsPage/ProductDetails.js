@@ -11,7 +11,7 @@ const ProductDetails = () => {
     const [product, setProduct] = useState(null);
     const [selectedImage, setSelectedImage] = useState('');
     const [quantity, setQuantity] = useState(1);
-    const [size, setSize] = useState('S');
+    const [size, setSize] = useState('');
     const [pincode, setPincode] = useState('');
     const [pincodeMessage, setPincodeMessage] = useState('');
     const [expandedSections, setExpandedSections] = useState({
@@ -45,7 +45,6 @@ const ProductDetails = () => {
                 }
             }).then(response => {
                 setWishlist(response.data.data.items.map(item => item.products._id));
-                console.log("i am wor", response.data.data.items)
             }).catch(error => {
                 console.error('Error fetching product details:', error);
             });
@@ -56,6 +55,11 @@ const ProductDetails = () => {
         const token = sessionStorage.getItem('token');
         if (!token) {
             navigate('/signup', { state: { from: location } });
+            return;
+        }
+
+        if (!size) {
+            showPopupMessage('Please select a size.');
             return;
         }
 
