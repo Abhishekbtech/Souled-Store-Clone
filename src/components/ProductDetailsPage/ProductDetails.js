@@ -128,7 +128,7 @@ const ProductDetails = () => {
         setShowPopup(true);
         setTimeout(() => {
             setShowPopup(false);
-        }, 5000);
+        }, 3000);
     };
 
     const handlePincodeChange = (e) => {
@@ -157,14 +157,14 @@ const ProductDetails = () => {
             )}
             <div className="flex flex-col md:flex-row">
                 <div className="mb-4 md:w-1/2 md:mr-5">
-                    <img src={selectedImage} alt={product.name} className="w-full h-auto object-cover mb-4 md:max-w-md md:ml-14" />
+                    <img src={selectedImage} alt={product.name} className="w-full h-auto object-cover mb-4 md:max-w-md md:ml-20" />
                     <div className="flex space-x-2">
                         {product.images.map((image, index) => (
                             <img
                                 key={index}
                                 src={image}
                                 alt={`Thumbnail ${index}`}
-                                className={`w-10 h-10 object-cover cursor-pointer ${index === 0 ? 'md:ml-14' : ''}`}
+                                className={`w-10 h-10 object-cover cursor-pointer ${index === 0 ? 'md:ml-20' : ''}`}
                                 onClick={() => setSelectedImage(image)}
                             />
                         ))}
