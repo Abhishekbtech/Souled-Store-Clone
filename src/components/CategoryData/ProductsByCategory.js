@@ -15,7 +15,7 @@ function ProductsByCategory() {
     const navigate = useNavigate()
     const location = useLocation();
     const { category } = location.state || {};
-    const [sortBy, setSortBy] = useState('default'); // State for sorting criteria
+    const [sortBy, setSortBy] = useState('default');
 
     useEffect(() => {
         const fetchProducts = async () => {
