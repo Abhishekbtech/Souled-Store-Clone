@@ -68,7 +68,7 @@ function Address() {
             <Grid container spacing={3}>
                 <Grid item xs={12} lg={8}>
                     <Paper elevation={3} className="p-4">
-                        <form onSubmit={handleSubmit} className="space-y-4">
+                        <form className="space-y-4">
                             <TextField
                                 fullWidth
                                 id="fullName"
@@ -176,6 +176,7 @@ function Address() {
                                 className="py-2"
                                 disabled={!isFormValid}
                                 type="submit"
+                                onClick={handleSubmit}
                             >
                                 Continue Payment
                             </Button>
