@@ -63,7 +63,6 @@ function CartPage() {
                     projectID: '0e7aaiqkxs51'
                 }
             });
-            // Update cart items after successful removal
             fetchCartItems();
         } catch (error) {
             console.error('Error removing item from cart:', error);
