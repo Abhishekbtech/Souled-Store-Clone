@@ -28,28 +28,28 @@ function CartPage() {
     const location = useLocation();
 
     useEffect(() => {
-        const fetchCartItems = async () => {
-            const token = sessionStorage.getItem('token');
-            if (!token) {
-                navigate('/signup', { state: { from: location } });
-                return;
-            }
-            try {
-                const response = await axios.get('https://academics.newtonschool.co/api/v1/ecommerce/cart', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        projectID: '0e7aaiqkxs51'
-                    }
-                });
-                setCartItems(response.data.data.items);
-                setTotalAmount(response.data.data.totalPrice);
-            } catch (error) {
-                console.error('Error fetching cart items:', error);
-            }
-        };
-
         fetchCartItems();
-    }, [navigate, location]);
+    }, []);
+
+    const fetchCartItems = async () => {
+        const token = sessionStorage.getItem('token');
+        if (!token) {
+            navigate('/signup', { state: { from: location } });
+            return;
+        }
+        try {
+            const response = await axios.get('https://academics.newtonschool.co/api/v1/ecommerce/cart', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    projectID: '0e7aaiqkxs51'
+                }
+            });
+            setCartItems(response.data.data.items);
+            setTotalAmount(response.data.data.totalPrice);
+        } catch (error) {
+            console.error('Error fetching cart items:', error);
+        }
+    };
 
     const removeFromCart = async (productId) => {
         const token = sessionStorage.getItem('token');
@@ -60,14 +60,23 @@ function CartPage() {
                     projectID: '0e7aaiqkxs51'
                 }
             });
-            setCartItems((prevItems) => prevItems.filter((item) => item.product._id !== productId));
+            // Update cart items after successful removal
+            fetchCartItems();
         } catch (error) {
             console.error('Error removing item from cart:', error);
         }
     };
 
     const moveToWishlist = async (productId) => {
-        console.log(`Moving product ${productId} to wishlist`);
+        const token = sessionStorage.getItem('token');
+        try {
+            // Perform move to wishlist action here
+            console.log(`Moving product ${productId} to wishlist`);
+            // Refetch cart items after moving to wishlist
+            fetchCartItems();
+        } catch (error) {
+            console.error('Error moving item to wishlist:', error);
+        }
     };
 
     return (
