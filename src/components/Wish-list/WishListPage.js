@@ -25,6 +25,7 @@ function WishListPage() {
                     }
                 });
                 setWishlist(response.data.data.items);
+                console.log("wishlist", response.data.data.items);
             } catch (error) {
                 setError(error);
             } finally {
@@ -44,7 +45,7 @@ function WishListPage() {
                     'projectID': '0e7aaiqkxs51'
                 }
             });
-            setWishlist(wishlist.filter(item => item.products._id !== productId));
+            setWishlist(wishlist.filter(item => item.products && item.products._id !== productId));
             window.location.reload();
         } catch (error) {
             console.error(error);
@@ -66,7 +67,7 @@ function WishListPage() {
             console.log('Item added to cart:', response.data);
             showPopupMessage('Item added to cart');
             setMessage('Item added to cart');
-            setWishlist(wishlist.filter(item => item.products._id !== productId));
+            setWishlist(wishlist.filter(item => item.products && item.products._id !== productId));
         } catch (error) {
             console.error('Error adding item to cart:', error);
         }
@@ -87,6 +88,8 @@ function WishListPage() {
         navigate('/')
     }
 
+    const displayLength = wishlist.length > 0 ? wishlist.length - 1 : 0;
+
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error loading wishlist.</div>;
 
@@ -97,29 +100,31 @@ function WishListPage() {
                     <p>{message}</p>
                 </div>
             )}
-            <h2 className="text-xl sm:text-2xl font-bold mb-4">My Wishlist ({wishlist.length} items)</h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-4">My Wishlist ({displayLength} items)</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {wishlist.map(item => (
-                    <div key={item.products._id} className="border rounded-lg shadow-lg relative hover:scale-105 transition duration-300">
-                        <img src={item.products.displayImage} alt={item.products.name} className="w-full h-50 object-cover rounded-t-lg" />
-                        <div className="p-4">
-                            <h3 className="overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer" onClick={() => productWithDetailPage(item.products)}>{item.products.name}</h3>
-                            <p className="text-red-500 font-bold">{`₹${item.products.price}`}</p>
-                            <p className="text-gray-500 text-sm">MRP incl. of all taxes</p>
+                    item.products && (
+                        <div key={item._id} className="border rounded-lg shadow-lg relative hover:scale-105 transition duration-300">
+                            <img src={item.products.displayImage} alt={item.products.name} className="w-full h-50 object-cover rounded-t-lg" />
+                            <div className="p-4">
+                                <h3 className="overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer" onClick={() => productWithDetailPage(item.products)}>{item.products.name}</h3>
+                                <p className="text-red-500 font-bold">{`₹${item.products.price}`}</p>
+                                <p className="text-gray-500 text-sm">MRP incl. of all taxes</p>
+                                <button
+                                    className="mt-2 bg-green-500 text-white px-4 py-2 rounded w-full"
+                                    onClick={() => addToCart(item.products._id)}
+                                >
+                                    Move to Cart
+                                </button>
+                            </div>
                             <button
-                                className="mt-2 bg-green-500 text-white px-4 py-2 rounded w-full"
-                                onClick={() => addToCart(item.products._id)}
+                                className="absolute top-2 right-2 text-red-500 bg-white rounded-full w-6 h-6 flex items-center justify-center"
+                                onClick={() => removeFromWishlist(item.products._id)}
                             >
-                                Move to Cart
+                                &times;
                             </button>
                         </div>
-                        <button
-                            className="absolute top-2 right-2 text-red-500 bg-white rounded-full w-6 h-6 flex items-center justify-center"
-                            onClick={() => removeFromWishlist(item.products._id)}
-                        >
-                            &times;
-                        </button>
-                    </div>
+                    )
                 ))}
             </div>
             {wishlist.length === 0 && (
