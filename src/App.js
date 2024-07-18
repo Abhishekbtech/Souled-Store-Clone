@@ -15,6 +15,7 @@ import WishListPage from './components/Wish-list/WishListPage';
 import Address from './components/Cart/Address';
 import Payment from './components/Cart/Payment';
 import OrderMessage from './components/Order/OrderMessage';
+import OrderDetails from './components/Order/OrderDetails';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path='/address' element={<Address/>}/>
           <Route path='/payment' element={<Payment/>}/>
           <Route path='/ordermessage' element={<OrderMessage/>}/>
+          <Route path='/order' element={<OrderDetails/>}/>
         </Routes>
         {/* <Footer/> */}
       </div>
