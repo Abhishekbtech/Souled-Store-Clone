@@ -11,8 +11,8 @@ function Foo() {
             <div className="bg-white text-center py-4">
                 <p className="text-4xl font-semibold">Over <span className="text-4xl font-bold">6 Million</span> Happy Customers</p>
             </div>
-            <div className='mx-4 md:mx-20 mt-10 border'>
-                <div className="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-4 gap-4 p-4">
+            <div className='mx-2 sm:mx-4 md:mx-10 lg:mx-20'>
+                <div className="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-4 p-4">
                     <div className="mx-4 my-5">
                         <h2 className="text-xl font-bold text-red-600">NEED HELP</h2>
                         <ul className="mt-4 font-bold">
@@ -57,7 +57,7 @@ function Foo() {
                         <p>↩ 30 Days Easy Returns</p>
                     </div>
                 </div>
-                <div className="flex justify-end">
+                <div className="flex justify-end mt-5">
                     <div className="container mx-auto px-5 text-center">
                         <p className="mb-2">📱 EXPERIENCE THE SOULED STORE APP</p>
                         <div className="flex justify-center space-x-4">
@@ -79,7 +79,6 @@ function Foo() {
                     <h1 className='font-semibold text-xl'>© The Souled Store 2024-25</h1>
                 </div>
             </div>
-
         </footer>
     )
 }
