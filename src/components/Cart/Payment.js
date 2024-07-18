@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { TextField, Button, Grid, Typography, Paper, Divider } from '@mui/material';
@@ -17,6 +17,27 @@ function Payment() {
         cvv: ''
     });
     const [isFormValid, setIsFormValid] = useState(false);
+    const [cartData, setCartData] = useState([]);
+
+    useEffect(() => {
+        // Fetch cart data from API
+        const fetchCartData = async () => {
+            try {
+                const token = sessionStorage.getItem('token');
+                const response = await axios.get('https://academics.newtonschool.co/api/v1/cart', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        projectID: '0e7aaiqkxs51'
+                    }
+                });
+                setCartData(response.data.cartItems);
+            } catch (error) {
+                console.error('Error fetching cart data:', error);
+            }
+        };
+
+        fetchCartData();
+    }, []);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -63,22 +84,22 @@ function Payment() {
         e.preventDefault();
         const isValid = Object.keys(payment).every(field => validateField(field, payment[field]) === '');
         setIsFormValid(isValid);
-        if (isValid) {
+        if (isValid && cartData.length > 0) {
             const token = sessionStorage.getItem('token');
-            const orderData = {
-                productId: 'productID',
-                quantity: 2, 
+            const orderData = cartData.map(item => ({
+                productId: item.productId,
+                quantity: item.quantity,
                 addressType: 'HOME',
                 address: {
-                    street:address.street,
+                    street: address.street,
                     city: address.city,
                     state: address.state,
                     zip: address.zip
                 }
-            };
+            }));
 
             try {
-                const response = await axios.post('https://your-backend-endpoint.com/api/v1/orders', orderData, {
+                const response = await axios.post('https://academics.newtonschool.co/api/v1/orders', { orders: orderData }, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         projectID: '0e7aaiqkxs51'
