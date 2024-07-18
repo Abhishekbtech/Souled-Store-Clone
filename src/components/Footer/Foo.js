@@ -4,7 +4,7 @@ import { faFacebookF, faInstagram, faSnapchatGhost, faTwitter } from '@fortaweso
 
 function Foo() {
     return (
-        <footer className='bg-gray-300 text-gray-700'>
+        <footer className='bg-gray-300 text-gray-700 '>
             <div className="bg-red-600 text-white text-center py-4">
                 <p className="text-3xl font-semibold">HOMEGROWN INDIAN BRAND</p>
             </div>
@@ -64,7 +64,7 @@ function Foo() {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-end mt-4">
+                <div className="flex justify-end my-4 mr-10">
                     <div className="flex items-center space-x-4">
                         <h3 className='mt-1'>Follow us :</h3>
                         <a href="https://www.facebook.com/SouledStore" className="text-2xl text-blue-600"><FontAwesomeIcon icon={faFacebookF} /></a>
@@ -72,6 +72,9 @@ function Foo() {
                         <a href="https://www.snapchat.com/add/thesouledstore" className="text-2xl text-yellow-600"><FontAwesomeIcon icon={faSnapchatGhost} /></a>
                         <a href="https://twitter.com/TheSouledStore" className="text-2xl text-blue-500"><FontAwesomeIcon icon={faTwitter} /></a>
                     </div>
+                </div>
+                <div className='mb-10 text-center'>
+                    <h1 className='font-semibold text-xl'>© The Souled Store 2024-25</h1>
                 </div>
             </div>
 
