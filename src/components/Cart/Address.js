@@ -144,16 +144,7 @@ function Address() {
                                     />
                                 </Grid>
                             </Grid>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                fullWidth
-                                className="py-2"
-                                disabled={!isFormValid}
-                                type="submit"
-                            >
-                                Continue Payment
-                            </Button>
+                            
                         </form>
                     </Paper>
                 </Grid>
@@ -178,6 +169,16 @@ function Address() {
                                 <span>Total Amount:</span>
                                 <span>₹{totalAmount}</span>
                             </Typography>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                                className="py-2"
+                                disabled={!isFormValid}
+                                type="submit"
+                            >
+                                Continue Payment
+                            </Button>
                         </div>
                     </Paper>
                 </Grid>
