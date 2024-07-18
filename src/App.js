@@ -5,7 +5,7 @@ import SecondNavbar from './components/Navbar/SecondNavbar';
 import Men from './components/MenPage/MenPage';
 import Women from './components/WomenPage/WomenPage';
 import SearchPage from './components/Search/SearchPage';
-import Footer from './components/Footer/Footer';
+import Foo from './components/Footer/Foo';
 import ProductsByCategory from './components/CategoryData/ProductsByCategory';
 import ProductDetails from './components/ProductDetailsPage/ProductDetails';
 import AuthForm from './components/Sing/AuthForm';
@@ -40,7 +40,7 @@ function App() {
           <Route path='/men/:subCategory' element={<ScrolManData/>}/>
           <Route path='/women/:subCategory' element={<ScrolWomenData/>}/>
         </Routes>
-        <Footer/>
+        <Foo/>
       </div>
     </Router>
   );
