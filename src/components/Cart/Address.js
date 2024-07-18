@@ -7,10 +7,10 @@ function Address() {
     const [totalAmount, setTotalAmount] = useState(0);
     const [address, setAddress] = useState({
         fullName: '',
-        addressLine1: '',
-        addressLine2: '',
+        street: '',
         city: '',
         state: '',
+        country: '',
         zip: ''
     });
     const [isFormValid, setIsFormValid] = useState(false);
@@ -83,9 +83,9 @@ function Address() {
                                 fullWidth
                                 id="street"
                                 name="street"
-                                label="street"
+                                label="Street"
                                 variant="outlined"
-                                value={address.v}
+                                value={address.street}
                                 onChange={handleInputChange}
                                 className="mb-3"
                             />
