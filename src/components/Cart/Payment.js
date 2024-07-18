@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { TextField, Button, Grid, Typography, Paper, Divider } from '@mui/material';
 
@@ -18,6 +18,7 @@ function Payment() {
     });
     const [isFormValid, setIsFormValid] = useState(false);
     const [cartData, setCartData] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCartData = async () => {
@@ -77,37 +78,63 @@ function Payment() {
         validateField(name, value);
     };
 
+    const removeProductFromCart = async (productId) => {
+        try {
+            const token = sessionStorage.getItem('token');
+            await axios.delete(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${productId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    projectID: '0e7aaiqkxs51'
+                }
+            });
+            console.log(`Product with ID ${productId} removed from cart.`);
+        } catch (error) {
+            console.error('Error removing product from cart:', error);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const isValid = Object.keys(payment).every(field => validateField(field, payment[field]) === '');
         setIsFormValid(isValid);
         if (isValid && cartData.length > 0) {
             const token = sessionStorage.getItem('token');
-            const orderData = cartData.map(item => ({
-                productId: item.product._id,
-                quantity: item.quantity,
-                addressType: 'HOME',
-                address: {
-                    street: address.street,
-                    city: address.city,
-                    state: address.state,
-                    country: address.country,
-                    zipCode: address.zip
-                }
-            }));
+            let allOrdersSuccessful = true;
 
-            console.log("Order data to be sent:", orderData);
-
-            try {
-                const response = await axios.post('https://academics.newtonschool.co/api/v1/ecommerce/order', orderData, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        projectID: '0e7aaiqkxs51'
+            for (const item of cartData) {
+                const orderData = {
+                    productId: item.product._id,
+                    quantity: item.quantity,
+                    addressType: 'HOME',
+                    address: {
+                        street: address.street,
+                        city: address.city,
+                        state: address.state,
+                        country: address.country,
+                        zipCode: address.zip
                     }
-                });
-                console.log('Order placed successfully:', response.data);
-            } catch (error) {
-                console.error('Error placing order:', error.response ? error.response.data : error);
+                };
+
+                try {
+                    const response = await axios.post('https://academics.newtonschool.co/api/v1/ecommerce/order', orderData, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            projectID: '0e7aaiqkxs51'
+                        }
+                    });
+                    console.log('Order placed successfully:', response.data);
+                    await removeProductFromCart(item.product._id);
+                } catch (error) {
+                    console.error('Error placing order:', error.response ? error.response.data : error);
+                    allOrdersSuccessful = false;
+                    break; 
+                }
+            }
+
+            if (allOrdersSuccessful) {
+                navigate('/ordermessage');
+            } else {
+                console.error('One or more orders failed.');
             }
         }
     };
@@ -118,7 +145,7 @@ function Payment() {
             <Grid container spacing={3}>
                 <Grid item xs={12} lg={8}>
                     <Paper elevation={3} className="p-4">
-                        <form onSubmit={handleSubmit} className="space-y-4">
+                        <form className="space-y-4">
                             <Typography variant="h6" className="mb-4">Billing Address</Typography>
                             <Typography variant="body1" className="mb-2">
                                 {address.fullName}<br />
@@ -135,6 +162,7 @@ function Payment() {
                                 variant="outlined"
                                 value={payment.cardNumber}
                                 onChange={handleInputChange}
+                                inputProps={{ maxLength: 16 }}
                                 onBlur={handleBlur}
                                 error={!!errors.cardNumber}
                                 helperText={errors.cardNumber}
@@ -150,18 +178,21 @@ function Payment() {
                                 onBlur={handleBlur}
                                 error={!!errors.expiryDate}
                                 helperText={errors.expiryDate}
+                                inputProps={{ maxLength: 5 }}
                             />
                             <TextField
                                 fullWidth
                                 id="cvv"
                                 name="cvv"
                                 label="CVV"
+                                type='password'
                                 variant="outlined"
                                 value={payment.cvv}
                                 onChange={handleInputChange}
                                 onBlur={handleBlur}
                                 error={!!errors.cvv}
                                 helperText={errors.cvv}
+                                inputProps={{ maxLength: 3 }}
                             />
                             
                         </form>
@@ -195,6 +226,7 @@ function Payment() {
                                 className="py-2"
                                 type="submit"
                                 disabled={!isFormValid}
+                                onClick={handleSubmit}
                             >
                                 Submit Payment
                             </Button>
