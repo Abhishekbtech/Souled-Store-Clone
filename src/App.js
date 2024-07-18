@@ -40,7 +40,7 @@ function App() {
           <Route path='/men/:subCategory' element={<ScrolManData/>}/>
           <Route path='/women/:subCategory' element={<ScrolWomenData/>}/>
         </Routes>
-        {/* <Footer/> */}
+        <Footer/>
       </div>
     </Router>
   );
