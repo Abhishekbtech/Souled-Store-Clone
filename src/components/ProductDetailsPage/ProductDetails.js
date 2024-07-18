@@ -72,7 +72,6 @@ const ProductDetails = () => {
                 'projectID': '0e7aaiqkxs51'
             }
         }).then(response => {
-            console.log('Item added to cart:', response.data);
             showPopupMessage('Item added to cart');
         }).catch(error => {
             console.error('Error adding item to cart:', error);
@@ -100,7 +99,7 @@ const ProductDetails = () => {
             setWishlist([...wishlist, productId]);
             showPopupMessage('Item added to wishlist');
         }).catch(error => {
-            console.error('Error adding item to wishlist:', error.response.data.message);
+            console.error('Error adding item to wishlist:', error);
         });
     };
 
@@ -157,7 +156,7 @@ const ProductDetails = () => {
             )}
             <div className="flex flex-col md:flex-row">
                 <div className="mb-4 md:w-1/2 md:mr-5">
-                    <img src={selectedImage} alt={product.name} className="w-full h-auto object-cover mb-4 md:max-w-md md:ml-20" />
+                    <img src={selectedImage} alt={product.name} className="w-full h-auto object-cover mb-4 md:max-w-md md:ml-4" />
                     <div className="flex space-x-2">
                         {product.images.map((image, index) => (
                             <img
@@ -175,6 +174,8 @@ const ProductDetails = () => {
                     <hr />
                     <p className="text-xl text-gray-800 mt-4">₹ {product.price}</p>
                     <p className='text-sm mt-1'>MRP incl. of all taxes</p>
+                    <p className="text-sm line-through">MRP ₹ {product.price + Math.floor(product.price * 0.3)}</p>
+                    <p className="text-green-600 font-semibold">You got {Math.floor(Math.random() * 50) + 10}% OFF</p>
                     <div className="mb-4 mt-5">
                         <h3 className="font-semibold mb-2">Please select a size: <span className="text-blue-500 cursor-pointer">SIZE CHART</span></h3>
                         <div className="flex space-x-2 mt-6">
