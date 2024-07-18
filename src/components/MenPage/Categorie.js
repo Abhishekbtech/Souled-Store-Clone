@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 function Categorie() {
     const navigate = useNavigate()
     const handelclick =((category) =>{
-        console.log(category);
         const gender = "men"
         navigate(`/${gender}/${category.title}`, { state: { category } })
     })
