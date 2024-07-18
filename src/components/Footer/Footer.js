@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF, faInstagram, faSnapchatGhost, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
   return (
@@ -10,9 +12,9 @@ const Footer = () => {
         <p className="text-2xl font-bold">Over <span className="text-3xl">6 Million</span> Happy Customers</p>
       </div>
       <div className="container mx-auto py-8 px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div>
+        <div className="mb-8 sm:mb-0">
           <h2 className="text-xl font-bold text-red-600">NEED HELP</h2>
-          <ul>
+          <ul className="mt-4">
             <li><a href="#">Contact Us</a></li>
             <li><a href="#">Track Order</a></li>
             <li><a href="#">Returns & Refunds</a></li>
@@ -24,26 +26,26 @@ const Footer = () => {
             <p>↩ 30 Days Easy Returns</p>
           </div>
         </div>
-        <div>
+        <div className="mb-8 sm:mb-0">
           <h2 className="text-xl font-bold text-red-600">COMPANY</h2>
-          <ul>
+          <ul className="mt-4">
             <li><a href="#">About Us</a></li>
             <li><a href="#">Careers</a></li>
             <li><a href="#">Community Initiatives</a></li>
             <li><a href="#">Souled Army</a></li>
           </ul>
         </div>
-        <div>
+        <div className="mb-8 sm:mb-0">
           <h2 className="text-xl font-bold text-red-600">MORE INFO</h2>
-          <ul>
+          <ul className="mt-4">
             <li><a href="#">T&C</a></li>
             <li><a href="#">Privacy Policy</a></li>
             <li><a href="#">Sitemap</a></li>
           </ul>
         </div>
-        <div>
+        <div className="mb-8 sm:mb-0">
           <h2 className="text-xl font-bold text-red-600">STORE NEAR ME</h2>
-          <ul>
+          <ul className="mt-4">
             <li><a href="#">Bandra</a></li>
             <li><a href="#">Thane</a></li>
             <li><a href="#">Colaba</a></li>
@@ -64,28 +66,19 @@ const Footer = () => {
       <div className="bg-gray-200 py-4">
         <div className="container mx-auto px-4 text-center">
           <div className="flex justify-center space-x-4">
-            <a href="#"><i className="fab fa-facebook-f"></i></a>
-            <a href="#"><i className="fab fa-instagram"></i></a>
-            <a href="#"><i className="fab fa-snapchat-ghost"></i></a>
-            <a href="#"><i className="fab fa-twitter"></i></a>
+            <a href="#"><FontAwesomeIcon icon={faFacebookF} /></a>
+            <a href="#"><FontAwesomeIcon icon={faInstagram} /></a>
+            <a href="#"><FontAwesomeIcon icon={faSnapchatGhost} /></a>
+            <a href="#"><FontAwesomeIcon icon={faTwitter} /></a>
           </div>
           <div className="mt-4">
             <p className="text-gray-600">100% Secure Payment:</p>
             <div className="flex justify-center space-x-4">
-              <img src="phonepe-logo.png" alt="PhonePe" className="h-6" />
-              <img src="gpay-logo.png" alt="GPay" className="h-6" />
-              <img src="amazon-pay-logo.png" alt="Amazon Pay" className="h-6" />
-              <img src="mastercard-logo.png" alt="MasterCard" className="h-6" />
-              <img src="mobikwik-logo.png" alt="MobiKwik" className="h-6" />
-              <img src="paytm-logo.png" alt="Paytm" className="h-6" />
-              <img src="cod-logo.png" alt="COD" className="h-6" />
+              {/* Add your payment method logos here */}
             </div>
             <p className="mt-4">Shipping Partners:</p>
             <div className="flex justify-center space-x-4">
-              <img src="dtdc-logo.png" alt="DTDC" className="h-6" />
-              <img src="delhivery-logo.png" alt="Delhivery" className="h-6" />
-              <img src="ecom-express-logo.png" alt="Ecom Express" className="h-6" />
-              <img src="xpressbees-logo.png" alt="Xpressbees" className="h-6" />
+              {/* Add your shipping partner logos here */}
             </div>
           </div>
         </div>
