@@ -16,6 +16,7 @@ import Address from './components/Cart/Address';
 import Payment from './components/Cart/Payment';
 import OrderMessage from './components/Order/OrderMessage';
 import OrderDetails from './components/Order/OrderDetails';
+import ScrolManData from './components/CategoryData/ScrolManData';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path='/payment' element={<Payment/>}/>
           <Route path='/ordermessage' element={<OrderMessage/>}/>
           <Route path='/order' element={<OrderDetails/>}/>
+          <Route path='/men/:subCategory' element={<ScrolManData/>}/>
         </Routes>
         {/* <Footer/> */}
       </div>
