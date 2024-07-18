@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, json } from 'react-router-dom';
 import {
     Grid,
     Typography,
@@ -17,6 +17,7 @@ import {
     ListItemSecondaryAction,
     Avatar,
     List,
+    Snackbar,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -24,6 +25,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 function CartPage() {
     const [cartItems, setCartItems] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -67,16 +70,42 @@ function CartPage() {
         }
     };
 
-    const moveToWishlist = async (productId) => {
+    const moveToWishlist = async (productId, productName) => {
         const token = sessionStorage.getItem('token');
         try {
-            // Perform move to wishlist action here
-            console.log(`Moving product ${productId} to wishlist`);
-            // Refetch cart items after moving to wishlist
+            // Remove from cart
+            const res = await axios.delete(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${productId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    projectID: '0e7aaiqkxs51'
+                }
+            });
+            console.log('delet', json.res)
+    
+            // Add to wishlist
+            await axios.patch('https://academics.newtonschool.co/api/v1/ecommerce/wishlist', {
+                productId: productId
+                // Other wishlist data as needed
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    projectID: '0e7aaiqkxs51'
+                }
+            });
+    
+            // Show snackbar message
+            setSnackbarMessage(`${productName} moved to Wishlist`);
+            setSnackbarOpen(true);
+    
+            // Update cart items after moving to wishlist
             fetchCartItems();
         } catch (error) {
             console.error('Error moving item to wishlist:', error);
         }
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
     };
 
     return (
@@ -156,7 +185,7 @@ function CartPage() {
                                             <IconButton edge="end" aria-label="delete" onClick={() => removeFromCart(item.product._id)}>
                                                 <DeleteIcon />
                                             </IconButton>
-                                            <IconButton edge="end" aria-label="move-to-wishlist" onClick={() => moveToWishlist(item.product._id)}>
+                                            <IconButton edge="end" aria-label="move-to-wishlist" onClick={() => moveToWishlist(item.product._id, item.product.name)}>
                                                 <FavoriteIcon />
                                             </IconButton>
                                         </div>
@@ -200,6 +229,13 @@ function CartPage() {
                     </Grid>
                 </Grid>
             )}
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={4000}
+                onClose={handleSnackbarClose}
+                message={snackbarMessage}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            />
         </div>
     );
 }
