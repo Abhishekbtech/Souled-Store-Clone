@@ -85,6 +85,10 @@ const SecondNavbar = () => {
         navigate('/wishlist');
     }
 
+    const handlingOrder = () => {
+        navigate('/order');
+    }
+
     const handleLogout = () => {
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('username');
@@ -140,7 +144,7 @@ const SecondNavbar = () => {
                         >
                             <MenuItem onClick={handlingWishList}>My Wishlist</MenuItem>
                             <MenuItem onClick={handlingCart}>My Cart</MenuItem>
-                            <MenuItem onClick={handleMenuClose}>My Orders</MenuItem>
+                            <MenuItem onClick={handlingOrder}>My Orders</MenuItem>
                             <MenuItem onClick={handleLogout}>Logout</MenuItem>
                         </Menu>
                     </div>
