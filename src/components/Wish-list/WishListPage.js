@@ -124,9 +124,9 @@ function WishListPage() {
             </div>
             {wishlist.length === 0 && (
                 <div className="text-center mt-4">
-                    <p>Your wishlist is empty.</p>
-                    <button className="mt-2 bg-blue-500 text-white px-4 py-2 rounded" onClick={handLingClick}>
-                        Add Products
+                    <p className='font-bold text-lg'>Your wishlist is empty.</p>
+                    <button className="mt-5 bg-blue-500 text-white px-4 py-2 rounded" onClick={handLingClick}>
+                        Go to Home
                     </button>
                 </div>
             )}
