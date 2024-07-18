@@ -20,7 +20,6 @@ function Payment() {
     const [cartData, setCartData] = useState([]);
 
     useEffect(() => {
-        // Fetch cart data from API
         const fetchCartData = async () => {
             try {
                 const token = sessionStorage.getItem('token');
@@ -31,7 +30,7 @@ function Payment() {
                     }
                 });
                 setCartData(response.data.data.items);
-                console.log("cart dtaa", response.data.data.items)
+                console.log("Cart data fetched:", response.data.data.items);
             } catch (error) {
                 console.error('Error fetching cart data:', error);
             }
@@ -46,7 +45,6 @@ function Payment() {
             ...prevPayment,
             [name]: value
         }));
-
         validateField(name, value);
     };
 
@@ -69,8 +67,6 @@ function Payment() {
             ...prevErrors,
             [name]: error
         }));
-
-        // Check if the form is valid
         const formIsValid = Object.values(payment).every(field => field.trim() !== '') && !error;
         setIsFormValid(formIsValid);
         return error;
@@ -100,8 +96,10 @@ function Payment() {
                 }
             }));
 
+            console.log("Order data to be sent:", orderData);
+
             try {
-                const response = await axios.post('https://academics.newtonschool.co/api/v1/ecommerce/order', { orderData }, {
+                const response = await axios.post('https://academics.newtonschool.co/api/v1/ecommerce/order', orderData, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         projectID: '0e7aaiqkxs51'
@@ -109,7 +107,7 @@ function Payment() {
                 });
                 console.log('Order placed successfully:', response.data);
             } catch (error) {
-                console.error('Error placing order:', error);
+                console.error('Error placing order:', error.response ? error.response.data : error);
             }
         }
     };
@@ -165,16 +163,7 @@ function Payment() {
                                 error={!!errors.cvv}
                                 helperText={errors.cvv}
                             />
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                fullWidth
-                                className="py-2"
-                                type="submit"
-                                disabled={!isFormValid}
-                            >
-                                Submit Payment
-                            </Button>
+                            
                         </form>
                     </Paper>
                 </Grid>
@@ -199,6 +188,16 @@ function Payment() {
                                 <span>Total Amount:</span>
                                 <span>₹{totalAmount}</span>
                             </Typography>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                                className="py-2"
+                                type="submit"
+                                disabled={!isFormValid}
+                            >
+                                Submit Payment
+                            </Button>
                         </div>
                     </Paper>
                 </Grid>
