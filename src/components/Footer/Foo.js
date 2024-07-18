@@ -4,15 +4,15 @@ import { faFacebookF, faInstagram, faSnapchatGhost, faTwitter } from '@fortaweso
 
 function Foo() {
     return (
-        <footer className='bg-gray-300 text-gray-700 '>
+        <footer className='bg-gray-300 text-gray-700'>
             <div className="bg-red-600 text-white text-center py-4">
                 <p className="text-3xl font-semibold">HOMEGROWN INDIAN BRAND</p>
             </div>
             <div className="bg-white text-center py-4">
                 <p className="text-4xl font-semibold">Over <span className="text-4xl font-bold">6 Million</span> Happy Customers</p>
             </div>
-            <div className='mx-20 mt-10 border'>
-                <div className="flex flex-wrap justify-around">
+            <div className='mx-4 md:mx-20 mt-10 border'>
+                <div className="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-4 gap-4 p-4">
                     <div className="mx-4 my-5">
                         <h2 className="text-xl font-bold text-red-600">NEED HELP</h2>
                         <ul className="mt-4 font-bold">
@@ -22,10 +22,6 @@ function Foo() {
                             <li><a href="#">FAQs</a></li>
                             <li><a href="#">My Account</a></li>
                         </ul>
-                        <div className="mt-1 ml-1">
-                            <p>₹ COD Available</p>
-                            <p>↩ 30 Days Easy Returns</p>
-                        </div>
                     </div>
                     <div className="mx-4 my-5">
                         <h2 className="text-xl font-bold text-red-600">COMPANY</h2>
@@ -55,6 +51,12 @@ function Foo() {
                         </ul>
                     </div>
                 </div>
+                <div className='flex justify-start'>
+                    <div className=" ml-10">
+                        <p>₹ COD Available</p>
+                        <p>↩ 30 Days Easy Returns</p>
+                    </div>
+                </div>
                 <div className="flex justify-end">
                     <div className="container mx-auto px-5 text-center">
                         <p className="mb-2">📱 EXPERIENCE THE SOULED STORE APP</p>
@@ -64,7 +66,7 @@ function Foo() {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-end my-4 mr-10">
+                <div className="flex justify-end my-5 mr-10">
                     <div className="flex items-center space-x-4">
                         <h3 className='mt-1'>Follow us :</h3>
                         <a href="https://www.facebook.com/SouledStore" className="text-2xl text-blue-600"><FontAwesomeIcon icon={faFacebookF} /></a>
