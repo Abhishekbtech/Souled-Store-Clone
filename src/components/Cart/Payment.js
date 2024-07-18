@@ -25,7 +25,6 @@ function Payment() {
             [name]: value
         }));
 
-        // Validate field on change
         validateField(name, value);
     };
 
