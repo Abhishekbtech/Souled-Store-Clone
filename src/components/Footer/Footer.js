@@ -11,8 +11,8 @@ const Footer = () => {
       <div className="bg-white text-center py-4">
         <p className="text-2xl font-bold">Over <span className="text-3xl">6 Million</span> Happy Customers</p>
       </div>
-      <div className="container mx-auto py-8 px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div className="mb-8 sm:mb-0">
+      <div className="container mx-auto py-8 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="mb-8 sm:mb-0 md:col-span-2">
           <h2 className="text-xl font-bold text-red-600">NEED HELP</h2>
           <ul className="mt-4">
             <li><a href="#">Contact Us</a></li>
@@ -26,7 +26,7 @@ const Footer = () => {
             <p>↩ 30 Days Easy Returns</p>
           </div>
         </div>
-        <div className="mb-8 sm:mb-0">
+        <div className="mb-8 sm:mb-0 md:col-span-2">
           <h2 className="text-xl font-bold text-red-600">COMPANY</h2>
           <ul className="mt-4">
             <li><a href="#">About Us</a></li>
@@ -35,7 +35,7 @@ const Footer = () => {
             <li><a href="#">Souled Army</a></li>
           </ul>
         </div>
-        <div className="mb-8 sm:mb-0">
+        <div className="mb-8 sm:mb-0 md:col-span-2">
           <h2 className="text-xl font-bold text-red-600">MORE INFO</h2>
           <ul className="mt-4">
             <li><a href="#">T&C</a></li>
@@ -43,7 +43,7 @@ const Footer = () => {
             <li><a href="#">Sitemap</a></li>
           </ul>
         </div>
-        <div className="mb-8 sm:mb-0">
+        <div className="mb-8 sm:mb-0 md:col-span-2">
           <h2 className="text-xl font-bold text-red-600">STORE NEAR ME</h2>
           <ul className="mt-4">
             <li><a href="#">Bandra</a></li>
@@ -54,12 +54,12 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="bg-white py-4">
+      <div className="bg-gray-200 py-4">
         <div className="container mx-auto px-4 text-center">
           <p className="mb-2">📱 EXPERIENCE THE SOULED STORE APP</p>
           <div className="flex justify-center space-x-4">
-            <a href="#"><img src="google-play-badge.png" alt="Google Play" className="h-10" /></a>
-            <a href="#"><img src="app-store-badge.png" alt="App Store" className="h-10" /></a>
+            <a href="https://play.google.com/store/apps/details?id=com.thesouledstore"><img src="https://tss-static-images.gumlet.io/icons/play-store.png" alt="Google Play" className="h-10" /></a>
+            <a href="https://apps.apple.com/in/app/the-souled-store/id1493897434"><img src="https://tss-static-images.gumlet.io/icons/app-store.png" alt="App Store" className="h-10" /></a>
           </div>
         </div>
       </div>
@@ -83,7 +83,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white py-4">
+      {/* <div className="bg-white py-4">
         <div className="container mx-auto px-4 text-center">
           <p className="text-gray-600">POPULAR SEARCHES</p>
           <p className="text-sm text-gray-500">
@@ -93,7 +93,7 @@ const Footer = () => {
       </div>
       <div className="bg-gray-200 py-4 text-center">
         <p>© The Souled Store 2024-25</p>
-      </div>
+      </div> */}
     </footer>
   );
 };
