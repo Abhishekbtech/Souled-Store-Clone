@@ -95,12 +95,13 @@ function Payment() {
                     street: address.street,
                     city: address.city,
                     state: address.state,
-                    zip: address.zip
+                    country: address.country,
+                    zipCode: address.zip
                 }
             }));
 
             try {
-                const response = await axios.post('https://academics.newtonschool.co/api/v1/orders', { orders: orderData }, {
+                const response = await axios.post('https://academics.newtonschool.co/api/v1/ecommerce/order', { orderData }, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         projectID: '0e7aaiqkxs51'
