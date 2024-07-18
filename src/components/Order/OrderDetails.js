@@ -36,8 +36,8 @@ function OrderDetails() {
         <div className="container mx-auto p-4">
             <div className="max-w-screen-lg mx-auto">
                 <div className="flex justify-between items-center mb-6">
-                    <h1 className="text-2xl font-semibold">Your orders</h1>
-                    <span>Total orders: {orders.length}</span>
+                    <h1 className="text-3xl font-bold">Your orders</h1>
+                    <span className="text-2xl font-semibold">Total orders: {orders.length}</span>
                 </div>
                 {loading ? (
                     <p>Loading orders...</p>
