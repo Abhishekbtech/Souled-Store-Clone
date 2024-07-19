@@ -100,6 +100,7 @@ function WishListPage() {
                     <p>{message}</p>
                 </div>
             )}
+            
             <h2 className="text-xl sm:text-2xl font-bold mb-4">My Wishlist ({displayLength} items)</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {wishlist.map(item => (
@@ -127,6 +128,7 @@ function WishListPage() {
                     )
                 ))}
             </div>
+
             {displayLength === 0 && (
                 <div className="text-center mt-4">
                     <p className='font-bold text-lg'>Your wishlist is empty.</p>
