@@ -17,6 +17,7 @@ import OrderMessage from './components/Order/OrderMessage';
 import OrderDetails from './components/Order/OrderDetails';
 import ScrolManData from './components/MenPage/ScrolManData';
 import ScrolWomenData from './components/WomenPage/ScrolWomenData';
+import Kids from './components/Kids/Kids';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Men />} />
           <Route path="/women" element={<Women />} />
+          <Route path='/kids' element={<Kids/>}/>
           <Route path='/search' element={<SearchPage/>}/>
           <Route path='/:gender/:type' element={<ProductsByCategory/>}/>
           <Route path='/:productId' element={<ProductDetails/>}/>
