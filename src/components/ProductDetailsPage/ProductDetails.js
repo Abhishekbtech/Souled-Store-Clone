@@ -154,7 +154,7 @@ const ProductDetails = () => {
                     <p>{message}</p>
                 </div>
             )}
-            
+
             <div className="flex flex-col md:flex-row">
 
                 <div className="mb-4 md:w-1/2 md:mr-5">
