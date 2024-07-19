@@ -3,13 +3,13 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
     const location = useLocation();
-    const isMenPage = location.pathname === '/' || location.pathname.startsWith('/men') || location.pathname.startsWith('/Men');
-    const isWomenPage = location.pathname.startsWith('/women') || location.pathname.startsWith('/Women');
-    const isKidsPage = location.pathname.startsWith('/kids');
+    const isMenPage = location.pathname === '/' || location.pathname.toLowerCase().startsWith('/men');
+    const isWomenPage = location.pathname.toLowerCase().startsWith('/women');
+    const isKidsPage = location.pathname.toLowerCase().startsWith('/kids');
 
     return (
         <nav className="bg-red-600 p-4">
-            <div className="container mx-auto flex items-center justify-around">
+            <div className="container mx-auto flex flex-col sm:flex-row items-center sm:justify-around">
                 <div className="flex space-x-4">
                     <Link 
                         to="/women" 
@@ -31,9 +31,9 @@ const Navbar = () => {
                     </Link>
                 </div>
                 {/* Buttons */}
-                <div className="flex items-center space-x-4">
+                <div className="items-center space-x-4 hidden sm:flex">
                     <button className="text-white" onClick={() => alert('Track Order')}>Track Order</button>
-                    <button className="text-white hidden sm:block" onClick={() => alert('Contact Us')}>Contact Us</button>
+                    <button className="text-white" onClick={() => alert('Contact Us')}>Contact Us</button>
                     <button className="text-white" onClick={() => alert('Download App')}>Download App</button>
                 </div>
             </div>
