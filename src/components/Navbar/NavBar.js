@@ -30,7 +30,6 @@ const Navbar = () => {
                         Kids
                     </Link>
                 </div>
-                {/* Buttons */}
                 <div className="items-center space-x-4 hidden sm:flex">
                     <button className="text-white" onClick={() => alert('Track Order')}>Track Order</button>
                     <button className="text-white" onClick={() => alert('Contact Us')}>Contact Us</button>
