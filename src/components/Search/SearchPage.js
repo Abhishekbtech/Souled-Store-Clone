@@ -16,7 +16,6 @@ const SearchPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const searchTerm = location.state?.key;
-    console.log('sear', searchTerm)
     const [sortBy, setSortBy] = useState('default');
 
     const fetchProducts = async () => {
@@ -339,6 +338,7 @@ const SearchPage = () => {
                     <div className="text-center mb-8">
                         <h1 className="text-3xl font-bold">{searchTerm.toUpperCase()}</h1>
                     </div>
+
                     <div className="flex justify-between items-center mb-4">
                         <p>{products.length} items</p>
                         {sellerTag && <p>Seller Tag: {sellerTag.toUpperCase()}</p>}
@@ -352,6 +352,7 @@ const SearchPage = () => {
                             {/* Add more sorting options as needed */}
                         </select>
                     </div>
+
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {error ? (
                             <div className="col-span-4 text-center text-3xl font-bold text-red-500">{error}</div>
