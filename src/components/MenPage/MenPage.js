@@ -15,5 +15,4 @@ function MenPage() {
         </div>
     )
 }
-
 export default MenPage
