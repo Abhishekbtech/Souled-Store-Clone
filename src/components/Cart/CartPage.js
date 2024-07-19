@@ -107,6 +107,7 @@ function CartPage() {
                     <div className="lg:col-span-2 space-y-6">
                         {cartItems.map((item) => (
                             <div key={item._id} className="flex flex-col sm:flex-row items-center justify-between bg-white p-4 rounded shadow-md">
+
                                 <div className="flex items-center space-x-4">
                                     <img
                                         alt={item.product.name}
@@ -131,6 +132,7 @@ function CartPage() {
                                         </div>
                                     </div>
                                 </div>
+
                                 <div className="text-right mt-4 sm:mt-0">
                                     <p className="font-medium text-lg">₹{item.product.price}</p>
                                     <p className="text-gray-500">Incl. of all taxes</p>
@@ -144,6 +146,7 @@ function CartPage() {
                             </div>
                         ))}
                     </div>
+
                     <div className="bg-white p-4 rounded shadow-md space-y-6">
                         <h2 className="text-2xl font-bold mb-2">Billing Details</h2>
                         <hr className="mb-2" />
