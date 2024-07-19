@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faFilter, faSort } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faSort } from '@fortawesome/free-solid-svg-icons';
 
 const SearchPage = () => {
     const [products, setProducts] = useState([]);
