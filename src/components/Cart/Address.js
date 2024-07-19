@@ -40,7 +40,7 @@ function Address() {
         const { name, value } = e.target;
 
         if (name === 'zip') {
-            const zipRegex = /^\d{0,6}$/; // Allows only numbers up to 6 digits
+            const zipRegex = /^\d{0,6}$/;
             if (!zipRegex.test(value)) {
                 setZipError('ZIP Code must be exactly 6 digits');
                 return;
@@ -148,6 +148,7 @@ function Address() {
                         </form>
                     </Paper>
                 </Grid>
+                
                 <Grid item xs={12} lg={4}>
                     <Paper elevation={3} className="p-4">
                         <Typography variant="h5" className="mb-2">Billing Details</Typography>
