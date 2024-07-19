@@ -154,7 +154,9 @@ const ProductDetails = () => {
                     <p>{message}</p>
                 </div>
             )}
+            
             <div className="flex flex-col md:flex-row">
+
                 <div className="mb-4 md:w-1/2 md:mr-5">
                     <img src={selectedImage} alt={product.name} className="w-full h-auto object-cover mb-4 md:max-w-md md:ml-4" />
                     <div className="flex space-x-2">
@@ -169,6 +171,7 @@ const ProductDetails = () => {
                         ))}
                     </div>
                 </div>
+
                 <div className="w-full md:w-1/2 p-4 md:mr-5">
                     <h1 className="text-2xl font-bold mb-3">{product.name}</h1>
                     <hr />
@@ -176,6 +179,7 @@ const ProductDetails = () => {
                     <p className='text-sm mt-1'>MRP incl. of all taxes</p>
                     <p className="text-sm line-through">MRP ₹ {product.price + Math.floor(product.price * 0.3)}</p>
                     <p className="text-green-600 font-semibold">You got {Math.floor(Math.random() * 50) + 10}% OFF</p>
+
                     <div className="mb-4 mt-5">
                         <h3 className="font-semibold mb-2">Please select a size: <span className="text-blue-500 cursor-pointer">SIZE CHART</span></h3>
                         <div className="flex space-x-2 mt-6">
@@ -218,21 +222,23 @@ const ProductDetails = () => {
                             </button>
                         )}
                     </div>
+
                     <div className="flex space-x-2 mb-4 mt-5">
                         <span className='pr-5'>Share:</span>
-                        <a href="#" className="text-2xl text-blue-600">
+                        <div className="text-2xl text-blue-600">
                             <FontAwesomeIcon icon={faFacebook} />
-                        </a>
-                        <a href="#" className="text-2xl text-blue-500">
+                        </div>
+                        <div className="text-2xl text-blue-500">
                             <FontAwesomeIcon icon={faTwitter} />
-                        </a>
-                        <a href="#" className="text-2xl text-green-600">
+                        </div>
+                        <div className="text-2xl text-green-600">
                             <FontAwesomeIcon icon={faWhatsapp} />
-                        </a>
-                        <a href="#" className="text-2xl text-pink-500">
+                        </div>
+                        <div className="text-2xl text-pink-500">
                             <FontAwesomeIcon icon={faInstagram} />
-                        </a>
+                        </div>
                     </div>
+
                     <h1 className='font-semibold mb-2'>Delivery Details</h1>
                     <div className="flex items-center mb-2">
                         <input
@@ -252,10 +258,12 @@ const ProductDetails = () => {
                         </button>
                     </div>
                     {pincodeMessage && <p className="mt-2 text-green-600">{pincodeMessage}</p>}
+
                     <p className="text-gray-700 mt-5 mb-5 p-2 text-sm border shadow-md">
                         <FontAwesomeIcon icon={faUndoAlt} className="mr-4" />
                         This product is eligible for return or exchange under our 30-day return or exchange policy. No questions asked.
                     </p>
+
                     <div className="mb-2 border-t">
                         <button
                             className="flex justify-between w-full py-2 font-semibold"
