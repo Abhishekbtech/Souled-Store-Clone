@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,7 +7,6 @@ import { faFacebook, faInstagram, faTwitter, faWhatsapp } from '@fortawesome/fre
 import { faUndoAlt } from '@fortawesome/free-solid-svg-icons';
 
 const ProductDetails = () => {
-    const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [selectedImage, setSelectedImage] = useState('');
     const [quantity, setQuantity] = useState(1);
@@ -25,6 +24,7 @@ const ProductDetails = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const productId = location.state.product._id
 
     useEffect(() => {
         axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/product/${productId}`, {
