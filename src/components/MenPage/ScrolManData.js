@@ -13,8 +13,8 @@ function ScrolManData() {
     const [error, setError] = useState(null);
     const [showFilter, setShowFilter] = useState(false);
     const [showSort, setShowSort] = useState(false);
-    const navigate = useNavigate()
     const [sortBy, setSortBy] = useState('default');
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchProducts = async () => {
