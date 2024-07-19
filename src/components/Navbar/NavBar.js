@@ -3,9 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
     const location = useLocation();
-    const isMenPage = location.pathname === '/';
-    const isWomenPage = location.pathname === '/women';
-    const isKidsPage = location.pathname === '/kids';
+    const isMenPage = location.pathname === '/' || location.pathname.startsWith('/men') || location.pathname.startsWith('/Men');
+    const isWomenPage = location.pathname.startsWith('/women') || location.pathname.startsWith('/Women');
+    const isKidsPage = location.pathname.startsWith('/kids');
 
     return (
         <nav className="bg-red-600 p-4">
@@ -16,19 +16,19 @@ const Navbar = () => {
                 <div className="hidden md:flex space-x-4">
                     <Link 
                         to="/women" 
-                        className={`text-xl ${isWomenPage ? 'bg-white text-red-600' : 'text-white'}`}
+                        className={`text-xl px-2 ${isWomenPage ? 'bg-white text-red-600' : 'text-white'}`}
                     >
                         Women
                     </Link>
                     <Link 
                         to="/" 
-                        className={`text-xl ${isMenPage ? 'bg-white text-red-600' : 'text-white'}`}
+                        className={`text-xl px-2 ${isMenPage ? 'bg-white text-red-600' : 'text-white'}`}
                     >
                         Men
                     </Link>
                     <Link 
                         to="/kids" 
-                        className={`text-xl ${isKidsPage ? 'bg-white text-red-600' : 'text-white'}`}
+                        className={`text-xl px-2 ${isKidsPage ? 'bg-white text-red-600' : 'text-white'}`}
                     >
                         Kids
                     </Link>
