@@ -39,6 +39,7 @@ function OrderDetails() {
                     <h1 className="text-3xl font-bold">Your orders</h1>
                     <span className="text-2xl font-semibold">Total orders: {orders.length}</span>
                 </div>
+                
                 {loading ? (
                     <p>Loading orders...</p>
                 ) : orders.length === 0 ? (
@@ -61,6 +62,7 @@ function OrderDetails() {
                                         alt={order.items[0].product.name}
                                         className="w-48 h-64 object-cover rounded-md mr-4"
                                     />
+
                                     <div>
                                         <h2 className="text-xl font-semibold">{order.items[0].product.name}</h2>
                                         <p className="text-gray-500">Order placed on {new Date(createdAt).toLocaleDateString()}</p>
