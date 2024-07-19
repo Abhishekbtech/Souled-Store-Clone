@@ -4,7 +4,7 @@ import { faFacebookF, faInstagram, faSnapchatGhost, faTwitter } from '@fortaweso
 
 function Foo() {
     return (
-        <footer className='bg-gray-300 text-gray-700 mb-10'>
+        <footer className='bg-gray-300 text-gray-700 my-10'>
             <div className="bg-red-600 text-white text-center py-4">
                 <p className="text-3xl font-semibold">HOMEGROWN INDIAN BRAND</p>
             </div>
@@ -75,7 +75,7 @@ function Foo() {
                         <a href="https://twitter.com/TheSouledStore" className="text-2xl text-blue-500"><FontAwesomeIcon icon={faTwitter} /></a>
                     </div>
                 </div>
-                <div className='mb-10 text-center'>
+                <div className='text-center'>
                     <h1 className='font-semibold text-xl'>© The Souled Store 2024-25</h1>
                 </div>
             </div>
