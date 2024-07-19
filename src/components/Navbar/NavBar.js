@@ -9,11 +9,8 @@ const Navbar = () => {
 
     return (
         <nav className="bg-red-600 p-4">
-            <div className="container mx-auto flex items-center justify-between">
-                <Link to="/" className="text-white text-xl font-bold flex items-center space-x-2">
-                    <img src="/path/to/logo.png" alt="The Souled Store" className="h-8" />
-                </Link>
-                <div className="hidden md:flex space-x-4">
+            <div className="container mx-auto flex items-center justify-around">
+                <div className="flex space-x-4">
                     <Link 
                         to="/women" 
                         className={`text-xl px-2 ${isWomenPage ? 'bg-white text-red-600' : 'text-white'}`}
@@ -33,10 +30,11 @@ const Navbar = () => {
                         Kids
                     </Link>
                 </div>
+                {/* Buttons */}
                 <div className="flex items-center space-x-4">
-                    <button className="text-white hidden md:block" onClick={() => alert('Track Order')}>Track Order</button>
-                    <button className="text-white hidden md:block" onClick={() => alert('Contact Us')}>Contact Us</button>
-                    <button className="text-white hidden md:block" onClick={() => alert('Download App')}>Download App</button>
+                    <button className="text-white" onClick={() => alert('Track Order')}>Track Order</button>
+                    <button className="text-white hidden sm:block" onClick={() => alert('Contact Us')}>Contact Us</button>
+                    <button className="text-white" onClick={() => alert('Download App')}>Download App</button>
                 </div>
             </div>
         </nav>
