@@ -4,7 +4,7 @@ import { faFacebookF, faInstagram, faSnapchatGhost, faTwitter } from '@fortaweso
 
 function Foo() {
     return (
-        <footer className='bg-gray-300 text-gray-700'>
+        <footer className='bg-gray-300 text-gray-700 mb-10'>
             <div className="bg-red-600 text-white text-center py-4">
                 <p className="text-3xl font-semibold">HOMEGROWN INDIAN BRAND</p>
             </div>
@@ -16,38 +16,38 @@ function Foo() {
                     <div className="mx-4 my-5">
                         <h2 className="text-xl font-bold text-red-600">NEED HELP</h2>
                         <ul className="mt-4 font-bold">
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Track Order</a></li>
-                            <li><a href="#">Returns & Refunds</a></li>
-                            <li><a href="#">FAQs</a></li>
-                            <li><a href="#">My Account</a></li>
+                            <li>Contact Us</li>
+                            <li>Track Order</li>
+                            <li>Returns & Refunds</li>
+                            <li>FAQs</li>
+                            <li>My Account</li>
                         </ul>
                     </div>
                     <div className="mx-4 my-5">
                         <h2 className="text-xl font-bold text-red-600">COMPANY</h2>
                         <ul className="mt-4 font-bold">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Careers</a></li>
-                            <li><a href="#">Community Initiatives</a></li>
-                            <li><a href="#">Souled Army</a></li>
+                            <li>About Us</li>
+                            <li>Careers</li>
+                            <li>Community Initiatives</li>
+                            <li>Souled Army</li>
                         </ul>
                     </div>
                     <div className="mx-4 my-5">
                         <h2 className="text-xl font-bold text-red-600">MORE INFO</h2>
                         <ul className="mt-4 font-bold">
-                            <li><a href="#">T&C</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Sitemap</a></li>
+                            <li>T&C</li>
+                            <li>Privacy Policy</li>
+                            <li>Sitemap</li>
                         </ul>
                     </div>
                     <div className="mx-4 my-5">
                         <h2 className="text-xl font-bold text-red-600">STORE NEAR ME</h2>
                         <ul className="mt-4 font-bold">
-                            <li><a href="#">Bandra</a></li>
-                            <li><a href="#">Thane</a></li>
-                            <li><a href="#">Colaba</a></li>
-                            <li><a href="#">Palladium</a></li>
-                            <li><a href="#" className="text-blue-600">View More</a></li>
+                            <li>Bandra</li>
+                            <li>Thane</li>
+                            <li>Colaba</li>
+                            <li>Palladium</li>
+                            <li className="text-blue-600">View More</li>
                         </ul>
                     </div>
                 </div>
