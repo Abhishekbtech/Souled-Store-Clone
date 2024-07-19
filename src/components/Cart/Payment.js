@@ -198,6 +198,7 @@ function Payment() {
                         </form>
                     </Paper>
                 </Grid>
+                
                 <Grid item xs={12} lg={4}>
                     <Paper elevation={3} className="p-4">
                         <Typography variant="h5" className="mb-2">Billing Details</Typography>
