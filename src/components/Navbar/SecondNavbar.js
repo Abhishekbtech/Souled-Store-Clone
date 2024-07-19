@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SecondNavbar = () => {
     const [categories, setCategories] = useState([]);
@@ -13,7 +13,7 @@ const SecondNavbar = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
-    const [isScrolled, setIsScrolled] = useState(false); // State to track if scrolled
+    const [isScrolled, setIsScrolled] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -59,7 +59,7 @@ const SecondNavbar = () => {
         if (isLoggedIn) {
             setAnchorEl(event.currentTarget);
         } else {
-            navigate('/signup'); // This line should be updated based on how you handle the login flow
+            navigate('/signup');
         }
     };
 
@@ -101,11 +101,15 @@ const SecondNavbar = () => {
         <nav className={`bg-gray-100 p-2 ${isScrolled ? 'fixed w-full top-0 z-50' : ''}`}>
             <div className="container mx-auto flex items-center justify-between flex-wrap">
                 <div className="flex space-x-4 overflow-x-auto flex-1">
-                    {/* {categories.map((category, index) => (
-                        <button key={index} className="text-gray-700 hover:text-gray-900 whitespace-nowrap">
-                            {category.toUpperCase()}
-                        </button>
-                    ))} */}
+                    {/* <Link to="/" className="text-white text-xl font-bold flex items-center space-x-2">
+                        <div className="relative h-16">
+                            <img 
+                                src="https://thesouledstore.ae/cdn/shop/files/logo.gif?v=1673249256&width=250" 
+                                alt="The Souled Store" 
+                                className="h-full object-contain" 
+                            />
+                        </div>
+                    </Link> */}
                 </div>
                 <div className="flex items-center space-x-4">
                     {showSearch && (
