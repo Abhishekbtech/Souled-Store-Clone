@@ -99,9 +99,12 @@ const AuthForm = () => {
                     Register
                 </button>
             </div>
+
             <h2 className="text-2xl font-bold mb-4 text-center">{isForgotPassword ? 'Forgot Password' : isLogin ? 'Login' : 'Register'}</h2>
+
             {error && <p className="text-red-500 mb-4">{error}</p>}
             {success && <p className="text-green-500 mb-4">{success}</p>}
+            
             {isForgotPassword ? (
                 <form onSubmit={handleForgotPassword}>
                     <div className="mb-4">
@@ -183,6 +186,7 @@ const AuthForm = () => {
                     </button>
                 </form>
             )}
+
             {!isForgotPassword && (
                 <p className="mt-4 text-center">
                     {isLogin ? (
