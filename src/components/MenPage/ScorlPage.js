@@ -45,5 +45,4 @@ function ScorlPage() {
         </Carousel>
     );
 }
-
 export default ScorlPage
