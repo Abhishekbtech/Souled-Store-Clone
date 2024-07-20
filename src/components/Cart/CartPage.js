@@ -7,8 +7,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 function CartPage() {
     const [cartItems, setCartItems] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
-    const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+    const [message, setMessage] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -46,12 +46,13 @@ function CartPage() {
                 }
             });
             fetchCartItems();
+            showPopupMessage('Item Remove from Cart');
         } catch (error) {
             console.error('Error removing item from cart:', error);
         }
     };
 
-    const moveToWishlist = async (productId, productName) => {
+    const moveToWishlist = async (productId) => {
         const token = sessionStorage.getItem('token');
         try {
             // Remove from cart
@@ -61,34 +62,38 @@ function CartPage() {
                     projectID: '0e7aaiqkxs51'
                 }
             });
-
+            fetchCartItems();
+            showPopupMessage('Item added to wishlist');
             // Add to wishlist
             await axios.patch('https://academics.newtonschool.co/api/v1/ecommerce/wishlist', {
                 productId: productId
             }, {
                 headers: {
-                    Authorization: `Bearer ${token}`,
-                    projectID: '0e7aaiqkxs51'
+                    'Authorization': `Bearer ${token}`,
+                    'projectID': '0e7aaiqkxs51'
                 }
             });
-
-            // Show snackbar message
-            setSnackbarMessage(`${productName} moved to Wishlist`);
-            setSnackbarOpen(true);
-
-            // Update cart items after moving to wishlist
-            fetchCartItems();
+            
         } catch (error) {
             console.error('Error moving item to wishlist:', error);
         }
     };
 
-    const handleSnackbarClose = () => {
-        setSnackbarOpen(false);
+    const showPopupMessage = (message) => {
+        setMessage(message)
+        setShowPopup(true);
+        setTimeout(() => {
+            setShowPopup(false);
+        }, 5000);
     };
 
     return (
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
+            {showPopup && (
+                <div className="text-white fixed top-30 right-0 mb-4 mr-4 bg-red-600 p-4 shadow-md rounded-md">
+                    <p>{message}</p>
+                </div>
+            )}
             <h1 className="text-2xl sm:text-4xl font-bold mb-8">My Bag</h1>
             {cartItems.length === 0 ? (
                 <div className="p-4 text-center space-y-6">
@@ -139,7 +144,7 @@ function CartPage() {
                                     <button onClick={() => removeFromCart(item.product._id)} className="text-red-500 mr-5 mt-5 sm:mt-0 hover:text-red-700">
                                         <DeleteIcon />
                                     </button>
-                                    <button onClick={() => moveToWishlist(item.product._id, item.product.name)} className="text-pink-500 hover:text-pink-700">
+                                    <button onClick={() => moveToWishlist(item.product._id)} className="text-pink-500 hover:text-pink-700">
                                         <FavoriteIcon />
                                     </button>
                                 </div>
@@ -175,11 +180,6 @@ function CartPage() {
                             </button>
                         </div>
                     </div>
-                </div>
-            )}
-            {snackbarOpen && (
-                <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-black text-white py-2 px-4 rounded">
-                    {snackbarMessage}
                 </div>
             )}
         </div>
