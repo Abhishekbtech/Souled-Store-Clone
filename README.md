@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+# The Soul Store Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a clone of The Soul Store e-commerce platform, focusing on product details, user authentication, and password update functionalities. It uses React for the front end and Axios for API calls.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+1. **Product Details Page**
+    - Displays information such as product name, images, description, price, and available sizes/colors.
+    - Includes "Add to Cart" and "Wishlist" buttons.
+    - Gallery of product images with thumbnails for easy navigation.
+    - Shows availability status of the product.
 
-### `npm start`
+2. **User Authentication**
+    - User registration form with input fields for name, email, and password.
+    - User login form with input fields for email and password.
+    - Authentication check on product purchase process to ensure the user is logged in before proceeding to checkout.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. **Password Update**
+    - Feature for logged-in users to update their password.
+    - Form for users to enter their new password.
+    - API call to update the password.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+4. **Cart Page**
+    - Displays a list of products added to the cart.
+    - Allows users to add items to wishlist from the cart.
+    - Allows users to remove items from the cart.
+    - Calculates the total cost of the items in the cart.
+    - Provides a "Checkout" button to proceed to the payment page.
 
-### `npm test`
+5. **WishList Page**
+    - Displays a list of products added to the wishlist.
+    - Allows users to remove items from the wishlist.
+    - Allows users to add items to the cart from wishlist.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+6. **Search Page**
+    - Allows users to search for products by category.
+    - Displays a list of products matching the search query.
+    - Allows users to add items to the cart or wishlist from the search results.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technologies Used
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Frontend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **HTML**: The standard markup language for creating web pages and web applications.
+- **Tailwind CSS**: A stylesheet language used for describing the presentation of a document written in HTML.
+- **JavaScript**: A programming language that conforms to the ECMAScript specification, used for creating dynamic web content.
+- **React**: A JavaScript library for building user interfaces, maintained by Facebook.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Tools and Libraries
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **npm**: A package manager for the JavaScript programming language, maintained by npm, Inc.
+- **Webpack**: A static module bundler for modern JavaScript applications.
+- **Axios**: A promise-based HTTP client for the browser and Node.js, used for making HTTP requests.
+- **React Router**: A routing library for React, used for managing the browser history and URLs.
+- **heroicons/react**: A set of free, MIT-licensed high-quality SVG icons for you to use in your web projects, implemented as React components.
+- **react-icons**: A collection of icons for React, implemented as React components.
+- **MUI**: A popular React UI framework for building responsive and customizable user interfaces.
+- **@fortawesome**: A React component library for using Font Awesome icons in React applications
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Installation
 
-## Learn More
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/Abhishekbtech/Souled-Store-Clone.git
+    ```
+2. Navigate to the project directory:
+    ```sh
+    cd souled-store
+    ```
+3. Install dependencies:
+    ```sh
+    npm install
+    ```
+4. Start the development server:
+    ```sh
+    npm start
+    ```
+5. Open your browser and navigate to 'http://localhost:3000' to see the app.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Deploy on Vercel
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Deployment link of my project 'https://souled-store-clone-rho.vercel.app/'
