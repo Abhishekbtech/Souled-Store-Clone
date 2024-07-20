@@ -75,7 +75,7 @@ function WishListPage() {
             console.log('Item added to cart:', response.data);
             showPopupMessage('Item added to cart');
             setMessage('Item added to cart');
-            // setWishlist(wishlist.filter(item => item.products && item.products._id !== productId));
+            setWishlist(wishlist.filter(item => item.products && item.products._id !== productId));
 
         } catch (error) {
             console.error('Error adding item to cart:', error);
