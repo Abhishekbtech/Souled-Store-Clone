@@ -10,31 +10,31 @@ function WishListPage() {
     const [showPopup, setShowPopup] = useState(false);
     const [message, setMessage] = useState('');
 
-    useEffect(() => {
-        const fetchWishlist = async () => {
-            try {
-                const token = sessionStorage.getItem('token');
-                if (!token) {
-                    navigate('/signup');
-                    return;
-                }
-                const response = await axios.get('https://academics.newtonschool.co/api/v1/ecommerce/wishlist', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'projectID': '0e7aaiqkxs51'
-                    }
-                });
-                setWishlist(response.data.data.items);
-                console.log("wishlist", response.data.data.items);
-            } catch (error) {
-                setError(error);
-            } finally {
-                setLoading(false);
+    const fetchWishlist = async () => {
+        try {
+            const token = sessionStorage.getItem('token');
+            if (!token) {
+                navigate('/signup');
+                return;
             }
-        };
+            const response = await axios.get('https://academics.newtonschool.co/api/v1/ecommerce/wishlist', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'projectID': '0e7aaiqkxs51'
+                }
+            });
+            setWishlist(response.data.data.items);
+            console.log("wishlist", response.data.data.items);
+        } catch (error) {
+            setError(error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
+    useEffect(() => {
         fetchWishlist();
-    }, [navigate]);
+    }, []);
 
     const removeFromWishlist = async (productId) => {
         try {
@@ -46,7 +46,8 @@ function WishListPage() {
                 }
             });
             setWishlist(wishlist.filter(item => item.products && item.products._id !== productId));
-            window.location.reload();
+            showPopupMessage('Item');
+            setMessage('Item Remove from Wishlist');
         } catch (error) {
             console.error(error);
         }
@@ -55,6 +56,13 @@ function WishListPage() {
     const addToCart = async (productId) => {
         const token = sessionStorage.getItem('token');
         try {
+            await axios.delete(`https://academics.newtonschool.co/api/v1/ecommerce/wishlist/${productId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'projectID': '0e7aaiqkxs51'
+                }
+            });
+
             const response = await axios.patch(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${productId}`, {
                 quantity: '1',
                 size: 's'
@@ -67,7 +75,8 @@ function WishListPage() {
             console.log('Item added to cart:', response.data);
             showPopupMessage('Item added to cart');
             setMessage('Item added to cart');
-            setWishlist(wishlist.filter(item => item.products && item.products._id !== productId));
+            // setWishlist(wishlist.filter(item => item.products && item.products._id !== productId));
+
         } catch (error) {
             console.error('Error adding item to cart:', error);
         }
@@ -88,7 +97,7 @@ function WishListPage() {
         navigate('/')
     }
 
-    const displayLength = wishlist.length > 0 ? wishlist.length - 1 : 0;
+    // const displayLength = wishlist.length > 0 ? wishlist.length - 1 : 0;
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error loading wishlist.</div>;
@@ -101,7 +110,7 @@ function WishListPage() {
                 </div>
             )}
             
-            <h2 className="text-xl sm:text-2xl font-bold mb-4">My Wishlist ({displayLength} items)</h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-4">My Wishlist ({wishlist.length} items)</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {wishlist.map(item => (
                     item.products && (
@@ -129,7 +138,7 @@ function WishListPage() {
                 ))}
             </div>
 
-            {displayLength === 0 && (
+            {wishlist.length === 0 && (
                 <div className="text-center mt-4">
                     <p className='font-bold text-lg'>Your wishlist is empty.</p>
                     <button className="mt-5 bg-blue-500 text-white px-4 py-2 rounded" onClick={handLingClick}>
