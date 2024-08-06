@@ -73,7 +73,7 @@ function CartPage() {
                     'projectID': '0e7aaiqkxs51'
                 }
             });
-            
+
         } catch (error) {
             console.error('Error moving item to wishlist:', error);
         }
@@ -122,17 +122,17 @@ function CartPage() {
                                     <div className="flex-1">
                                         <h2 className="text-base sm:text-lg">{item.product.name}</h2>
                                         <div className="flex space-x-4 mt-2">
-                                            <div>
-                                                <label className="block text-gray-700">Size</label>
-                                                <select value={item.size} disabled className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                                                    <option>{item.size}</option>
-                                                </select>
+                                            <div className='border p-1'>
+                                                <label className="block ml-3 text-gray-700">Size</label>
+                                                <p className="mt-1 ml-2 block w-full pl-3 pr-10 py-2 text-base text-gray-700 sm:text-sm">
+                                                    {item.size}
+                                                </p>
                                             </div>
-                                            <div>
-                                                <label className="block text-gray-700">Qty</label>
-                                                <select value={item.quantity} disabled className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                                                    <option>{item.quantity}</option>
-                                                </select>
+                                            <div className='border p-1'>
+                                                <label className="block ml-3 text-gray-700">Qty</label>
+                                                <p className="mt-1 ml-2 block w-full pl-3 pr-10 py-2 text-base text-gray-700 sm:text-sm">
+                                                    {item.quantity}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
