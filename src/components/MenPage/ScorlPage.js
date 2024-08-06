@@ -38,7 +38,7 @@ function ScorlPage() {
             {ScorlData.map((item) => (
                 <div key={item.id}>
                     <Link to={`/men/${item.title}`} className="swiper-slide" data-swiper-slide-index={`${item.index}`}>
-                        <img src={`${item.url}`} className='swiper-slide-img' alt='title' />
+                        <img src={`${item.url}`} className='swiper-slide-img rounded-md' alt='title' />
                     </Link>
                 </div>
             ))}
