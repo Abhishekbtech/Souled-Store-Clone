@@ -51,6 +51,7 @@ function Payment() {
 
     const validateField = (name, value) => {
         let error = '';
+
         if (name === 'cardNumber') {
             if (!/^\d{16}$/.test(value)) {
                 error = 'Card Number must be 16 digits long.';
@@ -58,18 +59,33 @@ function Payment() {
         } else if (name === 'expiryDate') {
             if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(value)) {
                 error = 'Expiry Date must be in MM/YY format.';
+            } else {
+                const [month, year] = value.split('/').map(Number);
+                const currentDate = new Date();
+                const currentMonth = currentDate.getMonth() + 1; // JavaScript months are 0-indexed
+                const currentYear = currentDate.getFullYear() % 100; // Get last two digits of year
+
+                if (month < 1 || month > 12) {
+                    error = 'Invalid month.';
+                } else if (year < currentYear || (year === currentYear && month < currentMonth)) {
+                    error = 'Expiry Date cannot be in the past.';
+                }
             }
         } else if (name === 'cvv') {
             if (!/^\d{3}$/.test(value)) {
                 error = 'CVV must be 3 digits long.';
             }
         }
+
         setErrors(prevErrors => ({
             ...prevErrors,
             [name]: error
         }));
+
+        // Check if the entire form is valid
         const formIsValid = Object.values(payment).every(field => field.trim() !== '') && !error;
         setIsFormValid(formIsValid);
+
         return error;
     };
 
@@ -127,7 +143,7 @@ function Payment() {
                 } catch (error) {
                     console.error('Error placing order:', error.response ? error.response.data : error);
                     allOrdersSuccessful = false;
-                    break; 
+                    break;
                 }
             }
 
@@ -194,11 +210,10 @@ function Payment() {
                                 helperText={errors.cvv}
                                 inputProps={{ maxLength: 3 }}
                             />
-                            
                         </form>
                     </Paper>
                 </Grid>
-                
+
                 <Grid item xs={12} lg={4}>
                     <Paper elevation={3} className="p-4">
                         <Typography variant="h5" className="mb-2">Billing Details</Typography>
