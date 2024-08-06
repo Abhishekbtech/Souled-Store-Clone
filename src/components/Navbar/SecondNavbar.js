@@ -5,6 +5,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link, useNavigate } from 'react-router-dom';
+import im from './image/logo-unscreen.gif'
 
 const SecondNavbar = () => {
     const [categories, setCategories] = useState([]);
@@ -101,15 +102,15 @@ const SecondNavbar = () => {
         <nav className={`bg-gray-100 p-2 ${isScrolled ? 'fixed w-full top-0 z-50' : ''}`}>
             <div className="container mx-auto flex items-center justify-between flex-wrap">
                 <div className="flex space-x-4 overflow-x-auto flex-1">
-                    {/* <Link to="/" className="text-white text-xl font-bold flex items-center space-x-2">
-                        <div className="relative h-16">
+                    <Link to="/" className="text-white text-xl font-bold flex items-center space-x-2">
+                        <div className="relative h-12 ml-5">
                             <img 
-                                src="https://thesouledstore.ae/cdn/shop/files/logo.gif?v=1673249256&width=250" 
+                                src={im} 
                                 alt="The Souled Store" 
                                 className="h-full object-contain" 
                             />
                         </div>
-                    </Link> */}
+                    </Link>
                 </div>
                 <div className="flex items-center space-x-4">
                     {showSearch && (
