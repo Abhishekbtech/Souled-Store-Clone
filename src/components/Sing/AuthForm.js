@@ -13,7 +13,8 @@ const AuthForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const from = location.state?.from?.pathname || '/';
+    console.log("poath", location.state)
+    const from = location.state?.from || '/';
 
     const toggleForm = () => {
         setIsLogin(!isLogin);
