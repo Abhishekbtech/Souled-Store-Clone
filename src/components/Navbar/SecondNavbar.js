@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link, useNavigate } from 'react-router-dom';
-import im from './image/logo-unscreen.gif'
+import im from './image/logo-unscreen.gif';
 
 const SecondNavbar = () => {
     const [categories, setCategories] = useState([]);
@@ -72,11 +72,31 @@ const SecondNavbar = () => {
         setShowSearch(!showSearch);
     };
 
+    const debounce = (func, delay) => {
+        let timeout;
+        return (...args) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func(...args), delay);
+        };
+    };
+
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
-        console.log("nav", e.target.value)
-        navigate("/search", { state: { key: searchTerm } });
     };
+
+    const debouncedSearch = useCallback(
+        debounce((searchTerm) => {
+            console.log("nav", searchTerm);
+            navigate("/search", { state: { key: searchTerm } });
+        }, 300), // 300ms delay
+        []
+    );
+
+    useEffect(() => {
+        if (searchTerm) {
+            debouncedSearch(searchTerm);
+        }
+    }, [searchTerm, debouncedSearch]);
 
     const handlingCart = () => {
         navigate('/cart');
@@ -84,11 +104,11 @@ const SecondNavbar = () => {
 
     const handlingWishList = () => {
         navigate('/wishlist');
-    }
+    };
 
     const handlingOrder = () => {
         navigate('/order');
-    }
+    };
 
     const handleLogout = () => {
         sessionStorage.removeItem('token');
