@@ -24,6 +24,7 @@ const ProductDetails = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    console.log("send ", location.pathname)
     const productId = location.state.product._id
 
     useEffect(() => {
@@ -81,7 +82,7 @@ const ProductDetails = () => {
     const handleAddToWishlist = () => {
         const token = sessionStorage.getItem('token');
         if (!token) {
-            navigate('/signup', { state: { from: location } });
+            navigate('/signup', { state: { from: location.pathname} });
             return;
         }
 
