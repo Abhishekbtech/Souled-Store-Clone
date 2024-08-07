@@ -1,5 +1,5 @@
 import React from 'react'
-import ProductsBySellerTag from '../CategoryData/ProductsBySellerTag'
+import SellerTag from '../CategoryData/SellerTag'
 import Categorie from './Categorie'
 import ScrolPage from './ScrolPage'
 
@@ -8,10 +8,10 @@ function WomenPage() {
         <div className='m-3'>
             <ScrolPage/>
             <Categorie/>
-            <ProductsBySellerTag gender="Women" sellerTag="trending"/>
-            <ProductsBySellerTag gender="Women" sellerTag="top rated"/>
-            <ProductsBySellerTag gender="Women" sellerTag="new arrival"/>
-            <ProductsBySellerTag gender="Women" sellerTag="best seller"/>
+            <SellerTag gender="Women" sellerTag="trending"/>
+            <SellerTag gender="Women" sellerTag="top rated"/>
+            <SellerTag gender="Women" sellerTag="new arrival"/>
+            <SellerTag gender="Women" sellerTag="best seller"/>
         </div>
     )
 }
