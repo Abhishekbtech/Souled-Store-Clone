@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -25,7 +25,7 @@ const ProductDetails = () => {
     const navigate = useNavigate();
     const location = useLocation();
     console.log("send ", location.pathname)
-    const productId = location.state.product._id
+    const {productId} = useParams()
 
     useEffect(() => {
         axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/product/${productId}`, {
