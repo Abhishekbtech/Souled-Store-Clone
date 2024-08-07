@@ -1,17 +1,17 @@
 import React from 'react'
 import Categorie from './Categorie'
-import ProductsBySellerTag from '../CategoryData/ProductsBySellerTag'
 import ScorlPage from './ScorlPage'
+import SellerTag from '../CategoryData/SellerTag'
 
 function MenPage() {
     return (
         <div className='m-3'>
             <ScorlPage/>
             <Categorie/>
-            <ProductsBySellerTag gender="Men" sellerTag="trending"/>
-            <ProductsBySellerTag gender="Men" sellerTag="top rated"/>
-            <ProductsBySellerTag gender="Men" sellerTag="new arrival"/>
-            <ProductsBySellerTag gender="Men" sellerTag="best seller"/>
+            <SellerTag gender="Men" sellerTag="trending"/>
+            <SellerTag gender="Men" sellerTag="top rated"/>
+            <SellerTag gender="Men" sellerTag="new arrival"/>
+            <SellerTag gender="Men" sellerTag="best seller"/>
         </div>
     )
 }
