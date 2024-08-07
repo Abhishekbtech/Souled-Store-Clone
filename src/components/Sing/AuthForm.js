@@ -14,7 +14,7 @@ const AuthForm = () => {
     const location = useLocation();
 
     console.log("poath", location.state)
-    const from = location.state?.from || '/';
+    const from = '/';
 
     const toggleForm = () => {
         setIsLogin(!isLogin);
