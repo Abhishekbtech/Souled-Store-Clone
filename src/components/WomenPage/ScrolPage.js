@@ -34,6 +34,7 @@ function ScorlPage() {
             autoPlaySpeed={3000}
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item-padding-40-px"
+            className='z-0 relative'
         >
             {ScorlData.map((item) => (
                 <div key={item.id}>
